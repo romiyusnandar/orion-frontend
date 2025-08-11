@@ -1,1 +1,15 @@
 @import 'tailwindcss';
+
+/* Use a .dark selector for Tailwind's dark variant (manual + system fallback) */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+	html, body {
+		height: 100%;
+	}
+
+	/* Default page colors that respond to theme */
+	body {
+		@apply bg-white text-gray-900 dark:bg-gray-950 dark:text-gray-100 antialiased;
+	}
+}
