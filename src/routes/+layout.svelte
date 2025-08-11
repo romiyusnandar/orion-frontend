@@ -2,6 +2,7 @@
 	import '../app.css';
 	import favicon from '$lib/assets/favicon.svg';
 	import ThemeToggle from '$lib/components/ThemeToggle.svelte';
+    import MoleculeBackground from '$lib/components/MoleculeBackground.svelte';
 
 	let { children } = $props();
 </script>
@@ -18,6 +19,7 @@
 </header>
 
 <main class="mx-auto max-w-5xl px-4 py-6">
+    <MoleculeBackground />
 	{@render children?.()}
 
 </main>
