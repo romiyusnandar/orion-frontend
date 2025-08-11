@@ -1,5 +1,6 @@
 <script lang="ts">
 	import '../app.css';
+    import '@fontsource/poppins';
 	import favicon from '$lib/assets/favicon.svg';
 	import ThemeToggle from '$lib/components/ThemeToggle.svelte';
     import MoleculeBackground from '$lib/components/MoleculeBackground.svelte';

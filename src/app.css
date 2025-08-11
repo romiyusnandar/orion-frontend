@@ -5,6 +5,7 @@
 
 @layer base {
 	html, body {
+        font-family: 'Poppins', sans-serif;
 		height: 100%;
 	}
 
