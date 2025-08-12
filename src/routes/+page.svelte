@@ -2,6 +2,7 @@
   import { onMount } from 'svelte';
   import { fly } from 'svelte/transition';
   import { cubicIn, cubicOut } from 'svelte/easing';
+  import CarouselImageSample from '$lib/components/CarouselImageSample.svelte';
 
   let mounted = $state(false);
   let currentTextIndex = $state(0);
@@ -30,7 +31,7 @@
 
 <!-- Hero Section -->
 <section class="relative min-h-screen flex items-center justify-center">
-  <div class="relative z-10 max-w-7xl mx-auto px-4">
+  <div class="relative z-10 max-w-7xl mx-auto px-4 mb-10">
     <div class="grid lg:grid-cols-2 gap-12 items-center">
       <!-- Left Content -->
       <div
@@ -82,9 +83,9 @@
         </div>
       </div>
 
-      <!-- Right Image -->
+      <!-- Right UI Samples Carousel -->
       <div
-        class="transform transition-all duration-1000 ease-out delay-200"
+        class="transform transition-all duration-1000 ease-out delay-200 p-4"
         class:translate-y-0={mounted}
         class:opacity-100={mounted}
         class:translate-y-8={!mounted}
@@ -92,12 +93,10 @@
       >
         <div class="relative">
           <div class="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-blue-600/20 rounded-2xl blur-lg md:blur-xl"></div>
-          <div class="relative bg-white/10 dark:bg-gray-800/10 backdrop-blur-sm rounded-2xl p-4 border border-gray-200/20 dark:border-gray-700/20">
-            <img
-              src="/src/lib/assets/orion-fw.png"
-              alt="Orion Framework"
-              class="w-2/5 h-auto max-w-xs sm:max-w-sm lg:max-w-xs xl:max-w-sm mx-auto p-4 rounded-xl shadow-xl"
-            />
+          <div class="relative bg-white/10 dark:bg-gray-800/10 backdrop-blur-sm rounded-2xl p-6 pb-12 border border-gray-200/20 dark:border-gray-700/20">
+            <div class="w-full h-96 sm:h-[28rem] md:h-[32rem] lg:h-96 xl:h-[28rem] max-w-sm mx-auto overflow-hidden">
+              <CarouselImageSample />
+            </div>
           </div>
         </div>
       </div>
