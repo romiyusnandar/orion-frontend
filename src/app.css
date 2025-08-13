@@ -9,6 +9,12 @@
 		height: 100%;
 	}
 
+	/* Smooth scrolling for anchor links */
+	html {
+		scroll-behavior: smooth;
+		scroll-padding-top: 5rem; /* Account for fixed navbar height */
+	}
+
 	/* Default page colors that respond to theme */
 	body {
 		@apply bg-white text-gray-900 dark:bg-gray-950 dark:text-gray-100 antialiased;

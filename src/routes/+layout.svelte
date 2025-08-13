@@ -4,6 +4,7 @@
 	import favicon from '$lib/assets/favicon.svg';
 	import Navbar from '$lib/components/Navbar.svelte';
     import MoleculeBackground from '$lib/components/MoleculeBackground.svelte';
+    import Footer from '$lib/components/Footer.svelte';
 
 	let { children } = $props();
 </script>
@@ -20,3 +21,5 @@
         {@render children?.()}
     </div>
 </main>
+
+<Footer />
