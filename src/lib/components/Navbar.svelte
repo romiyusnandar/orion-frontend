@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import ThemeToggle from './ThemeToggle.svelte';
+  import logo from '$lib/assets/orion-lg.png'
 
   let isOpen = $state(false);
   let scrolled = $state(false);
@@ -83,7 +84,7 @@
         >
           <div class="w-10 h-10 rounded-lg flex items-center justify-center overflow-hidden">
             <img
-              src="/src/lib/assets/orion-lg.png"
+              src={logo}
               alt="OrionOS Logo"
               class="w-full h-full object-contain"
             />
