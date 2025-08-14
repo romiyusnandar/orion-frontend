@@ -1,3 +1,6 @@
+<script lang="ts">
+  import logo from '$lib/assets/orion-lg.png'
+</script>
 <footer class="relative py-16 bg-gradient-to-br from-gray-900/95 via-black/90 to-gray-800/95 text-white backdrop-blur-sm border-t border-white/10">
   <!-- Background Effects -->
   <div class="absolute inset-0 bg-gradient-to-r from-cyan-500/5 via-purple-500/5 to-blue-500/5"></div>
@@ -12,11 +15,8 @@
         <div class="group mb-6">
           <div class="inline-flex items-center space-x-3 mb-4">
             <div class="relative">
-              <div class="absolute inset-0 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-full blur-md opacity-75 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <div class="relative w-12 h-12 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
-                </svg>
+              <div class="relative w-12 h-12 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                <img src={logo} />
               </div>
             </div>
             <h3 class="text-3xl font-bold bg-gradient-to-r from-white via-cyan-200 to-purple-200 bg-clip-text text-transparent">
@@ -132,22 +132,33 @@
 
     <!-- Bottom Section -->
     <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-      <div class="flex items-center space-x-2 text-gray-400 text-sm">
-        <span>&copy; 2025 OrionOS Project.</span>
-        <span class="hidden md:inline">•</span>
-        <span class="flex items-center space-x-1">
+      <!-- Copyright and Credits -->
+      <div class="text-center md:text-left">
+        <div class="text-gray-400 text-sm mb-2 md:mb-0">
+          <span>&copy; 2025 OrionOS Project.</span>
+        </div>
+        <div class="flex flex-wrap items-center justify-center md:justify-start gap-1 text-gray-400 text-sm">
           <span>Made with</span>
-          <svg class="w-4 h-4 text-red-500 animate-pulse" fill="currentColor" viewBox="0 0 24 24">
+          <svg class="w-4 h-4 text-red-500 animate-pulse mx-1" fill="currentColor" viewBox="0 0 24 24">
             <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
           </svg>
-          <span>by RyuDev</span>
+          <span>by</span>
+          <span class="font-semibold text-cyan-400">RyuDev</span>
           <span>and</span>
           <span class="font-semibold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
             SvelteKit
           </span>
-        </span>
+        </div>
       </div>
 
+      <!-- Links -->
+      <div class="flex flex-wrap items-center justify-center gap-3 text-sm">
+        <a href="/privacy" class="text-gray-400 hover:text-white transition-colors duration-300 whitespace-nowrap">Privacy Policy</a>
+        <span class="text-gray-600 hidden sm:inline">•</span>
+        <a href="/terms" class="text-gray-400 hover:text-white transition-colors duration-300 whitespace-nowrap">Terms of Service</a>
+        <span class="text-gray-600 hidden sm:inline">•</span>
+        <a href="mailto:contact@orionos.org" class="text-gray-400 hover:text-cyan-400 transition-colors duration-300 whitespace-nowrap">Contact</a>
+      </div>
     </div>
   </div>
 </footer>
