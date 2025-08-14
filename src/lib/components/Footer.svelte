@@ -150,15 +150,6 @@
           </span>
         </div>
       </div>
-
-      <!-- Links -->
-      <div class="flex flex-wrap items-center justify-center gap-3 text-sm">
-        <a href="/privacy" class="text-gray-400 hover:text-white transition-colors duration-300 whitespace-nowrap">Privacy Policy</a>
-        <span class="text-gray-600 hidden sm:inline">•</span>
-        <a href="/terms" class="text-gray-400 hover:text-white transition-colors duration-300 whitespace-nowrap">Terms of Service</a>
-        <span class="text-gray-600 hidden sm:inline">•</span>
-        <a href="mailto:contact@orionos.org" class="text-gray-400 hover:text-cyan-400 transition-colors duration-300 whitespace-nowrap">Contact</a>
-      </div>
     </div>
   </div>
 </footer>
