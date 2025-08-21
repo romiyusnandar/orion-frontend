@@ -126,9 +126,7 @@
           <div class="w-px h-12 bg-gradient-to-b from-transparent via-gray-300 dark:via-gray-600 to-transparent"></div>
           <div class="text-center">
             <div class="text-3xl font-bold text-purple-600 dark:text-purple-400">
-                {#each sources as source}
-                    {source.version}
-                {/each}
+                {sources.length > 0 ? sources[0].version : '---'}
             </div>
             <div class="text-sm text-gray-600 dark:text-gray-400">Latest Version</div>
           </div>
