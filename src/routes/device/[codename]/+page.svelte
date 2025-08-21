@@ -15,6 +15,10 @@
   let hoveredBuild = $state<string | null>(null);
   let isScrolled = $state(false);
 
+  // Mobile performance optimization states
+  let isMobile = $state(false);
+  let reduceAnimations = $state(false);
+
   interface SocialLink {
     url: string;
     platform: string;
@@ -178,19 +182,67 @@
   }
 
   onMount(() => {
+    // Detect mobile device and set performance preferences
+    isMobile = window.innerWidth < 768;
+    reduceAnimations = window.matchMedia('(prefers-reduced-motion: reduce)').matches || isMobile;
+
+    // Performance logging for mobile
+    if (isMobile) {
+      console.log('Mobile device detected - enabling performance optimizations');
+    }
+
     mounted = true;
     const codename = $page.params.codename;
     if (codename) {
       fetchDevice(codename);
     }
 
-    // Handle scroll events for glass effect
+    // Optimized scroll handler with RAF throttling
+    let ticking = false;
     const handleScroll = () => {
-      isScrolled = window.scrollY > 100;
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          isScrolled = window.scrollY > 100;
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    // Throttled resize handler
+    let resizeTimeout: number;
+    const handleResize = () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        const wasMobile = isMobile;
+        isMobile = window.innerWidth < 768;
+
+        // Update animation preferences if mobile state changed
+        if (wasMobile !== isMobile) {
+          reduceAnimations = window.matchMedia('(prefers-reduced-motion: reduce)').matches || isMobile;
+          console.log(`Device state changed: ${isMobile ? 'mobile' : 'desktop'} mode`);
+        }
+      }, 150);
+    };
+
+    // Listen for animation preference changes
+    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const handleMotionChange = (e: MediaQueryListEvent) => {
+      reduceAnimations = e.matches || isMobile;
+    };
+
+    // Use passive listeners for better performance
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleResize, { passive: true });
+    motionQuery.addEventListener('change', handleMotionChange);
+
+    // Cleanup
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleResize);
+      motionQuery.removeEventListener('change', handleMotionChange);
+      if (resizeTimeout) clearTimeout(resizeTimeout);
+    };
   });
 </script>
 
@@ -207,18 +259,18 @@
       <div class="absolute inset-0 bg-gradient-to-br from-blue-50/30 via-purple-50/20 to-indigo-50/30 dark:from-gray-900/50 dark:via-black/60 dark:to-gray-800/50"></div>
       <div class="absolute inset-0 backdrop-blur-3xl"></div>
 
-      <!-- Floating Particles -->
+      <!-- Floating Particles - Reduced for mobile -->
       <div class="absolute inset-0 overflow-hidden">
-        {#each Array(6) as _, i}
+        {#each Array(isMobile ? 3 : 6) as _, i}
           <div
-            class="absolute w-4 h-4 bg-blue-500/20 dark:bg-blue-400/20 rounded-full animate-pulse"
+            class="absolute w-3 h-3 md:w-4 md:h-4 bg-blue-500/15 dark:bg-blue-400/15 rounded-full"
+            class:animate-pulse={!reduceAnimations}
             style="
               left: {Math.random() * 100}%;
               top: {Math.random() * 100}%;
-              animation-delay: {i * 0.5}s;
-              animation-duration: {2 + Math.random() * 2}s;
+              animation-delay: {i * 0.8}s;
+              animation-duration: {reduceAnimations ? '4s' : 2 + Math.random() * 2 + 's'};
             "
-            in:scale={{ duration: 1000, delay: i * 200, easing: elasticOut }}
           ></div>
         {/each}
       </div>
@@ -329,18 +381,18 @@
           <div class="absolute inset-0 bg-gradient-to-br from-blue-900/30 via-transparent to-purple-900/30"></div>
         </div>
 
-        <!-- Floating Glass Elements -->
+        <!-- Floating Glass Elements - Reduced for mobile -->
         <div class="absolute inset-0 overflow-hidden pointer-events-none">
-          {#each Array(8) as _, i}
+          {#each Array(isMobile ? 4 : 8) as _, i}
             <div
-              class="absolute w-2 h-2 bg-white/20 rounded-full animate-pulse"
+              class="absolute w-2 h-2 bg-white/20 rounded-full"
+              class:animate-pulse={!reduceAnimations}
               style="
-                left: {10 + (i * 12)}%;
+                left: {10 + (i * 15)}%;
                 top: {20 + Math.sin(i) * 30}%;
-                animation-delay: {i * 0.3}s;
-                animation-duration: {3 + Math.random() * 2}s;
+                animation-delay: {i * 0.5}s;
+                animation-duration: {reduceAnimations ? '5s' : 3 + Math.random() * 2 + 's'};
               "
-              in:scale={{ duration: 1000, delay: i * 150, easing: elasticOut }}
             ></div>
           {/each}
         </div>
@@ -358,8 +410,10 @@
             <div class="flex justify-center sm:justify-start mb-6 md:mb-8">
               <a
                 href="/device"
-                class="group inline-flex items-center px-4 py-2 md:px-6 md:py-3 bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl md:rounded-2xl text-white hover:bg-white/20 hover:border-white/30 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
-                in:fly={{ x: -50, duration: 600, delay: 200 }}
+                class="group inline-flex items-center px-4 py-2 md:px-6 md:py-3 bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl md:rounded-2xl text-white hover:bg-white/20 hover:border-white/30 transition-all duration-300 shadow-lg hover:shadow-xl"
+                class:transform-none={reduceAnimations}
+                class:hover:scale-105={!reduceAnimations}
+                in:fly={{ x: reduceAnimations ? 0 : -50, duration: reduceAnimations ? 300 : 600, delay: reduceAnimations ? 0 : 200 }}
               >
                 <svg class="w-4 h-4 md:w-5 md:h-5 mr-2 group-hover:-translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
@@ -583,10 +637,13 @@
                   <div class="space-y-4 md:space-y-6">
                     {#each device.builds as build, index (build.id)}
                       <div
-                        class="group bg-gray-50/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-xl md:rounded-2xl p-4 md:p-6 border border-gray-200/50 dark:border-gray-700/50 hover:border-blue-500/40 hover:bg-white/40 dark:hover:bg-gray-700/40 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-[1.01]"
-                        onmouseenter={() => hoveredBuild = build.id}
-                        onmouseleave={() => hoveredBuild = null}
-                        in:fly={{ y: 30, duration: 500, delay: 200 + (index * 100), easing: cubicOut }}
+                        class="group bg-gray-50/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-xl md:rounded-2xl p-4 md:p-6 border border-gray-200/50 dark:border-gray-700/50 hover:border-blue-500/40 hover:bg-white/40 dark:hover:bg-gray-700/40 transition-all duration-300 shadow-lg hover:shadow-xl"
+                        class:transform-none={reduceAnimations}
+                        class:hover:scale-[1.01]={!reduceAnimations}
+                        role="article"
+                        onmouseenter={() => !isMobile && (hoveredBuild = build.id)}
+                        onmouseleave={() => !isMobile && (hoveredBuild = null)}
+                        in:fly={{ y: reduceAnimations ? 0 : 30, duration: reduceAnimations ? 200 : 500, delay: reduceAnimations ? 0 : 200 + (index * 100), easing: cubicOut }}
                       >
                         <div class="flex flex-col gap-4">
                           <!-- Build Header -->
@@ -646,13 +703,18 @@
                                 href={build.downloadUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                class="group/download relative inline-flex items-center px-6 py-2 md:px-8 md:py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-xl hover:from-green-600 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-2xl transform hover:scale-105 font-bold text-sm md:text-base flex-1 lg:flex-none justify-center overflow-hidden"
-                                class:animate-pulse={hoveredBuild === build.id}
+                                class="group/download relative inline-flex items-center px-6 py-2 md:px-8 md:py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-xl hover:from-green-600 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-2xl font-bold text-sm md:text-base flex-1 lg:flex-none justify-center overflow-hidden"
+                                class:transform-none={reduceAnimations}
+                                class:hover:scale-105={!reduceAnimations}
+                                class:animate-pulse={hoveredBuild === build.id && !reduceAnimations}
                               >
-                                <!-- Button Glow -->
-                                <div class="absolute inset-0 bg-gradient-to-r from-green-400 to-emerald-500 opacity-0 group-hover/download:opacity-30 transition-opacity duration-300 blur-xl"></div>
+                                <!-- Button Glow - Hidden on mobile for performance -->
+                                <div class="absolute inset-0 bg-gradient-to-r from-green-400 to-emerald-500 opacity-0 group-hover/download:opacity-30 transition-opacity duration-300 blur-xl"
+                                     class:hidden={reduceAnimations}></div>
 
-                                <svg class="w-5 h-5 mr-2 group-hover/download:animate-bounce relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="w-5 h-5 mr-2 relative z-10"
+                                     class:animate-bounce={!reduceAnimations && hoveredBuild === build.id}
+                                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                                 </svg>
                                 <span class="relative z-10">Download</span>
