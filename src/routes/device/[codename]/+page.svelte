@@ -93,7 +93,7 @@
     switch (status) {
       case 'ACTIVE':
         return 'bg-green-500';
-      case 'INACTIVE':
+      case 'DISCONTINUED':
         return 'bg-red-500';
       case 'BETA':
         return 'bg-yellow-500';
@@ -106,8 +106,8 @@
     switch (status) {
       case 'ACTIVE':
         return 'Active';
-      case 'INACTIVE':
-        return 'Inactive';
+      case 'DISCONTINUED':
+        return 'Discontinued';
       case 'BETA':
         return 'Beta';
       default:
@@ -481,7 +481,7 @@
         <!-- Background with Glass Effect -->
         <div class="absolute inset-0 bg-gradient-to-br from-gray-50/90 via-blue-50/60 to-purple-50/90 dark:from-gray-900/95 dark:via-black/90 dark:to-gray-800/95"></div>
 
-        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="relative max-w-7xl mx-auto px-4 lg:px-8">
           <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
 
             <!-- Maintainer & Flash Instructions Column -->
@@ -751,7 +751,7 @@
                                 </div>
                               {:else if changelogContents[build.id]}
                                 <!-- Enhanced Changelog Content -->
-                                <div class="bg-gray-100/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-xl md:rounded-2xl p-4 md:p-6 max-h-80 md:max-h-96 overflow-y-auto border border-gray-200/30 dark:border-gray-700/30 shadow-inner">
+                                <div class="bg-gray-100/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-xl md:rounded-2xl p-0 md:p-6 max-h-80 md:max-h-96 overflow-y-auto border border-gray-200/30 dark:border-gray-700/30 shadow-inner">
                                   {#if changelogContents[build.id].startsWith('Failed to load')}
                                     <!-- Enhanced Error State -->
                                     <div class="text-center py-8 md:py-12">
@@ -774,10 +774,10 @@
                                     </div>
                                   {:else}
                                     <!-- Enhanced Changelog Lines -->
-                                    <div class="space-y-2 md:space-y-3">
+                                    <div class="space-y-0 md:space-y-3">
                                       {#each formatChangelog(changelogContents[build.id]) as line, i}
                                         <div
-                                          class="group flex items-start space-x-3 md:space-x-4 text-gray-700 dark:text-gray-300 hover:bg-white/30 dark:hover:bg-gray-700/30 p-2 md:p-3 rounded-lg transition-all duration-200"
+                                          class="group flex items-start space-x-3 md:space-x-4 text-gray-700 dark:text-gray-300 hover:bg-white/30 dark:hover:bg-gray-700/30 p-1 md:p-3 rounded-lg transition-all duration-200"
                                           in:fly={{ y: 10, duration: 300, delay: i * 30 }}
                                         >
                                           <div class="w-2 h-2 bg-gradient-to-r from-orange-500 to-red-500 rounded-full mt-2 flex-shrink-0 group-hover:scale-125 transition-transform duration-200"></div>

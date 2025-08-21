@@ -208,29 +208,27 @@
             </div>
           </div>
         </div>
-        <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-6 px-4">
+        <h1 class="text-xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-6 px-4">
           Supported <span class="bg-gradient-to-r from-blue-400 via-purple-500 to-indigo-600 bg-clip-text text-transparent">Devices</span>
         </h1>
-        <p class="text-lg sm:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-8 px-4">
+        <p class="md:text-lg text-sm text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-8 px-4">
           Browse all devices officially supported by OrionOS. Find your device and download the latest build.
         </p>
 
         <!-- Stats -->
-        <div class="flex flex-col sm:flex-col justify-center items-center gap-4 sm:gap-8 mt-12">
+        <div class="flex justify-center items-center space-x-8 mt-12">
           <div class="text-center">
             <div class="text-2xl sm:text-3xl font-bold text-blue-600 dark:text-blue-400">{devices.length}</div>
             <div class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Supported Devices</div>
           </div>
-          <div class="hidden sm:block w-px h-12 bg-gradient-to-b from-transparent via-gray-300 dark:via-gray-600 to-transparent"></div>
-          <div class="sm:hidden w-12 h-px bg-gradient-to-r from-transparent via-gray-300 dark:via-gray-600 to-transparent"></div>
+          <div class="w-px h-12 bg-gradient-to-r from-transparent via-gray-300 dark:via-gray-600 to-transparent"></div>
           <div class="text-center">
             <div class="text-2xl sm:text-3xl font-bold text-purple-600 dark:text-purple-400">
               {devices.filter(d => d.status === 'ACTIVE').length}
             </div>
-            <div class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Active Builds</div>
+            <div class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Active Devices</div>
           </div>
-          <div class="hidden sm:block w-px h-12 bg-gradient-to-b from-transparent via-gray-300 dark:via-gray-600 to-transparent"></div>
-          <div class="sm:hidden w-12 h-px bg-gradient-to-r from-transparent via-gray-300 dark:via-gray-600 to-transparent"></div>
+          <div class="w-px h-12 bg-gradient-to-r from-transparent via-gray-300 dark:via-gray-600 to-transparent"></div>
           <div class="text-center">
             <div class="text-2xl sm:text-3xl font-bold text-indigo-600 dark:text-indigo-400">
               {devices.reduce((acc, d) => acc + d.builds.length, 0)}

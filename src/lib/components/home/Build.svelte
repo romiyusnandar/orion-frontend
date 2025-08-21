@@ -1,10 +1,10 @@
 <section id="build" class="py-20 bg-white/50 dark:bg-gray-900/50 md:backdrop-blur-sm" style="content-visibility: auto; contain-intrinsic-size: 1px 1000px;">
   <div class="max-w-6xl mx-auto px-4 text-center">
     <div class="mb-16">
-      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+      <h2 class="text-2xl md:text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
         🔧 Build OrionOS Independently Now!
       </h2>
-      <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+      <p class="text-md md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
         Get the complete OrionOS manifest and build your custom Android experience with our comprehensive guides and tools.
       </p>
     </div>

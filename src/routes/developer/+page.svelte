@@ -188,22 +188,22 @@
             </div>
           </div>
         </div>
-        <h1 class="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
+        <h1 class="text-2xl md:text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
           Meet Our <span class="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent">Developers</span>
         </h1>
-        <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-8">
+        <p class="text-md md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-8">
           The talented minds behind OrionOS, working together to create exceptional Android experiences with cutting-edge technology and innovation.
         </p>
 
         <!-- Stats -->
-        <div class="flex justify-center items-center space-x-8 mt-12">
+        <div class="flex flex-row justify-center items-center space-x-8 mt-12">
           <div class="text-center">
-            <div class="text-3xl font-bold text-cyan-600 dark:text-cyan-400">{developers.length}</div>
+            <div class="text-xl md:text-3xl font-bold text-cyan-600 dark:text-cyan-400">{developers.length}</div>
             <div class="text-sm text-gray-600 dark:text-gray-400">Developers</div>
           </div>
           <div class="w-px h-12 bg-gradient-to-b from-transparent via-gray-300 dark:via-gray-600 to-transparent"></div>
           <div class="text-center">
-            <div class="text-3xl font-bold text-purple-600 dark:text-purple-400">24/7</div>
+            <div class="text-xl md:text-3xl font-bold text-purple-600 dark:text-purple-400">24/7</div>
             <div class="text-sm text-gray-600 dark:text-gray-400">Support</div>
           </div>
           <div class="w-px h-12 bg-gradient-to-b from-transparent via-gray-300 dark:via-gray-600 to-transparent"></div>

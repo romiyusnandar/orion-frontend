@@ -23,7 +23,7 @@
               OrionOS
             </h3>
           </div>
-          <p class="text-gray-300 text-lg mb-4 max-w-md mx-auto lg:mx-0">
+          <p class="text-gray-300 text-sm md:text-lg mb-4 max-w-md mx-auto lg:mx-0">
             Revolutionizing Android experience with cutting-edge customization, performance optimization, and innovative features.
           </p>
 
@@ -55,10 +55,10 @@
 
       <!-- Quick Links -->
       <div class="text-center md:text-left">
-        <h4 class="text-lg font-semibold mb-4 text-white">Quick Links</h4>
+        <h4 class="text-sm md:text-lg font-semibold mb-4 text-white">Quick Links</h4>
         <ul class="space-y-3">
           <li>
-            <a href="#features" class="group inline-flex items-center text-gray-300 hover:text-cyan-400 transition-all duration-300">
+            <a href="#features" class="group text-sm md:text-lg inline-flex items-center text-gray-300 hover:text-cyan-400 transition-all duration-300">
               <svg class="w-4 h-4 mr-2 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
               </svg>
@@ -66,7 +66,7 @@
             </a>
           </li>
           <li>
-            <a href="#build" class="group inline-flex items-center text-gray-300 hover:text-cyan-400 transition-all duration-300">
+            <a href="#build" class="group text-sm md:text-lg inline-flex items-center text-gray-300 hover:text-cyan-400 transition-all duration-300">
               <svg class="w-4 h-4 mr-2 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
               </svg>
@@ -74,7 +74,7 @@
             </a>
           </li>
           <li>
-            <a href="#donate" class="group inline-flex items-center text-gray-300 hover:text-cyan-400 transition-all duration-300">
+            <a href="#donate" class="group text-sm md:text-lg inline-flex items-center text-gray-300 hover:text-cyan-400 transition-all duration-300">
               <svg class="w-4 h-4 mr-2 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
               </svg>
@@ -86,11 +86,11 @@
 
       <!-- Resources -->
       <div class="text-center md:text-left">
-        <h4 class="text-lg font-semibold mb-4 text-white">Resources</h4>
+        <h4 class="text-sm md:text-lg font-semibold mb-4 text-white">Resources</h4>
         <ul class="space-y-3">
           <li>
-            <a href="https://github.com/OrionOS-Project/android_manifest" target="_blank" rel="noopener noreferrer"
-               class="group inline-flex items-center text-gray-300 hover:text-purple-400 transition-all duration-300">
+            <a href="https://github.com/OrionOS-Project/manifest" target="_blank" rel="noopener noreferrer"
+               class="group text-sm md:text-lg inline-flex items-center text-gray-300 hover:text-purple-400 transition-all duration-300">
               <svg class="w-4 h-4 mr-2 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
               </svg>
@@ -98,7 +98,7 @@
             </a>
           </li>
           <li>
-            <a href="/developer" class="group inline-flex items-center text-gray-300 hover:text-purple-400 transition-all duration-300">
+            <a href="/developer" class="group text-sm md:text-lg inline-flex items-center text-gray-300 hover:text-purple-400 transition-all duration-300">
               <svg class="w-4 h-4 mr-2 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
               </svg>
@@ -107,7 +107,7 @@
           </li>
           <li>
             <a href="https://github.com/OrionOS-Project/manifest.git" target="_blank" rel="noopener noreferrer"
-               class="group inline-flex items-center text-gray-300 hover:text-purple-400 transition-all duration-300">
+               class="group text-sm md:text-lg inline-flex items-center text-gray-300 hover:text-purple-400 transition-all duration-300">
               <svg class="w-4 h-4 mr-2 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
               </svg>

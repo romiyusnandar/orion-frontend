@@ -1,10 +1,10 @@
 <section id="donate" class="py-20" style="content-visibility: auto; contain-intrinsic-size: 1px 1000px;">
   <div class="max-w-6xl mx-auto px-4">
     <div class="text-center mb-16">
-      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+      <h2 class="text-2xl md:text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
         💖 Support OrionOS Development
       </h2>
-      <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+      <p class="text-md md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
         Help us continue developing amazing features and maintaining this open-source project. Every contribution makes a difference!
       </p>
     </div>

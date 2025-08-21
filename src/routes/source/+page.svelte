@@ -110,29 +110,29 @@
             </div>
           </div>
         </div>
-        <h1 class="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
+        <h1 class="text-xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
           Source <span class="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent">Releases</span>
         </h1>
-        <p class="md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-8">
+        <p class="text-sm md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-8">
           Download the latest OrionOS source releases, explore new features, and stay up to date with our development progress.
         </p>
 
         <!-- Stats -->
         <div class="flex justify-center items-center space-x-8 mt-12">
           <div class="text-center">
-            <div class="text-3xl font-bold text-cyan-600 dark:text-cyan-400">{sources.length}</div>
+            <div class="text-xl md:text-3xl font-bold text-cyan-600 dark:text-cyan-400">{sources.length}</div>
             <div class="text-sm text-gray-600 dark:text-gray-400">Releases</div>
           </div>
           <div class="w-px h-12 bg-gradient-to-b from-transparent via-gray-300 dark:via-gray-600 to-transparent"></div>
           <div class="text-center">
-            <div class="text-3xl font-bold text-purple-600 dark:text-purple-400">
+            <div class="text-xl md:text-3xl font-bold text-purple-600 dark:text-purple-400">
                 {sources.length > 0 ? sources[0].version : '---'}
             </div>
             <div class="text-sm text-gray-600 dark:text-gray-400">Latest Version</div>
           </div>
           <div class="w-px h-12 bg-gradient-to-b from-transparent via-gray-300 dark:via-gray-600 to-transparent"></div>
           <div class="text-center">
-            <div class="text-3xl font-bold text-blue-600 dark:text-blue-400">Open</div>
+            <div class="text-xl md:text-3xl font-bold text-blue-600 dark:text-blue-400">Open</div>
             <div class="text-sm text-gray-600 dark:text-gray-400">Source</div>
           </div>
         </div>

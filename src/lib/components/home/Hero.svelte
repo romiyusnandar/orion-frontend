@@ -52,7 +52,7 @@
             {/key}
           </span>
         </h1>
-        <p class="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto lg:mx-0">
+        <p class="text-md md:text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto lg:mx-0">
           Experience the future of Android customization with cutting-edge technology, beautiful design, and seamless performance that transforms your device.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center">
