@@ -164,7 +164,7 @@
       >
         <div class="group inline-flex items-center justify-center mb-8">
           <div class="relative">
-            <div class="absolute inset-0 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-full blur-lg opacity-75 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-purple-600/20 rounded-full opacity-75 group-hover:opacity-100 transition-opacity duration-300"></div>
             <div class="relative w-24 h-24 bg-gradient-to-br from-cyan-500 to-purple-600 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
               <svg class="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
                 <!-- Main developer figure -->
@@ -270,10 +270,10 @@
               in:fly={{ y: 20, duration: 500, delay: index * 100, easing: cubicOut }}
             >
               <!-- Glass Card Background Effect - Enhanced for light/dark mode -->
-              <div class="absolute inset-0 bg-gradient-to-r {getRoleColor(developer.role)}/20 dark:{getRoleColor(developer.role)}/10 rounded-2xl blur-md group-hover:blur-lg transition-all duration-300 opacity-70 dark:opacity-60"></div>
+              <div class="absolute inset-0 bg-gradient-to-r {getRoleColor(developer.role)}/20 dark:{getRoleColor(developer.role)}/10 rounded-2xl opacity-70 dark:opacity-60 group-hover:opacity-80 transition-all duration-300"></div>
 
               <!-- Main Card -->
-              <div id={developer.name} class="relative bg-white/30 dark:bg-gray-800/30 backdrop-blur-sm rounded-2xl p-6 border border-gray-200/20 dark:border-gray-700/20 hover:border-cyan-500/30 shadow-lg hover:shadow-xl transition-all duration-300 hover:transform hover:scale-102 h-full">
+              <div id={developer.name} class="relative bg-white/40 dark:bg-gray-800/40 rounded-2xl p-6 border border-gray-200/30 dark:border-gray-700/30 hover:border-cyan-500/40 shadow-lg hover:shadow-xl transition-all duration-300 hover:transform hover:scale-102 h-full">
 
                 <!-- Avatar & Role Badge -->
                 <div class="flex items-start justify-between mb-4">
@@ -304,7 +304,7 @@
                   </div>
 
                   <!-- Role Badge -->
-                  <div class="px-3 py-1 bg-gradient-to-r {getRoleColor(developer.role)}/80 rounded-full text-xs font-medium text-white shadow-md backdrop-blur-sm">
+                  <div class="px-3 py-1 bg-gradient-to-r {getRoleColor(developer.role)}/90 rounded-full text-xs font-medium text-white shadow-md">
                     {developer.role || 'Member'}
                   </div>
                 </div>
@@ -345,9 +345,9 @@
                           target="_blank"
                           rel="noopener noreferrer"
                           aria-label="View {developer.name}'s {socialLink.platform} profile"
-                          class="group/social relative p-2 bg-white/10 dark:bg-gray-800/10 backdrop-blur-sm rounded-lg border border-gray-200/20 dark:border-gray-700/20 hover:border-{getSocialLinkColor(socialLink.platform)}-400/30 hover:bg-{getSocialLinkColor(socialLink.platform)}-500/10 transition-all duration-300"
+                          class="group/social relative p-2 bg-white/20 dark:bg-gray-800/20 rounded-lg border border-gray-200/30 dark:border-gray-700/30 hover:border-{getSocialLinkColor(socialLink.platform)}-400/40 hover:bg-{getSocialLinkColor(socialLink.platform)}-500/20 transition-all duration-300"
                         >
-                        <div class="absolute inset-0 bg-gradient-to-r from-{getSocialLinkColor(socialLink.platform)}-600/10 to-{getSocialLinkColor(socialLink.platform)}-400/10 rounded-lg blur-sm group-hover/social:blur-md transition-all duration-300 opacity-0 group-hover/social:opacity-50"></div>
+                        <div class="absolute inset-0 bg-gradient-to-r from-{getSocialLinkColor(socialLink.platform)}-600/10 to-{getSocialLinkColor(socialLink.platform)}-400/10 rounded-lg opacity-0 group-hover/social:opacity-50 transition-all duration-300"></div>
                         <svg class="relative w-4 h-4 text-gray-500 dark:text-gray-400 group-hover/social:text-{getSocialLinkColor(socialLink.platform)}-500 dark:group-hover/social:text-{getSocialLinkColor(socialLink.platform)}-400 transition-colors duration-300" fill="currentColor" viewBox="0 0 24 24">
                           <path d="{getSocialLinkIcon(socialLink.platform)}"/>
                         </svg>
@@ -358,9 +358,9 @@
                       <a
                         href="mailto:{developer.email}"
                         aria-label="Send email to {developer.name}"
-                        class="group/social relative p-2 bg-white/10 dark:bg-gray-800/10 backdrop-blur-sm rounded-lg border border-gray-200/20 dark:border-gray-700/20 hover:border-green-400/30 hover:bg-green-500/10 transition-all duration-300"
+                        class="group/social relative p-2 bg-white/20 dark:bg-gray-800/20 rounded-lg border border-gray-200/30 dark:border-gray-700/30 hover:border-green-400/40 hover:bg-green-500/20 transition-all duration-300"
                       >
-                        <div class="absolute inset-0 bg-gradient-to-r from-green-600/10 to-green-400/10 rounded-lg blur-sm group-hover/social:blur-md transition-all duration-300 opacity-0 group-hover/social:opacity-50"></div>
+                        <div class="absolute inset-0 bg-gradient-to-r from-green-600/10 to-green-400/10 rounded-lg opacity-0 group-hover/social:opacity-50 transition-all duration-300"></div>
                         <svg class="relative w-4 h-4 text-gray-500 dark:text-gray-400 group-hover/social:text-green-500 dark:group-hover/social:text-green-400 transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                         </svg>

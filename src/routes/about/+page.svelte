@@ -136,9 +136,7 @@
             class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-white leading-tight"
           >
             About
-            <span class="bg-gradient-to-r from-blue-500 via-purple-600 to-indigo-600 bg-clip-text text-transparent block md:inline">
-              OrionOS
-            </span>
+            <span class="">Orion<span class="text-cyan-600 bg-clip-text inline">OS</span></span>
           </h1>
 
           <p

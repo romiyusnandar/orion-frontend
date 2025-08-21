@@ -101,7 +101,7 @@
       >
         <div class="group inline-flex items-center justify-center mb-8">
           <div class="relative">
-            <div class="absolute inset-0 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-full blur-lg opacity-75 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-purple-600/20 rounded-full opacity-75 group-hover:opacity-100 transition-opacity duration-300"></div>
             <div class="relative w-24 h-24 bg-gradient-to-br from-cyan-500 to-purple-600 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
               <svg class="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" class="animate-pulse"/>
@@ -194,13 +194,13 @@
               in:fly={{ y: 30, duration: 600, delay: index * 150, easing: cubicOut }}
             >
               <!-- Glass Card Background Effect -->
-              <div class="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 dark:from-cyan-500/10 dark:to-purple-500/10 rounded-2xl blur-md group-hover:blur-lg transition-all duration-300 opacity-70 dark:opacity-60"></div>
+              <div class="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 dark:from-cyan-500/10 dark:to-purple-500/10 rounded-2xl opacity-70 dark:opacity-60 group-hover:opacity-80 transition-all duration-300"></div>
 
               <!-- Main Card -->
-              <div class="relative bg-white/30 dark:bg-gray-800/30 backdrop-blur-sm rounded-2xl border border-gray-200/20 dark:border-gray-700/20 hover:border-cyan-500/30 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
+              <div class="relative bg-white/40 dark:bg-gray-800/40 rounded-2xl border border-gray-200/30 dark:border-gray-700/30 hover:border-cyan-500/40 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
 
                 <!-- Banner -->
-                <div class="relative h-64 md:h-80 overflow-hidden">
+                <div class="relative aspect-video overflow-hidden">
                   <img
                     src={source.banner}
                     alt="{source.version} banner"
@@ -213,10 +213,10 @@
                   <div class="absolute top-4 left-4 group/version">
                     <div class="relative">
                       <!-- Glow Effect -->
-                      <div class="absolute inset-0 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full blur-md opacity-75 group-hover/version:opacity-100 group-hover/version:scale-110 transition-all duration-300"></div>
+                      <div class="absolute inset-0 bg-gradient-to-r from-cyan-400/30 to-blue-500/30 rounded-full opacity-75 group-hover/version:opacity-100 group-hover/version:scale-110 transition-all duration-300"></div>
 
                       <!-- Main Badge -->
-                      <div class="relative px-5 py-2.5 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 rounded-full text-white font-bold shadow-xl backdrop-blur-sm border border-white/20 group-hover/version:scale-105 transition-all duration-300">
+                      <div class="relative px-5 py-2.5 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 rounded-full text-white font-bold shadow-xl border border-white/20 group-hover/version:scale-105 transition-all duration-300">
                         <div class="flex items-center space-x-2">
                           <svg class="w-4 h-4 text-cyan-200 animate-pulse" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
@@ -234,10 +234,10 @@
                   <div class="absolute top-4 right-4 group/codename">
                     <div class="relative">
                       <!-- Glow Effect -->
-                      <div class="absolute inset-0 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full blur-md opacity-60 group-hover/codename:opacity-90 group-hover/codename:scale-110 transition-all duration-300"></div>
+                      <div class="absolute inset-0 bg-gradient-to-r from-purple-400/20 to-pink-400/20 rounded-full opacity-60 group-hover/codename:opacity-90 group-hover/codename:scale-110 transition-all duration-300"></div>
 
                       <!-- Main Badge -->
-                      <div class="relative px-4 py-2 bg-gradient-to-r from-purple-500/80 to-pink-500/80 backdrop-blur-md rounded-full border border-white/30 shadow-lg group-hover/codename:scale-105 transition-all duration-300">
+                      <div class="relative px-4 py-2 bg-gradient-to-r from-purple-500/90 to-pink-500/90 rounded-full border border-white/30 shadow-lg group-hover/codename:scale-105 transition-all duration-300">
                         <div class="flex items-center space-x-2">
                           <div class="w-2 h-2 bg-pink-300 rounded-full animate-ping"></div>
                           <span class="text-white text-xs font-semibold tracking-wider uppercase">{source.codenameVersion}</span>
@@ -371,7 +371,7 @@
                                 />
 
                                 <!-- Screenshot Number -->
-                                <div class="absolute top-3 right-3 w-8 h-8 bg-purple-500/90 backdrop-blur-sm rounded-full flex items-center justify-center text-white text-sm font-bold shadow-lg">
+                                <div class="absolute top-3 right-3 w-8 h-8 bg-purple-500/95 rounded-full flex items-center justify-center text-white text-sm font-bold shadow-lg">
                                   {i + 1}
                                 </div>
                               </div>

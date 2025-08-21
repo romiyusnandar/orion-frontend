@@ -187,8 +187,8 @@
   <!-- Hero Section -->
   <section class="relative py-20 overflow-hidden">
     <!-- Background Effects -->
-    <div class="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-indigo-50/30 to-purple-50/50 dark:from-gray-900/90 dark:via-black/80 dark:to-gray-800/90"></div>
-    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-500/10 via-transparent to-transparent"></div>
+    <div class="absolute inset-0 bg-gradient-to-br from-blue-50/70 via-indigo-50/50 to-purple-50/70 dark:from-gray-900/95 dark:via-black/90 dark:to-gray-800/95"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-500/15 via-transparent to-transparent"></div>
 
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div
@@ -216,7 +216,7 @@
         </p>
 
         <!-- Stats -->
-        <div class="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-8 mt-12">
+        <div class="flex flex-col sm:flex-col justify-center items-center gap-4 sm:gap-8 mt-12">
           <div class="text-center">
             <div class="text-2xl sm:text-3xl font-bold text-blue-600 dark:text-blue-400">{devices.length}</div>
             <div class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Supported Devices</div>
@@ -249,12 +249,9 @@
       <div class="mb-12">
         <div class="max-w-2xl mx-auto">
           <div class="relative group">
-            <!-- Glass Background Effect -->
-            <div class="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 dark:from-blue-500/10 dark:to-purple-500/10 rounded-2xl blur-md group-hover:blur-lg transition-all duration-300 opacity-70 dark:opacity-60"></div>
-
             <!-- Search Container -->
             <div
-              class="relative bg-white/30 dark:bg-gray-800/30 backdrop-blur-sm rounded-2xl border border-gray-200/20 dark:border-gray-700/20 shadow-lg transition-all duration-300"
+              class="relative bg-white/40 dark:bg-gray-800/40 rounded-2xl border border-gray-200/30 dark:border-gray-700/30 shadow-lg transition-all duration-300"
               class:border-blue-500={searchFocused}
               class:border-opacity-40={searchFocused}
               class:shadow-xl={searchFocused}
@@ -294,6 +291,7 @@
                     <!-- Clear Button -->
                     <button
                       onclick={clearSearch}
+                      aria-label="Clear search"
                       class="p-1 text-gray-400 hover:text-red-500 dark:text-gray-500 dark:hover:text-red-400 transition-colors duration-200 rounded-full hover:bg-red-50 dark:hover:bg-red-900/20"
                     >
                       <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -405,13 +403,10 @@
               class="group relative"
               in:fly={{ y: 30, duration: 600, delay: index * 150, easing: cubicOut }}
             >
-              <!-- Glass Card Background Effect -->
-              <div class="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 dark:from-blue-500/10 dark:to-purple-500/10 rounded-2xl blur-md group-hover:blur-lg transition-all duration-300 opacity-70 dark:opacity-60"></div>
-
               <!-- Main Card -->
               <a
                 href="/device/{device.codename}"
-                class="relative block bg-white/30 dark:bg-gray-800/30 backdrop-blur-sm rounded-2xl border border-gray-200/20 dark:border-gray-700/20 hover:border-blue-500/30 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group-hover:transform group-hover:scale-[1.02]"
+                class="relative block bg-white/40 dark:bg-gray-800/40 rounded-2xl border border-gray-200/30 dark:border-gray-700/30 hover:border-blue-500/40 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group-hover:transform group-hover:scale-[1.02]"
               >
                 <!-- Device Image -->
                 <div class="relative h-48 overflow-hidden">
@@ -425,7 +420,7 @@
 
                   <!-- Status Badge -->
                   <div class="absolute top-4 left-4">
-                    <div class="flex items-center space-x-2 px-3 py-1.5 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-full border border-gray-200/50 dark:border-gray-700/50">
+                    <div class="flex items-center space-x-2 px-3 py-1.5 bg-white/95 dark:bg-gray-800/95 rounded-full border border-gray-200/50 dark:border-gray-700/50">
                       <div class="w-2 h-2 {getStatusColor(device.status)} rounded-full animate-pulse"></div>
                       <span class="text-xs font-semibold text-gray-700 dark:text-gray-300">{getStatusText(device.status)}</span>
                     </div>
@@ -433,7 +428,7 @@
 
                   <!-- Build Count -->
                   <div class="absolute top-4 right-4">
-                    <div class="px-2 py-1 bg-blue-500/90 backdrop-blur-sm rounded-full text-white text-xs font-bold">
+                    <div class="px-2 py-1 bg-blue-500/95 rounded-full text-white text-xs font-bold">
                       {device.builds.length} build{device.builds.length !== 1 ? 's' : ''}
                     </div>
                   </div>

@@ -256,8 +256,7 @@
     <!-- Enhanced Loading State with Glass UI -->
     <div class="flex items-center justify-center min-h-[100vh] relative overflow-hidden">
       <!-- Background Glass Effect -->
-      <div class="absolute inset-0 bg-gradient-to-br from-blue-50/30 via-purple-50/20 to-indigo-50/30 dark:from-gray-900/50 dark:via-black/60 dark:to-gray-800/50"></div>
-      <div class="absolute inset-0 backdrop-blur-3xl"></div>
+      <div class="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-purple-50/40 to-indigo-50/50 dark:from-gray-900/70 dark:via-black/80 dark:to-gray-800/70"></div>
 
       <!-- Floating Particles - Reduced for mobile -->
       <div class="absolute inset-0 overflow-hidden">
@@ -276,7 +275,7 @@
       </div>
 
       <!-- Loading Content -->
-      <div class="relative text-center p-8 bg-white/10 dark:bg-gray-800/10 backdrop-blur-xl rounded-3xl border border-white/20 dark:border-gray-700/20 shadow-2xl"
+      <div class="relative text-center p-8 bg-white/20 dark:bg-gray-800/20 rounded-3xl border border-white/30 dark:border-gray-700/30 shadow-2xl"
            in:scale={{ duration: 800, easing: backOut }}>
         <div class="relative inline-flex items-center justify-center w-20 h-20 mb-6">
           <!-- Spinning Ring -->
@@ -312,14 +311,13 @@
     <!-- Enhanced Error State with Glass UI -->
     <div class="flex items-center justify-center min-h-[100vh] relative overflow-hidden" in:fade={{ duration: 500 }}>
       <!-- Background Glass Effect -->
-      <div class="absolute inset-0 bg-gradient-to-br from-red-50/30 via-orange-50/20 to-pink-50/30 dark:from-gray-900/50 dark:via-red-900/20 dark:to-gray-800/50"></div>
-      <div class="absolute inset-0 backdrop-blur-3xl"></div>
+      <div class="absolute inset-0 bg-gradient-to-br from-red-50/50 via-orange-50/40 to-pink-50/50 dark:from-gray-900/70 dark:via-red-900/40 dark:to-gray-800/70"></div>
 
       <!-- Error Content -->
-      <div class="relative text-center p-8 mx-4 max-w-md bg-white/10 dark:bg-gray-800/10 backdrop-blur-xl rounded-3xl border border-white/20 dark:border-gray-700/20 shadow-2xl"
+      <div class="relative text-center p-8 mx-4 max-w-md bg-white/20 dark:bg-gray-800/20 rounded-3xl border border-white/30 dark:border-gray-700/30 shadow-2xl"
            in:scale={{ duration: 600, easing: backOut }}>
         <!-- Error Icon -->
-        <div class="inline-flex items-center justify-center w-20 h-20 bg-red-100/80 dark:bg-red-900/40 backdrop-blur-sm rounded-full mb-6 relative"
+        <div class="inline-flex items-center justify-center w-20 h-20 bg-red-100/90 dark:bg-red-900/60 rounded-full mb-6 relative"
              in:scale={{ duration: 800, delay: 200, easing: elasticOut }}>
           <div class="absolute inset-0 bg-red-500/20 rounded-full animate-ping"></div>
           <svg class="w-10 h-10 text-red-600 dark:text-red-400 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -410,7 +408,7 @@
             <div class="flex justify-center sm:justify-start mb-6 md:mb-8">
               <a
                 href="/device"
-                class="group inline-flex items-center px-4 py-2 md:px-6 md:py-3 bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl md:rounded-2xl text-white hover:bg-white/20 hover:border-white/30 transition-all duration-300 shadow-lg hover:shadow-xl"
+                class="group inline-flex items-center px-4 py-2 md:px-6 md:py-3 bg-white/20 border border-white/30 rounded-xl md:rounded-2xl text-white hover:bg-white/30 hover:border-white/40 transition-all duration-300 shadow-lg hover:shadow-xl"
                 class:transform-none={reduceAnimations}
                 class:hover:scale-105={!reduceAnimations}
                 in:fly={{ x: reduceAnimations ? 0 : -50, duration: reduceAnimations ? 300 : 600, delay: reduceAnimations ? 0 : 200 }}
@@ -424,7 +422,7 @@
 
             <!-- Status Badge with Enhanced Animation -->
             <div class="flex justify-center mb-6 md:mb-8" in:scale={{ duration: 600, delay: 400, easing: backOut }}>
-              <div class="group flex items-center space-x-3 px-4 py-2 md:px-6 md:py-3 bg-white/10 backdrop-blur-xl rounded-full border border-white/20 hover:bg-white/15 transition-all duration-300 shadow-lg">
+              <div class="group flex items-center space-x-3 px-4 py-2 md:px-6 md:py-3 bg-white/20 rounded-full border border-white/30 hover:bg-white/25 transition-all duration-300 shadow-lg">
                 <div class="relative">
                   <div class="w-3 h-3 md:w-4 md:h-4 {getStatusColor(device.status)} rounded-full animate-pulse"></div>
                   <div class="absolute inset-0 {getStatusColor(device.status)} rounded-full animate-ping opacity-75"></div>
@@ -445,7 +443,7 @@
             <!-- Codename with Glass Background -->
             <div class="flex items-center justify-center space-x-2 text-lg md:text-xl lg:text-2xl text-gray-300 mb-8 md:mb-12"
                  in:fly={{ y: 30, duration: 600, delay: 800 }}>
-              <div class="p-2 md:p-3 bg-white/5 backdrop-blur-sm rounded-lg border border-white/10">
+              <div class="p-2 md:p-3 bg-white/10 rounded-lg border border-white/20">
                 <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
                 </svg>
@@ -461,7 +459,7 @@
                 { label: 'Maintainer Role', value: device.maintainer.role.replace('_', ' '), icon: 'M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z' },
                 { label: 'Last Updated', value: formatDate(device.updatedAt), icon: 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z' }
               ] as stat, i}
-                <div class="group text-center p-4 md:p-6 bg-white/5 backdrop-blur-xl rounded-xl md:rounded-2xl border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
+                <div class="group text-center p-4 md:p-6 bg-white/10 rounded-xl md:rounded-2xl border border-white/20 hover:bg-white/15 hover:border-white/30 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
                      in:scale={{ duration: 500, delay: 1200 + (i * 150), easing: backOut }}>
                   <!-- Icon -->
                   <div class="inline-flex items-center justify-center w-10 h-10 md:w-12 md:h-12 bg-white/10 rounded-full mb-3 md:mb-4 group-hover:bg-white/20 transition-colors duration-300">
@@ -478,23 +476,10 @@
             </div>
           </div>
         </div>
-
-        <!-- Scroll Indicator -->
-        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce"
-             in:fade={{ duration: 600, delay: 1800 }}>
-          <div class="p-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20">
-            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-            </svg>
-          </div>
-        </div>
-      </section>
-
-      <!-- Enhanced Device Info Section -->
+      </section>      <!-- Enhanced Device Info Section -->
       <section class="py-12 md:py-20 relative">
         <!-- Background with Glass Effect -->
-        <div class="absolute inset-0 bg-gradient-to-br from-gray-50/80 via-blue-50/40 to-purple-50/80 dark:from-gray-900/90 dark:via-black/80 dark:to-gray-800/90"></div>
-        <div class="absolute inset-0 backdrop-blur-sm"></div>
+        <div class="absolute inset-0 bg-gradient-to-br from-gray-50/90 via-blue-50/60 to-purple-50/90 dark:from-gray-900/95 dark:via-black/90 dark:to-gray-800/95"></div>
 
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
@@ -503,7 +488,7 @@
             <div class="lg:col-span-1 space-y-6 md:space-y-8">
 
               <!-- Enhanced Maintainer Card -->
-              <div class="group bg-white/20 dark:bg-gray-800/20 backdrop-blur-xl rounded-2xl md:rounded-3xl p-6 md:p-8 border border-gray-200/30 dark:border-gray-700/30 shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] transform"
+              <div class="group bg-white/30 dark:bg-gray-800/30 rounded-2xl md:rounded-3xl p-6 md:p-8 border border-gray-200/40 dark:border-gray-700/40 shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] transform"
                    in:fly={{ x: -50, duration: 800, delay: 400 }}>
 
                 <!-- Header with Icon -->
@@ -557,7 +542,7 @@
               </div>
 
               <!-- Enhanced Flash Instructions -->
-              <div class="group bg-white/20 dark:bg-gray-800/20 backdrop-blur-xl rounded-2xl md:rounded-3xl p-6 md:p-8 border border-gray-200/30 dark:border-gray-700/30 shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] transform"
+              <div class="group bg-white/30 dark:bg-gray-800/30 rounded-2xl md:rounded-3xl p-6 md:p-8 border border-gray-200/40 dark:border-gray-700/40 shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] transform"
                    in:fly={{ x: -50, duration: 800, delay: 600 }}>
 
                 <!-- Header -->
@@ -593,7 +578,7 @@
 
             <!-- Enhanced Builds Section -->
             <div class="lg:col-span-2">
-              <div class="bg-white/20 dark:bg-gray-800/20 backdrop-blur-xl rounded-2xl md:rounded-3xl p-6 md:p-8 border border-gray-200/30 dark:border-gray-700/30 shadow-xl hover:shadow-2xl transition-all duration-500"
+              <div class="bg-white/30 dark:bg-gray-800/30 rounded-2xl md:rounded-3xl p-6 md:p-8 border border-gray-200/40 dark:border-gray-700/40 shadow-xl hover:shadow-2xl transition-all duration-500"
                    in:fly={{ x: 50, duration: 800, delay: 400 }}>
 
                 <!-- Header -->
@@ -637,7 +622,7 @@
                   <div class="space-y-4 md:space-y-6">
                     {#each device.builds as build, index (build.id)}
                       <div
-                        class="group bg-gray-50/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-xl md:rounded-2xl p-4 md:p-6 border border-gray-200/50 dark:border-gray-700/50 hover:border-blue-500/40 hover:bg-white/40 dark:hover:bg-gray-700/40 transition-all duration-300 shadow-lg hover:shadow-xl"
+                        class="group bg-gray-50/80 dark:bg-gray-800/80 rounded-xl md:rounded-2xl p-4 md:p-6 border border-gray-200/60 dark:border-gray-700/60 hover:border-blue-500/50 hover:bg-white/50 dark:hover:bg-gray-700/50 transition-all duration-300 shadow-lg hover:shadow-xl"
                         class:transform-none={reduceAnimations}
                         class:hover:scale-[1.01]={!reduceAnimations}
                         role="article"
