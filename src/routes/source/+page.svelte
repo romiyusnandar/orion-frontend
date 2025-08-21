@@ -113,7 +113,7 @@
         <h1 class="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
           Source <span class="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent">Releases</span>
         </h1>
-        <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-8">
+        <p class="md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-8">
           Download the latest OrionOS source releases, explore new features, and stay up to date with our development progress.
         </p>
 
@@ -142,10 +142,10 @@
 
   <!-- Source Releases Section -->
   <section class="py-20">
-    <div class="max-w-7xl mx-auto px-4">
+    <div class="max-w-7xl mx-auto px-1.5 md:px-4">
       {#if loading}
         <!-- Loading State -->
-        <div class="text-center py-20">
+        <div class="text-center py-0 md:py-20">
           <div class="relative inline-flex items-center justify-center w-16 h-16 mb-4">
             <div class="absolute inset-0 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-full animate-ping opacity-75"></div>
             <div class="relative w-12 h-12 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-full animate-spin">
@@ -176,7 +176,7 @@
         </div>
       {:else if sources.length === 0}
         <!-- Empty State -->
-        <div class="text-center py-20" in:fade={{ duration: 300 }}>
+        <div class="text-center py-0 md:py-20" in:fade={{ duration: 300 }}>
           <div class="inline-flex items-center justify-center w-16 h-16 bg-gray-100 dark:bg-gray-800 rounded-full mb-4">
             <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
@@ -261,16 +261,16 @@
                 </div>
 
                 <!-- Content -->
-                <div class="p-6">
+                <div class="p-4 md:p-6">
                   <!-- Description -->
-                  <p class="text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">
+                  <p class="text-sm md:text-base text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">
                     {source.description}
                   </p>
 
                   <!-- Changelog -->
                   <div class="mb-6">
                     <div class="flex items-center justify-between mb-4">
-                      <h4 class="text-lg font-semibold text-gray-900 dark:text-white flex items-center">
+                      <h4 class="text-sm md:text-lg font-semibold text-gray-900 dark:text-white flex items-center">
                         <svg class="w-5 h-5 mr-2 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                         </svg>
@@ -325,7 +325,7 @@
                   {#if source.screenshots && source.screenshots.length > 0}
                     <div class="mb-6">
                       <div class="flex items-center justify-between mb-4">
-                        <h4 class="text-lg font-semibold text-gray-900 dark:text-white flex items-center">
+                        <h4 class="text-sm md:text-lg font-semibold text-gray-900 dark:text-white flex items-center">
                           <svg class="w-5 h-5 mr-2 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                           </svg>
@@ -357,7 +357,7 @@
                           in:fly={{ y: 20, duration: 400, easing: cubicOut }}
                         >
                           <!-- Screenshots Grid -->
-                          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                          <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                             {#each source.screenshots as screenshot, i}
                               <div
                                 class="relative aspect-[9/16] bg-gray-100 dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg"
@@ -384,14 +384,14 @@
 
                   <!-- Download Button -->
                   <div class="flex flex-col sm:flex-row gap-4">
-                    <a href="/download" class="flex-1 inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-lg hover:from-cyan-600 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl font-semibold">
+                    <a href="/device" class="flex-1 inline-flex items-center justify-center text-sm md:text-base px-6 py-2 md:py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-lg hover:from-cyan-600 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl font-semibold">
                       <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                       </svg>
                       Download For Your Devices
                     </a>
 
-                    <a href="https://github.com/OrionOS-Project" target="_blank" class="inline-flex items-center justify-center px-6 py-3 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:border-cyan-500 hover:text-cyan-600 dark:hover:text-cyan-400 hover:bg-cyan-50 dark:hover:bg-cyan-900/20 transition-all duration-300 font-semibold">
+                    <a href="https://github.com/OrionOS-Project" target="_blank" class="inline-flex items-center justify-center text-sm md:text-base px-6 py-2 md:py-3 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:border-cyan-500 hover:text-cyan-600 dark:hover:text-cyan-400 hover:bg-cyan-50 dark:hover:bg-cyan-900/20 transition-all duration-300 font-semibold">
                       <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
                       </svg>
