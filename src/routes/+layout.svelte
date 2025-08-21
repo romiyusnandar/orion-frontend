@@ -17,7 +17,7 @@
 
 <main class="relative min-h-screen">
     <MoleculeBackground />
-    <div class="relative z-10 mx-auto max-w-7xl px-4 py-6">
+    <div class="relative z-10 mx-auto max-w-7xl px-1 py-4 md:px-4 md:py-6">
         {@render children?.()}
     </div>
 </main>

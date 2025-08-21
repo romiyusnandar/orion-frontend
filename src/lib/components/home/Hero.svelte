@@ -57,7 +57,7 @@
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center">
           <a
-            href="/download"
+            href="/device"
             class="inline-flex items-center px-8 py-3 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold hover:from-cyan-600 hover:to-blue-700 transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl"
           >
             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

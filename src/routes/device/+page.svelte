@@ -190,7 +190,7 @@
     <div class="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-indigo-50/30 to-purple-50/50 dark:from-gray-900/90 dark:via-black/80 dark:to-gray-800/90"></div>
     <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-500/10 via-transparent to-transparent"></div>
 
-    <div class="relative max-w-7xl mx-auto px-4">
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div
         class="text-center transform transition-all duration-1000 ease-out"
         class:translate-y-0={mounted}
@@ -208,32 +208,34 @@
             </div>
           </div>
         </div>
-        <h1 class="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
+        <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-6 px-4">
           Supported <span class="bg-gradient-to-r from-blue-400 via-purple-500 to-indigo-600 bg-clip-text text-transparent">Devices</span>
         </h1>
-        <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-8">
+        <p class="text-lg sm:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-8 px-4">
           Browse all devices officially supported by OrionOS. Find your device and download the latest build.
         </p>
 
         <!-- Stats -->
-        <div class="flex justify-center items-center space-x-8 mt-12">
+        <div class="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-8 mt-12">
           <div class="text-center">
-            <div class="text-3xl font-bold text-blue-600 dark:text-blue-400">{devices.length}</div>
-            <div class="text-sm text-gray-600 dark:text-gray-400">Supported Devices</div>
+            <div class="text-2xl sm:text-3xl font-bold text-blue-600 dark:text-blue-400">{devices.length}</div>
+            <div class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Supported Devices</div>
           </div>
-          <div class="w-px h-12 bg-gradient-to-b from-transparent via-gray-300 dark:via-gray-600 to-transparent"></div>
+          <div class="hidden sm:block w-px h-12 bg-gradient-to-b from-transparent via-gray-300 dark:via-gray-600 to-transparent"></div>
+          <div class="sm:hidden w-12 h-px bg-gradient-to-r from-transparent via-gray-300 dark:via-gray-600 to-transparent"></div>
           <div class="text-center">
-            <div class="text-3xl font-bold text-purple-600 dark:text-purple-400">
+            <div class="text-2xl sm:text-3xl font-bold text-purple-600 dark:text-purple-400">
               {devices.filter(d => d.status === 'ACTIVE').length}
             </div>
-            <div class="text-sm text-gray-600 dark:text-gray-400">Active Builds</div>
+            <div class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Active Builds</div>
           </div>
-          <div class="w-px h-12 bg-gradient-to-b from-transparent via-gray-300 dark:via-gray-600 to-transparent"></div>
+          <div class="hidden sm:block w-px h-12 bg-gradient-to-b from-transparent via-gray-300 dark:via-gray-600 to-transparent"></div>
+          <div class="sm:hidden w-12 h-px bg-gradient-to-r from-transparent via-gray-300 dark:via-gray-600 to-transparent"></div>
           <div class="text-center">
-            <div class="text-3xl font-bold text-indigo-600 dark:text-indigo-400">
+            <div class="text-2xl sm:text-3xl font-bold text-indigo-600 dark:text-indigo-400">
               {devices.reduce((acc, d) => acc + d.builds.length, 0)}
             </div>
-            <div class="text-sm text-gray-600 dark:text-gray-400">Total Builds</div>
+            <div class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Total Builds</div>
           </div>
         </div>
       </div>
@@ -242,7 +244,7 @@
 
   <!-- Devices Section -->
   <section class="py-20">
-    <div class="max-w-7xl mx-auto px-4">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Search Bar -->
       <div class="mb-12">
         <div class="max-w-2xl mx-auto">
@@ -257,11 +259,11 @@
               class:border-opacity-40={searchFocused}
               class:shadow-xl={searchFocused}
             >
-              <div class="flex items-center p-4">
+              <div class="flex items-center p-3 sm:p-4">
                 <!-- Search Icon -->
-                <div class="flex-shrink-0 mr-4">
+                <div class="flex-shrink-0 mr-3 sm:mr-4">
                   <svg
-                    class="w-6 h-6 text-gray-400 dark:text-gray-500 transition-colors duration-300"
+                    class="w-5 h-5 sm:w-6 sm:h-6 text-gray-400 dark:text-gray-500 transition-colors duration-300"
                     class:text-blue-500={searchFocused}
                     class:dark:text-blue-400={searchFocused}
                     fill="none"
@@ -275,26 +277,26 @@
                 <!-- Search Input -->
                 <input
                   type="text"
-                  placeholder="Search devices by name or codename..."
+                  placeholder="Search devices..."
                   bind:value={searchQuery}
                   oninput={handleSearchInput}
                   onfocus={() => searchFocused = true}
                   onblur={() => searchFocused = false}
-                  class="flex-1 bg-transparent text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none text-lg"
+                  class="flex-1 bg-transparent text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none text-base sm:text-lg min-w-0"
                 />
 
                 <!-- Loading Spinner / Clear Button -->
-                <div class="flex-shrink-0 ml-4">
+                <div class="flex-shrink-0 ml-3 sm:ml-4">
                   {#if isSearching}
                     <!-- Loading Spinner -->
-                    <div class="w-6 h-6 border-2 border-blue-200 dark:border-blue-800 border-t-blue-500 rounded-full animate-spin"></div>
+                    <div class="w-5 h-5 sm:w-6 sm:h-6 border-2 border-blue-200 dark:border-blue-800 border-t-blue-500 rounded-full animate-spin"></div>
                   {:else if searchQuery.trim()}
                     <!-- Clear Button -->
                     <button
                       onclick={clearSearch}
                       class="p-1 text-gray-400 hover:text-red-500 dark:text-gray-500 dark:hover:text-red-400 transition-colors duration-200 rounded-full hover:bg-red-50 dark:hover:bg-red-900/20"
                     >
-                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                       </svg>
                     </button>

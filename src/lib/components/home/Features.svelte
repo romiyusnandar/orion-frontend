@@ -9,7 +9,7 @@
       </p>
     </div>
 
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div class="grid md:grid-cols-2 gap-8">
       <!-- Performance Feature -->
       <div class="group relative">
         <div class="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-blue-600/20 rounded-2xl blur-lg group-hover:blur-xl transition-all duration-300"></div>
@@ -20,15 +20,15 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
               </svg>
             </div>
-            <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Lightning Fast</h3>
+            <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">High Performance</h3>
             <p class="text-gray-600 dark:text-gray-300 text-sm">
-              Optimized performance with 40% faster boot times and smoother animations than stock Android.
+              Optimized for speed and efficiency with minimal resource usage.
             </p>
           </div>
         </div>
       </div>
 
-      <!-- Customization Feature -->
+      <!-- Design Feature -->
       <div class="group relative">
         <div class="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-pink-600/20 rounded-2xl blur-lg group-hover:blur-xl transition-all duration-300"></div>
         <div class="relative bg-white/10 dark:bg-gray-800/10 backdrop-blur-sm rounded-2xl p-6 border border-gray-200/20 dark:border-gray-700/20 hover:border-purple-500/40 transition-all duration-300 hover:transform hover:scale-105">
@@ -38,16 +38,16 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM21 5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a4 4 0 004 4h4a2 2 0 002-2V5z"></path>
               </svg>
             </div>
-            <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Deep Customization</h3>
+            <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Minimalist Design</h3>
             <p class="text-gray-600 dark:text-gray-300 text-sm">
-              Personalize every aspect of your device with advanced theming, custom ROMs, and UI modifications.
+              Clean, modern interface that focuses on user experience.
             </p>
           </div>
         </div>
       </div>
 
       <!-- Security Feature -->
-      <div class="group relative">
+      <!-- <div class="group relative">
         <div class="absolute inset-0 bg-gradient-to-r from-green-500/20 to-emerald-600/20 rounded-2xl blur-lg group-hover:blur-xl transition-all duration-300"></div>
         <div class="relative bg-white/10 dark:bg-gray-800/10 backdrop-blur-sm rounded-2xl p-6 border border-gray-200/20 dark:border-gray-700/20 hover:border-green-500/40 transition-all duration-300 hover:transform hover:scale-105">
           <div class="text-center mb-4">
@@ -62,10 +62,10 @@
             </p>
           </div>
         </div>
-      </div>
+      </div> -->
 
       <!-- Battery Feature -->
-      <div class="group relative">
+      <!-- <div class="group relative">
         <div class="absolute inset-0 bg-gradient-to-r from-yellow-500/20 to-orange-600/20 rounded-2xl blur-lg group-hover:blur-xl transition-all duration-300"></div>
         <div class="relative bg-white/10 dark:bg-gray-800/10 backdrop-blur-sm rounded-2xl p-6 border border-gray-200/20 dark:border-gray-700/20 hover:border-yellow-500/40 transition-all duration-300 hover:transform hover:scale-105">
           <div class="text-center mb-4">
@@ -80,10 +80,10 @@
             </p>
           </div>
         </div>
-      </div>
+      </div> -->
 
       <!-- Gaming Feature -->
-      <div class="group relative">
+      <!-- <div class="group relative">
         <div class="absolute inset-0 bg-gradient-to-r from-red-500/20 to-rose-600/20 rounded-2xl blur-lg group-hover:blur-xl transition-all duration-300"></div>
         <div class="relative bg-white/10 dark:bg-gray-800/10 backdrop-blur-sm rounded-2xl p-6 border border-gray-200/20 dark:border-gray-700/20 hover:border-red-500/40 transition-all duration-300 hover:transform hover:scale-105">
           <div class="text-center mb-4">
@@ -95,6 +95,23 @@
             <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Gaming Mode</h3>
             <p class="text-gray-600 dark:text-gray-300 text-sm">
               Dedicated gaming optimizations with GPU overclocking and reduced latency for competitive gaming.
+            </p>
+          </div>
+        </div>
+      </div> -->
+
+    <div class="group relative">
+        <div class="absolute inset-0 bg-gradient-to-r from-green-500/20 to-emerald-600/20 rounded-2xl blur-lg group-hover:blur-xl transition-all duration-300"></div>
+        <div class="relative bg-white/10 dark:bg-gray-800/10 backdrop-blur-sm rounded-2xl p-6 border border-gray-200/20 dark:border-gray-700/20 hover:border-red-500/40 transition-all duration-300 hover:transform hover:scale-105">
+          <div class="text-center mb-4">
+            <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-green-500 to-emerald-600 rounded-full mb-4 group-hover:scale-110 transition-transform duration-300">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Feature Rich</h3>
+            <p class="text-gray-600 dark:text-gray-300 text-sm">
+              Packed with useful features while maintaining simplicity
             </p>
           </div>
         </div>
