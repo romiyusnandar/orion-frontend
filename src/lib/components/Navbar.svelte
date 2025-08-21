@@ -11,7 +11,7 @@
   const navItems = [
     { href: '/developer', label: 'Developer', icon: 'developer' },
     { href: '/source', label: 'Source', icon: 'source' },
-    { href: '/download', label: 'Download', icon: 'download' },
+    { href: '/device', label: 'Download', icon: 'download' },
     { href: '/about', label: 'About', icon: 'about' }
   ];
 
