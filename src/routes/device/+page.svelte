@@ -89,7 +89,7 @@
     switch (status) {
       case 'ACTIVE':
         return 'bg-green-500';
-      case 'INACTIVE':
+      case 'DISCONTINUED':
         return 'bg-red-500';
       case 'BETA':
         return 'bg-yellow-500';
@@ -102,8 +102,8 @@
     switch (status) {
       case 'ACTIVE':
         return 'Active';
-      case 'INACTIVE':
-        return 'Inactive';
+      case 'DISCONTINUED':
+        return 'Discontinued';
       case 'BETA':
         return 'Beta';
       default:
