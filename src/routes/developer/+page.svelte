@@ -81,6 +81,32 @@
     return roleColors[role?.toLowerCase()] || roleColors.default;
   }
 
+  function formatRole(role: string) {
+    if (!role) return 'Member';
+
+    // Handle specific role mappings
+    const roleMap: Record<string, string> = {
+      'CO_FOUNDER': 'Co-Founder',
+      'CORE_DEVELOPER': 'Core Developer',
+      'UI_UX_DESIGNER': 'UI/UX Designer',
+      'GROUP_SUPPORT': 'Group Support',
+      'ADMIN': 'Admin',
+      'FOUNDER': 'Founder',
+      'MAINTAINER': 'Maintainer'
+    };
+
+    const upperRole = role.toUpperCase();
+    if (roleMap[upperRole]) {
+      return roleMap[upperRole];
+    }
+
+    // Fallback: replace underscores with spaces and capitalize each word
+    return role
+      .toLowerCase()
+      .replace(/_/g, ' ')
+      .replace(/\b\w/g, l => l.toUpperCase());
+  }
+
   function getAvatarUrl(developer: Developer) {
     if (developer.profileImage) {
       return developer.profileImage;
@@ -149,69 +175,22 @@
 
 <div class="min-h-screen pt-16">
   <!-- Hero Section -->
-  <section class="relative py-20 overflow-hidden">
-    <!-- Background Effects -->
-    <div class="absolute inset-0 bg-gradient-to-br from-cyan-50/50 via-blue-50/30 to-purple-50/50 dark:from-gray-900/90 dark:via-black/80 dark:to-gray-800/90"></div>
-    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-cyan-500/10 via-transparent to-transparent"></div>
+  <section class="py-8 md:py-12">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <!-- Title -->
+      <h1 class="text-xl md:text-2xl font-bold text-gray-900 dark:text-white mb-3">
+        Our <span class="bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent">Developers</span>
+      </h1>
 
-    <div class="relative max-w-7xl mx-auto px-4">
-      <div
-        class="text-center transform transition-all duration-1000 ease-out"
-        class:translate-y-0={mounted}
-        class:opacity-100={mounted}
-        class:translate-y-8={!mounted}
-        class:opacity-0={!mounted}
-      >
-        <div class="group inline-flex items-center justify-center mb-8">
-          <div class="relative">
-            <div class="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-purple-600/20 rounded-full opacity-75 group-hover:opacity-100 transition-opacity duration-300"></div>
-            <div class="relative w-24 h-24 bg-gradient-to-br from-cyan-500 to-purple-600 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
-              <svg class="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
-                <!-- Main developer figure -->
-                <circle cx="9" cy="7" r="3" class="group-hover:animate-pulse" opacity="0.9"/>
-                <path d="M9 14c-4.42 0-8 1.79-8 4v2h16v-2c0-2.21-3.58-4-8-4z" class="group-hover:animate-pulse" opacity="0.9"/>
+      <!-- Description -->
+      <p class="text-sm md:text-base text-gray-600 dark:text-gray-300 mb-4">
+        Meet the talented minds behind OrionOS
+      </p>
 
-                <!-- Second developer figure -->
-                <circle cx="17" cy="7" r="2.5" class="animate-pulse" style="animation-delay: 0.3s;" opacity="0.8"/>
-                <path d="M17 13c-2.67 0-8 1.34-8 4v2h8v-2c0-2.66 5.33-4 8-4v-1c-2.21 0-8 1.79-8 1z" class="animate-pulse" style="animation-delay: 0.3s;" opacity="0.8"/>
-
-                <!-- Connection lines -->
-                <line x1="11" y1="9" x2="15" y2="9" stroke="currentColor" stroke-width="0.5" class="group-hover:animate-ping" opacity="0.6"/>
-                <line x1="9" y1="11" x2="17" y2="11" stroke="currentColor" stroke-width="0.5" class="group-hover:animate-ping" style="animation-delay: 0.5s;" opacity="0.6"/>
-
-                <!-- Floating particles -->
-                <circle cx="6" cy="4" r="0.5" class="animate-bounce" style="animation-delay: 0.2s;" opacity="0.7"/>
-                <circle cx="20" cy="6" r="0.5" class="animate-bounce" style="animation-delay: 0.7s;" opacity="0.7"/>
-                <circle cx="4" cy="12" r="0.5" class="animate-bounce" style="animation-delay: 1s;" opacity="0.7"/>
-                <circle cx="22" cy="14" r="0.5" class="animate-bounce" style="animation-delay: 0.4s;" opacity="0.7"/>
-              </svg>
-            </div>
-          </div>
-        </div>
-        <h1 class="text-2xl md:text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
-          Meet Our <span class="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent">Developers</span>
-        </h1>
-        <p class="text-md md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-8">
-          The talented minds behind OrionOS, working together to create exceptional Android experiences with cutting-edge technology and innovation.
-        </p>
-
-        <!-- Stats -->
-        <div class="flex flex-row justify-center items-center space-x-8 mt-12">
-          <div class="text-center">
-            <div class="text-xl md:text-3xl font-bold text-cyan-600 dark:text-cyan-400">{developers.length}</div>
-            <div class="text-sm text-gray-600 dark:text-gray-400">Developers</div>
-          </div>
-          <div class="w-px h-12 bg-gradient-to-b from-transparent via-gray-300 dark:via-gray-600 to-transparent"></div>
-          <div class="text-center">
-            <div class="text-xl md:text-3xl font-bold text-purple-600 dark:text-purple-400">24/7</div>
-            <div class="text-sm text-gray-600 dark:text-gray-400">Support</div>
-          </div>
-          <div class="w-px h-12 bg-gradient-to-b from-transparent via-gray-300 dark:via-gray-600 to-transparent"></div>
-          <div class="text-center">
-            <div class="text-3xl font-bold text-blue-600 dark:text-blue-400">∞</div>
-            <div class="text-sm text-gray-600 dark:text-gray-400">Innovation</div>
-          </div>
-        </div>
+      <!-- Developer Count -->
+      <div class="inline-flex items-center px-3 py-1.5 bg-cyan-500/10 dark:bg-cyan-500/20 rounded-full">
+        <span class="text-lg md:text-xl font-bold text-cyan-600 dark:text-cyan-400">{developers.length}</span>
+        <span class="ml-2 text-xs md:text-sm text-gray-600 dark:text-gray-400">Developers</span>
       </div>
     </div>
   </section>
@@ -263,23 +242,20 @@
         </div>
       {:else}
         <!-- Developers Grid -->
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div class="columns-2 md:columns-3 lg:columns-4 xl:columns-5 gap-4 space-y-4">
           {#each developers as developer, index (developer.id)}
             <div
-              class="group relative"
+              class="group break-inside-avoid mb-4"
               in:fly={{ y: 20, duration: 500, delay: index * 100, easing: cubicOut }}
             >
-              <!-- Glass Card Background Effect - Enhanced for light/dark mode -->
-              <div class="absolute inset-0 bg-gradient-to-r {getRoleColor(developer.role)}/20 dark:{getRoleColor(developer.role)}/10 rounded-2xl opacity-70 dark:opacity-60 group-hover:opacity-80 transition-all duration-300"></div>
-
               <!-- Main Card -->
-              <div id={developer.name} class="relative bg-white/40 dark:bg-gray-800/40 rounded-2xl p-6 border border-gray-200/30 dark:border-gray-700/30 hover:border-cyan-500/40 shadow-lg hover:shadow-xl transition-all duration-300 hover:transform hover:scale-102 h-full">
+              <div class="bg-white dark:bg-gray-800 rounded-xl p-4 border border-gray-200 dark:border-gray-700 hover:border-cyan-500 shadow-sm hover:shadow-md transition-all duration-300 hover:scale-105">
 
-                <!-- Avatar & Role Badge -->
-                <div class="flex items-start justify-between mb-4">
-                  <div class="relative">
-                    <!-- Profile Photo Container -->
-                    <div class="w-16 h-16 rounded-full overflow-hidden shadow-lg group-hover:scale-105 transition-transform duration-300 bg-gradient-to-br {getRoleColor(developer.role)}">
+                <!-- Avatar Section -->
+                <div class="flex flex-col items-center mb-3">
+                  <!-- Profile Photo -->
+                  <div class="relative mb-2">
+                    <div class="w-16 h-16 rounded-full overflow-hidden shadow-md bg-gradient-to-br {getRoleColor(developer.role)}">
                       {#if !developer.imageError}
                         <img
                           src={getAvatarUrl(developer)}
@@ -289,87 +265,62 @@
                           onerror={() => developer.imageError = true}
                         />
                       {:else}
-                        <!-- Fallback to initials if image fails to load -->
-                        <div class="w-full h-full flex items-center justify-center text-white font-semibold text-lg">
+                        <!-- Fallback to initials -->
+                        <div class="w-full h-full flex items-center justify-center text-white font-semibold">
                           {developer.name?.charAt(0) || '?'}
                         </div>
                       {/if}
                     </div>
-                    <!-- Status indicator -->
-                    <div class="absolute -bottom-1 -right-1 w-5 h-5 bg-green-500 rounded-full flex items-center justify-center shadow-lg border-2 border-white dark:border-gray-800">
-                      <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                      </svg>
-                    </div>
+                    <!-- Online Status -->
+                    <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white dark:border-gray-800"></div>
                   </div>
 
                   <!-- Role Badge -->
-                  <div class="px-3 py-1 bg-gradient-to-r {getRoleColor(developer.role)}/90 rounded-full text-xs font-medium text-white shadow-md">
-                    {developer.role || 'Member'}
+                  <div class="px-3 py-1 bg-gradient-to-r {getRoleColor(developer.role)} rounded-full text-xs font-medium text-white shadow-sm">
+                    {formatRole(developer.role)}
                   </div>
                 </div>
 
                 <!-- Developer Info -->
-                <div class="">
-                  <div>
-                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors duration-300">
-                      {developer.name}
-                    </h3>
-                  </div>
+                <div class="text-center space-y-2">
+                  <!-- Name -->
+                  <h3 class="text-sm font-semibold text-gray-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors duration-300">
+                    {developer.name}
+                  </h3>
 
+                  <!-- Maintained Devices -->
                   {#if developer.maintainedDevices && developer.maintainedDevices.length > 0}
-                    <div>
-                      <p class="text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Maintained Devices:</p>
-                      <div class="flex flex-wrap gap-1">
-                        {#each developer.maintainedDevices as device}
-                          <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-xs text-gray-700 dark:text-gray-300 rounded-md">
-                            {device.codename}
-                          </span>
-                        {/each}
-                      </div>
+                    <div class="flex flex-wrap justify-center gap-1 mb-2">
+                      {#each developer.maintainedDevices.slice(0, 3) as device}
+                        <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-xs text-gray-700 dark:text-gray-300 rounded">
+                          {device.codename}
+                        </span>
+                      {/each}
+                      {#if developer.maintainedDevices.length > 3}
+                        <span class="px-2 py-1 bg-gray-200 dark:bg-gray-600 text-xs text-gray-600 dark:text-gray-400 rounded">
+                          +{developer.maintainedDevices.length - 3}
+                        </span>
+                      {/if}
                     </div>
                   {/if}
 
-                  <div class="text-xs text-gray-500 dark:text-gray-400">
-                    Joined {formatDate(developer.createdAt)}
-                  </div>
-                </div>
-
-                <!-- Social Links -->
-                <div class="flex items-center justify-between mt-4 pt-4 border-t border-gray-200/10 dark:border-gray-700/10">
-                  <div class="flex space-x-2">
+                  <!-- Social Links -->
+                  <div class="flex justify-center space-x-2 pt-2">
                     {#if developer.socialLinks && developer.socialLinks.length > 0}
-                      {#each developer.socialLinks as socialLink}
+                      {#each developer.socialLinks.slice(0, 3) as socialLink}
                         <a
                           href={socialLink.url}
                           target="_blank"
                           rel="noopener noreferrer"
                           aria-label="View {developer.name}'s {socialLink.platform} profile"
-                          class="group/social relative p-2 bg-white/20 dark:bg-gray-800/20 rounded-lg border border-gray-200/30 dark:border-gray-700/30 hover:border-{getSocialLinkColor(socialLink.platform)}-400/40 hover:bg-{getSocialLinkColor(socialLink.platform)}-500/20 transition-all duration-300"
+                          class="p-2 bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-cyan-500/20 transition-all duration-300"
                         >
-                        <div class="absolute inset-0 bg-gradient-to-r from-{getSocialLinkColor(socialLink.platform)}-600/10 to-{getSocialLinkColor(socialLink.platform)}-400/10 rounded-lg opacity-0 group-hover/social:opacity-50 transition-all duration-300"></div>
-                        <svg class="relative w-4 h-4 text-gray-500 dark:text-gray-400 group-hover/social:text-{getSocialLinkColor(socialLink.platform)}-500 dark:group-hover/social:text-{getSocialLinkColor(socialLink.platform)}-400 transition-colors duration-300" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="{getSocialLinkIcon(socialLink.platform)}"/>
-                        </svg>
+                          <svg class="w-4 h-4 text-gray-500 dark:text-gray-400 hover:text-cyan-500 transition-colors duration-300" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="{getSocialLinkIcon(socialLink.platform)}"/>
+                          </svg>
                         </a>
                       {/each}
-                    {:else}
-                      <!-- Email fallback if no social links -->
-                      <a
-                        href="mailto:{developer.email}"
-                        aria-label="Send email to {developer.name}"
-                        class="group/social relative p-2 bg-white/20 dark:bg-gray-800/20 rounded-lg border border-gray-200/30 dark:border-gray-700/30 hover:border-green-400/40 hover:bg-green-500/20 transition-all duration-300"
-                      >
-                        <div class="absolute inset-0 bg-gradient-to-r from-green-600/10 to-green-400/10 rounded-lg opacity-0 group-hover/social:opacity-50 transition-all duration-300"></div>
-                        <svg class="relative w-4 h-4 text-gray-500 dark:text-gray-400 group-hover/social:text-green-500 dark:group-hover/social:text-green-400 transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                        </svg>
-                      </a>
                     {/if}
-                  </div>                  <!-- Online Status -->
-                  <div class="flex items-center space-x-1">
-                    <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse shadow-sm"></div>
-                    <span class="text-xs text-gray-600 dark:text-gray-400">Active</span>
                   </div>
                 </div>
               </div>

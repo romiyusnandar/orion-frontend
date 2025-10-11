@@ -361,176 +361,113 @@
       </div>
     </div>
   {:else if device}
-    <!-- Enhanced Device Details with Glass UI -->
+    <!-- Simplified Device Details -->
     <div class="relative" in:fade={{ duration: 800 }}>
-      <!-- Enhanced Hero Section -->
-      <section class="relative min-h-[70vh] md:min-h-[80vh] flex items-center overflow-hidden">
-        <!-- Background Image with Parallax Effect -->
+      <!-- Simplified Hero Section -->
+      <section class="relative py-16 md:py-24 overflow-hidden">
+        <!-- Background Image -->
         <div class="absolute inset-0">
           <img
             src={device.image}
             alt={device.name}
-            class="w-full h-full object-cover transform scale-110 transition-transform duration-1000"
-            class:scale-105={isScrolled}
+            class="w-full h-full object-cover object-top"
           />
-          <!-- Enhanced Overlay Gradients -->
-          <div class="absolute inset-0 bg-gradient-to-r from-black/90 via-black/50 to-black/90"></div>
-          <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-transparent to-black/60"></div>
-          <div class="absolute inset-0 bg-gradient-to-br from-blue-900/30 via-transparent to-purple-900/30"></div>
-        </div>
-
-        <!-- Floating Glass Elements - Reduced for mobile -->
-        <div class="absolute inset-0 overflow-hidden pointer-events-none">
-          {#each Array(isMobile ? 4 : 8) as _, i}
-            <div
-              class="absolute w-2 h-2 bg-white/20 rounded-full"
-              class:animate-pulse={!reduceAnimations}
-              style="
-                left: {10 + (i * 15)}%;
-                top: {20 + Math.sin(i) * 30}%;
-                animation-delay: {i * 0.5}s;
-                animation-duration: {reduceAnimations ? '5s' : 3 + Math.random() * 2 + 's'};
-              "
-            ></div>
-          {/each}
+          <!-- Simple Overlay -->
+          <div class="absolute inset-0 bg-black/60"></div>
         </div>
 
         <!-- Content Container -->
-        <div class="relative w-full max-w-7xl mx-auto p-4 sm:p-6 lg:p-8 z-10">
-          <div
-            class="text-center text-white transform transition-all duration-1000 ease-out"
-            class:translate-y-0={mounted}
-            class:opacity-100={mounted}
-            class:translate-y-8={!mounted}
-            class:opacity-0={!mounted}
-          >
-            <!-- Back Button with Glass Effect -->
-            <div class="flex justify-center sm:justify-start mb-6 md:mb-8">
+        <div class="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
+          <div class="text-center text-white">
+            <!-- Back Button -->
+            <div class="flex justify-center sm:justify-start mb-8">
               <a
                 href="/device"
-                class="group inline-flex items-center px-4 py-2 md:px-6 md:py-3 bg-white/20 border border-white/30 rounded-xl md:rounded-2xl text-white hover:bg-white/30 hover:border-white/40 transition-all duration-300 shadow-lg hover:shadow-xl"
-                class:transform-none={reduceAnimations}
-                class:hover:scale-105={!reduceAnimations}
-                in:fly={{ x: reduceAnimations ? 0 : -50, duration: reduceAnimations ? 300 : 600, delay: reduceAnimations ? 0 : 200 }}
+                class="inline-flex items-center px-4 py-2 bg-white/20 border border-white/30 rounded-lg text-white hover:bg-white/30 transition-colors duration-300"
               >
-                <svg class="w-4 h-4 md:w-5 md:h-5 mr-2 group-hover:-translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
                 </svg>
-                <span class="font-semibold text-sm md:text-base">Back to Devices</span>
+                <span class="font-medium">Back to Devices</span>
               </a>
             </div>
 
-            <!-- Status Badge with Enhanced Animation -->
-            <div class="flex justify-center mb-6 md:mb-8" in:scale={{ duration: 600, delay: 400, easing: backOut }}>
-              <div class="group flex items-center space-x-3 px-4 py-2 md:px-6 md:py-3 bg-white/20 rounded-full border border-white/30 hover:bg-white/25 transition-all duration-300 shadow-lg">
-                <div class="relative">
-                  <div class="w-3 h-3 md:w-4 md:h-4 {getStatusColor(device.status)} rounded-full animate-pulse"></div>
-                  <div class="absolute inset-0 {getStatusColor(device.status)} rounded-full animate-ping opacity-75"></div>
-                </div>
-                <span class="text-sm md:text-base font-semibold">{getStatusText(device.status)}</span>
-                <div class="w-2 h-2 bg-white/40 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <!-- Status Badge -->
+            <div class="flex justify-center mb-6">
+              <div class="flex items-center space-x-2 px-4 py-2 bg-white/20 rounded-full border border-white/30">
+                <div class="w-3 h-3 {getStatusColor(device.status)} rounded-full"></div>
+                <span class="text-sm font-medium">{getStatusText(device.status)}</span>
               </div>
             </div>
 
-            <!-- Device Name with Responsive Typography -->
-            <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 md:mb-6 leading-tight"
-                in:fly={{ y: 50, duration: 800, delay: 600, easing: cubicOut }}>
-              <span class="bg-gradient-to-r from-white via-blue-100 to-purple-100 bg-clip-text text-transparent">
-                {device.name}
-              </span>
+            <!-- Device Name -->
+            <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
+              {device.name}
             </h1>
 
-            <!-- Codename with Glass Background -->
-            <div class="flex items-center justify-center space-x-2 text-lg md:text-xl lg:text-2xl text-gray-300 mb-8 md:mb-12"
-                 in:fly={{ y: 30, duration: 600, delay: 800 }}>
-              <div class="p-2 md:p-3 bg-white/10 rounded-lg border border-white/20">
-                <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
-                </svg>
-              </div>
-              <span class="font-mono font-semibold">{device.codename}</span>
+            <!-- Codename -->
+            <div class="flex items-center justify-center space-x-2 text-lg text-gray-300 mb-8">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+              </svg>
+              <span class="font-mono font-medium">{device.codename}</span>
             </div>
 
-            <!-- Enhanced Stats with Glass Cards -->
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 lg:gap-8 max-w-4xl mx-auto"
-                 in:fly={{ y: 40, duration: 800, delay: 1000 }}>
-              {#each [
-                { label: 'Available Builds', value: device.builds.length, icon: 'M12 10v6m0 0l-3-3m3 3l3-3' },
-                { label: 'Maintainer Role', value: device.maintainer.role.replace('_', ' '), icon: 'M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z' },
-                { label: 'Last Updated', value: formatDate(device.updatedAt), icon: 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z' }
-              ] as stat, i}
-                <div class="group text-center p-4 md:p-6 bg-white/10 rounded-xl md:rounded-2xl border border-white/20 hover:bg-white/15 hover:border-white/30 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
-                     in:scale={{ duration: 500, delay: 1200 + (i * 150), easing: backOut }}>
-                  <!-- Icon -->
-                  <div class="inline-flex items-center justify-center w-10 h-10 md:w-12 md:h-12 bg-white/10 rounded-full mb-3 md:mb-4 group-hover:bg-white/20 transition-colors duration-300">
-                    <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={stat.icon}></path>
-                    </svg>
-                  </div>
-                  <!-- Value -->
-                  <div class="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-2">{stat.value}</div>
-                  <!-- Label -->
-                  <div class="text-xs md:text-sm text-gray-300 font-medium">{stat.label}</div>
-                </div>
-              {/each}
+            <!-- Simple Stats -->
+            <div class="flex justify-center items-center space-x-8">
+              <div class="text-center">
+                <div class="text-2xl font-bold text-white">{device.builds.length}</div>
+                <div class="text-sm text-gray-300">Available Builds</div>
+              </div>
+              <div class="w-px h-8 bg-white/30"></div>
+              <div class="text-center">
+                <div class="text-2xl font-bold text-white">{formatDate(device.updatedAt)}</div>
+                <div class="text-sm text-gray-300">Last Updated</div>
+              </div>
             </div>
           </div>
         </div>
-      </section>      <!-- Enhanced Device Info Section -->
-      <section class="py-12 md:py-20 relative">
-        <!-- Background with Glass Effect -->
-        <div class="absolute inset-0 bg-gradient-to-br from-gray-50/90 via-blue-50/60 to-purple-50/90 dark:from-gray-900/95 dark:via-black/90 dark:to-gray-800/95"></div>
-
-        <div class="relative max-w-7xl mx-auto px-4 lg:px-8">
-          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
+      </section>      <!-- Device Info Section -->
+      <section class="py-8 md:py-16">
+        <div class="max-w-7xl mx-auto px-4 lg:px-8">
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
             <!-- Maintainer & Flash Instructions Column -->
-            <div class="lg:col-span-1 space-y-6 md:space-y-8">
+            <div class="lg:col-span-1 space-y-6">
 
-              <!-- Enhanced Maintainer Card -->
-              <div class="group bg-white/30 dark:bg-gray-800/30 rounded-2xl md:rounded-3xl p-6 md:p-8 border border-gray-200/40 dark:border-gray-700/40 shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] transform"
-                   in:fly={{ x: -50, duration: 800, delay: 400 }}>
-
-                <!-- Header with Icon -->
-                <div class="flex items-center mb-6 md:mb-8">
-                  <div class="p-3 bg-blue-500/20 backdrop-blur-sm rounded-xl mr-4 group-hover:bg-blue-500/30 transition-colors duration-300">
-                    <svg class="w-6 h-6 text-blue-500 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <!-- Maintainer Card -->
+              <div class="bg-white/50 dark:bg-gray-800/50 rounded-xl p-6 border border-gray-200/50 dark:border-gray-700/50 shadow-lg">
+                <!-- Header -->
+                <div class="flex items-center mb-6">
+                  <div class="p-2 bg-blue-500/20 rounded-lg mr-3">
+                    <svg class="w-5 h-5 text-blue-500 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                     </svg>
                   </div>
-                  <h3 class="text-xl md:text-2xl font-bold text-gray-900 dark:text-white">Maintainer</h3>
+                  <h3 class="text-lg md:text-xl font-bold text-gray-900 dark:text-white">Maintainer</h3>
                 </div>
 
                 <!-- Maintainer Info -->
                 <div class="flex flex-col items-center text-center">
-                  <div class="relative group/avatar mb-4 md:mb-6">
-                    <div class="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full blur-lg opacity-75 group-hover/avatar:opacity-100 transition-opacity duration-300"></div>
-                    <img
-                      src={device.maintainer.profileImage}
-                      alt={device.maintainer.name}
-                      class="relative w-20 h-20 md:w-24 md:h-24 rounded-full border-4 border-white/50 dark:border-gray-700/50 shadow-lg transform transition-transform duration-300 group-hover/avatar:scale-110"
-                      loading="lazy"
-                    />
-                    <div class="absolute -bottom-2 -right-2 w-6 h-6 bg-green-500 rounded-full border-2 border-white dark:border-gray-800 animate-pulse"></div>
-                  </div>
+                  <img
+                    src={device.maintainer.profileImage}
+                    alt={device.maintainer.name}
+                    class="w-16 h-16 md:w-20 md:h-20 rounded-full border-3 border-white/50 dark:border-gray-700/50 shadow-lg mb-4"
+                    loading="lazy"
+                  />
+                  <h4 class="text-base md:text-lg font-bold text-gray-900 dark:text-white mb-3">{device.maintainer.name}</h4>
 
-                  <h4 class="text-lg md:text-xl font-bold text-gray-900 dark:text-white mb-2">{device.maintainer.name}</h4>
-                  <p class="text-sm md:text-base text-gray-600 dark:text-gray-400 mb-6 px-2 py-1 bg-gray-100/50 dark:bg-gray-800/50 rounded-lg backdrop-blur-sm">
-                    {device.maintainer.role.replace('_', ' ')}
-                  </p>
-
-                  <!-- Enhanced Social Links -->
+                  <!-- Social Links -->
                   {#if device.maintainer.socialLinks.length > 0}
-                    <div class="flex flex-wrap gap-3 justify-center">
-                      {#each device.maintainer.socialLinks as social, i}
+                    <div class="flex flex-wrap gap-2 justify-center">
+                      {#each device.maintainer.socialLinks as social}
                         <a
                           href={social.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          class="group/social inline-flex items-center px-3 py-2 md:px-4 md:py-2 bg-gray-100/60 dark:bg-gray-800/60 backdrop-blur-sm text-gray-700 dark:text-gray-300 rounded-xl hover:bg-blue-100/80 dark:hover:bg-blue-900/40 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 text-sm md:text-base shadow-lg hover:shadow-xl transform hover:scale-105"
-                          in:scale={{ duration: 400, delay: 600 + (i * 100), easing: backOut }}
+                          class="inline-flex items-center px-3 py-2 bg-gray-100/60 dark:bg-gray-800/60 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-blue-100/80 dark:hover:bg-blue-900/40 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300 text-sm"
                         >
-                          <div class="mr-2 group-hover/social:rotate-12 transition-transform duration-300">
+                          <div class="mr-2">
                             {@html getPlatformIcon(social.platform)}
                           </div>
                           <span class="capitalize font-medium">{social.platform}</span>
@@ -541,62 +478,66 @@
                 </div>
               </div>
 
-              <!-- Enhanced Flash Instructions -->
-              <div class="group bg-white/30 dark:bg-gray-800/30 rounded-2xl md:rounded-3xl p-6 md:p-8 border border-gray-200/40 dark:border-gray-700/40 shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] transform"
-                   in:fly={{ x: -50, duration: 800, delay: 600 }}>
-
+              <!-- Flash Instructions -->
+              <div class="bg-white/50 dark:bg-gray-800/50 rounded-xl p-6 border border-gray-200/50 dark:border-gray-700/50 shadow-lg">
                 <!-- Header -->
-                <div class="flex items-center mb-4 md:mb-6">
-                  <div class="p-3 bg-purple-500/20 backdrop-blur-sm rounded-xl mr-4 group-hover:bg-purple-500/30 transition-colors duration-300">
-                    <svg class="w-6 h-6 text-purple-500 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="flex items-center mb-4">
+                  <div class="p-2 bg-purple-500/20 rounded-lg mr-3">
+                    <svg class="w-5 h-5 text-purple-500 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
                     </svg>
                   </div>
-                  <h3 class="text-xl md:text-2xl font-bold text-gray-900 dark:text-white">Flash Instructions</h3>
+                  <h3 class="text-lg md:text-xl font-bold text-gray-900 dark:text-white">Flash Instructions</h3>
                 </div>
 
-                <p class="text-gray-600 dark:text-gray-400 mb-6 text-sm md:text-base leading-relaxed">
-                  Learn how to install OrionOS on your {device.name}. Follow our comprehensive step-by-step guide for a successful installation.
+                <p class="text-gray-600 dark:text-gray-400 mb-6 text-sm leading-relaxed">
+                  Learn how to install OrionOS on your {device.name}. Follow our step-by-step guide for a successful installation.
                 </p>
 
-                <a
-                  href={device.flashInstruction}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="group/button inline-flex items-center px-6 py-3 md:px-8 md:py-4 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded-xl md:rounded-2xl hover:from-purple-600 hover:to-pink-700 transition-all duration-300 text-sm md:text-base font-bold shadow-lg hover:shadow-2xl transform hover:scale-105 w-full sm:w-auto justify-center relative overflow-hidden"
-                >
-                  <!-- Button Glow -->
-                  <div class="absolute inset-0 bg-gradient-to-r from-purple-400 to-pink-500 opacity-0 group-hover/button:opacity-30 transition-opacity duration-300 blur-xl"></div>
-
-                  <svg class="w-5 h-5 mr-3 group-hover/button:rotate-12 transition-transform duration-300 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-                  </svg>
-                  <span class="relative z-10">View Installation Guide</span>
-                </a>
+                {#if device.flashInstruction}
+                  <a
+                    href={device.flashInstruction}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="relative z-10 inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded-lg hover:from-purple-600 hover:to-pink-700 transition-colors duration-300 text-sm font-semibold shadow-lg w-full justify-center cursor-pointer"
+                    role="button"
+                    tabindex="0"
+                  >
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                    </svg>
+                    <span>View Installation Guide</span>
+                  </a>
+                {:else}
+                  <div class="inline-flex items-center px-6 py-3 bg-gray-400 text-white rounded-lg text-sm font-semibold shadow-lg w-full justify-center cursor-not-allowed opacity-60">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.268 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+                    </svg>
+                    <span>Installation Guide Not Available</span>
+                  </div>
+                {/if}
               </div>
             </div>
 
-            <!-- Enhanced Builds Section -->
+            <!-- Builds Section -->
             <div class="lg:col-span-2">
-              <div class="bg-white/30 dark:bg-gray-800/30 rounded-2xl md:rounded-3xl p-6 md:p-8 border border-gray-200/40 dark:border-gray-700/40 shadow-xl hover:shadow-2xl transition-all duration-500"
-                   in:fly={{ x: 50, duration: 800, delay: 400 }}>
-
+              <div class="bg-white/50 dark:bg-gray-800/50 rounded-xl p-6 border border-gray-200/50 dark:border-gray-700/50 shadow-lg">
                 <!-- Header -->
-                <div class="flex items-center justify-between mb-6 md:mb-8">
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-4">
                   <div class="flex items-center">
-                    <div class="p-3 bg-green-500/20 backdrop-blur-sm rounded-xl mr-4">
-                      <svg class="w-6 h-6 text-green-500 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="p-2 bg-green-500/20 rounded-lg mr-3">
+                      <svg class="w-5 h-5 text-green-500 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                       </svg>
                     </div>
                     <div>
-                      <h3 class="text-xl md:text-2xl font-bold text-gray-900 dark:text-white">Available Builds</h3>
+                      <h3 class="text-lg md:text-xl font-bold text-gray-900 dark:text-white">Available Builds</h3>
                       <p class="text-sm text-gray-600 dark:text-gray-400">({device.builds.length} build{device.builds.length !== 1 ? 's' : ''})</p>
                     </div>
                   </div>
 
-                  <!-- Build Type Legend (Hidden on mobile) -->
-                  <div class="hidden md:flex items-center space-x-3">
+                  <!-- Build Type Legend -->
+                  <div class="flex items-center space-x-3">
                     {#each ['GAPPS', 'VANILLA'] as type}
                       <div class="flex items-center space-x-2">
                         <div class="w-3 h-3 rounded-full {getBuildTypeColor(type).split(' ')[0]}"></div>
@@ -607,45 +548,36 @@
                 </div>
 
                 {#if device.builds.length === 0}
-                  <!-- Enhanced Empty State -->
-                  <div class="text-center py-16 md:py-20">
-                    <div class="inline-flex items-center justify-center w-20 h-20 bg-gray-100/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-full mb-6"
-                         in:scale={{ duration: 600, easing: elasticOut }}>
-                      <svg class="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <!-- Empty State -->
+                  <div class="text-center py-12">
+                    <div class="inline-flex items-center justify-center w-16 h-16 bg-gray-100/60 dark:bg-gray-800/60 rounded-full mb-4">
+                      <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                       </svg>
                     </div>
-                    <h4 class="text-xl md:text-2xl font-bold text-gray-900 dark:text-white mb-3">No builds available</h4>
-                    <p class="text-gray-600 dark:text-gray-300 max-w-md mx-auto">Check back later for new releases and updates.</p>
+                    <h4 class="text-lg font-bold text-gray-900 dark:text-white mb-2">No builds available</h4>
+                    <p class="text-gray-600 dark:text-gray-300">Check back later for new releases and updates.</p>
                   </div>
                 {:else}
-                  <div class="space-y-4 md:space-y-6">
-                    {#each device.builds as build, index (build.id)}
-                      <div
-                        class="group bg-gray-50/80 dark:bg-gray-800/80 rounded-xl md:rounded-2xl p-4 md:p-6 border border-gray-200/60 dark:border-gray-700/60 hover:border-blue-500/50 hover:bg-white/50 dark:hover:bg-gray-700/50 transition-all duration-300 shadow-lg hover:shadow-xl"
-                        class:transform-none={reduceAnimations}
-                        class:hover:scale-[1.01]={!reduceAnimations}
-                        role="article"
-                        onmouseenter={() => !isMobile && (hoveredBuild = build.id)}
-                        onmouseleave={() => !isMobile && (hoveredBuild = null)}
-                        in:fly={{ y: reduceAnimations ? 0 : 30, duration: reduceAnimations ? 200 : 500, delay: reduceAnimations ? 0 : 200 + (index * 100), easing: cubicOut }}
-                      >
+                  <div class="space-y-4">
+                    {#each device.builds as build}
+                      <div class="bg-gray-50/80 dark:bg-gray-800/80 rounded-lg p-4 border border-gray-200/60 dark:border-gray-700/60 hover:border-blue-500/50 hover:bg-white/50 dark:hover:bg-gray-700/50 transition-colors duration-300">
                         <div class="flex flex-col gap-4">
                           <!-- Build Header -->
                           <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
                             <!-- Build Info -->
                             <div class="flex-1 min-w-0">
                               <div class="flex flex-wrap items-center gap-3 mb-3">
-                                <span class="inline-flex items-center px-3 py-1 text-xs md:text-sm font-bold rounded-lg {getBuildTypeColor(build.type)} shadow-sm">
-                                  <div class="w-2 h-2 bg-current rounded-full mr-2 animate-pulse"></div>
+                                <span class="inline-flex items-center px-3 py-1 text-xs font-bold rounded-lg {getBuildTypeColor(build.type)}">
+                                  <div class="w-2 h-2 bg-current rounded-full mr-2"></div>
                                   {build.type}
                                 </span>
-                                <span class="text-sm md:text-base text-gray-600 dark:text-gray-400 font-medium">
+                                <span class="text-sm text-gray-600 dark:text-gray-400 font-medium">
                                   {formatDate(build.createdAt)}
                                 </span>
                               </div>
-                              <h4 class="font-bold text-gray-900 dark:text-white mb-2 text-lg md:text-xl truncate">{build.version}</h4>
-                              <div class="flex items-center space-x-2 text-sm md:text-base text-gray-600 dark:text-gray-400">
+                              <h4 class="font-bold text-gray-900 dark:text-white mb-2 text-base md:text-lg">{build.version}</h4>
+                              <div class="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4V2a1 1 0 011-1h8a1 1 0 011 1v2h4a1 1 0 011 1v1a1 1 0 01-1 1H3a1 1 0 01-1-1V5a1 1 0 011-1h4z"></path>
                                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8v12a2 2 0 002 2h10a2 2 0 002-2V8"></path>
@@ -655,22 +587,22 @@
                             </div>
 
                             <!-- Action Buttons -->
-                            <div class="flex flex-wrap gap-3 lg:flex-nowrap">
+                            <div class="flex flex-col sm:flex-row gap-3">
                               <!-- Changelog Toggle Button -->
                               {#if build.changelogUrl}
                                 <button
                                   onclick={() => toggleChangelog(build.id, build.changelogUrl)}
-                                  class="group/changelog flex items-center px-4 py-2 md:px-5 md:py-3 text-sm md:text-base font-semibold text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 bg-gray-100/60 dark:bg-gray-700/60 backdrop-blur-sm rounded-xl hover:bg-orange-50/80 dark:hover:bg-orange-900/30 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 flex-1 lg:flex-none justify-center"
+                                  class="flex items-center px-4 py-2 text-sm font-semibold text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 bg-gray-100/60 dark:bg-gray-700/60 rounded-lg hover:bg-orange-50/80 dark:hover:bg-orange-900/30 transition-colors duration-300 justify-center"
                                   class:bg-orange-100={expandedChangelogs[build.id]}
                                   class:dark:bg-orange-900={expandedChangelogs[build.id]}
                                   class:text-orange-600={expandedChangelogs[build.id]}
                                   class:dark:text-orange-400={expandedChangelogs[build.id]}
                                 >
-                                  <svg class="w-5 h-5 mr-2 group-hover/changelog:rotate-12 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707v11a2 2 0 01-2 2z"></path>
                                   </svg>
                                   <span class="hidden sm:inline">{expandedChangelogs[build.id] ? 'Hide' : 'View'} Changelog</span>
-                                  <span class="sm:hidden">{expandedChangelogs[build.id] ? 'Hide' : 'Changes'}</span>
+                                  <span class="sm:hidden">Changelog</span>
                                   <svg
                                     class="w-4 h-4 ml-2 transform transition-transform duration-300"
                                     class:rotate-180={expandedChangelogs[build.id]}
@@ -688,83 +620,59 @@
                                 href={build.downloadUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                class="group/download relative inline-flex items-center px-6 py-2 md:px-8 md:py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-xl hover:from-green-600 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-2xl font-bold text-sm md:text-base flex-1 lg:flex-none justify-center overflow-hidden"
-                                class:transform-none={reduceAnimations}
-                                class:hover:scale-105={!reduceAnimations}
-                                class:animate-pulse={hoveredBuild === build.id && !reduceAnimations}
+                                class="inline-flex items-center px-6 py-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-lg hover:from-green-600 hover:to-emerald-700 transition-colors duration-300 font-semibold text-sm justify-center"
                               >
-                                <!-- Button Glow - Hidden on mobile for performance -->
-                                <div class="absolute inset-0 bg-gradient-to-r from-green-400 to-emerald-500 opacity-0 group-hover/download:opacity-30 transition-opacity duration-300 blur-xl"
-                                     class:hidden={reduceAnimations}></div>
-
-                                <svg class="w-5 h-5 mr-2 relative z-10"
-                                     class:animate-bounce={!reduceAnimations && hoveredBuild === build.id}
-                                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                                 </svg>
-                                <span class="relative z-10">Download</span>
+                                <span>Download</span>
                               </a>
                             </div>
                           </div>
 
-                          <!-- Enhanced Expanded Changelog -->
+                          <!-- Expanded Changelog -->
                           {#if expandedChangelogs[build.id]}
-                            <div
-                              class="mt-6 border-t border-gray-200/60 dark:border-gray-700/60 pt-6"
-                              in:fly={{ y: 20, duration: 500, easing: cubicOut }}
-                            >
+                            <div class="mt-4 border-t border-gray-200/60 dark:border-gray-700/60 pt-4">
                               <!-- Changelog Header -->
                               <div class="flex items-center justify-between mb-4">
                                 <div class="flex items-center">
-                                  <div class="p-2 bg-orange-500/20 backdrop-blur-sm rounded-lg mr-3">
-                                    <svg class="w-5 h-5 text-orange-500 dark:text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <div class="p-2 bg-orange-500/20 rounded-lg mr-3">
+                                    <svg class="w-4 h-4 text-orange-500 dark:text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707v11a2 2 0 01-2 2z"></path>
                                     </svg>
                                   </div>
-                                  <h5 class="text-lg md:text-xl font-bold text-gray-900 dark:text-white">Changelog</h5>
+                                  <h5 class="text-base font-bold text-gray-900 dark:text-white">Changelog</h5>
                                 </div>
 
-                                <!-- Changelog Source Link (Mobile Hidden) -->
+                                <!-- Changelog Source Link -->
                                 <a
                                   href={build.changelogUrl}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  class="hidden sm:inline-flex items-center text-xs md:text-sm text-gray-500 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors duration-200 bg-gray-100/50 dark:bg-gray-800/50 backdrop-blur-sm px-3 py-1 rounded-lg"
+                                  class="text-xs text-gray-500 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors duration-200"
                                 >
-                                  <svg class="w-3 h-3 md:w-4 md:h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-                                  </svg>
                                   View raw file
                                 </a>
                               </div>
 
                               {#if changelogLoading[build.id]}
-                                <!-- Enhanced Loading State -->
-                                <div class="flex items-center justify-center py-12 md:py-16">
+                                <!-- Loading State -->
+                                <div class="flex items-center justify-center py-8">
                                   <div class="text-center">
-                                    <div class="relative inline-flex items-center justify-center mb-4">
-                                      <div class="w-10 h-10 md:w-12 md:h-12 border-4 border-orange-200 dark:border-orange-800 border-t-orange-500 rounded-full animate-spin"></div>
-                                      <div class="absolute inset-2 md:inset-3 bg-orange-500/20 rounded-full animate-pulse"></div>
-                                    </div>
-                                    <p class="text-gray-600 dark:text-gray-400 font-medium">Loading changelog...</p>
+                                    <div class="w-8 h-8 border-4 border-orange-200 dark:border-orange-800 border-t-orange-500 rounded-full animate-spin mb-2"></div>
+                                    <p class="text-gray-600 dark:text-gray-400 text-sm">Loading changelog...</p>
                                   </div>
                                 </div>
                               {:else if changelogContents[build.id]}
-                                <!-- Enhanced Changelog Content -->
-                                <div class="bg-gray-100/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-xl md:rounded-2xl p-0 md:p-6 max-h-80 md:max-h-96 overflow-y-auto border border-gray-200/30 dark:border-gray-700/30 shadow-inner">
+                                <!-- Changelog Content -->
+                                <div class="bg-gray-100/70 dark:bg-gray-800/70 rounded-lg p-4 max-h-64 overflow-y-auto border border-gray-200/30 dark:border-gray-700/30">
                                   {#if changelogContents[build.id].startsWith('Failed to load')}
-                                    <!-- Enhanced Error State -->
-                                    <div class="text-center py-8 md:py-12">
-                                      <div class="inline-flex items-center justify-center w-16 h-16 bg-red-100/80 dark:bg-red-900/40 backdrop-blur-sm rounded-full mb-4"
-                                           in:scale={{ duration: 400, easing: backOut }}>
-                                        <svg class="w-8 h-8 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.268 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
-                                        </svg>
-                                      </div>
-                                      <p class="text-red-600 dark:text-red-400 text-sm md:text-base font-medium mb-4">{changelogContents[build.id]}</p>
+                                    <!-- Error State -->
+                                    <div class="text-center py-6">
+                                      <p class="text-red-600 dark:text-red-400 text-sm mb-3">{changelogContents[build.id]}</p>
                                       <button
                                         onclick={() => fetchChangelog(build.id, build.changelogUrl)}
-                                        class="inline-flex items-center px-4 py-2 text-sm md:text-base text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 bg-red-50/80 dark:bg-red-900/20 backdrop-blur-sm rounded-lg hover:bg-red-100/80 dark:hover:bg-red-900/40 transition-all duration-200 font-medium"
+                                        class="inline-flex items-center px-3 py-2 text-sm text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 bg-red-50/80 dark:bg-red-900/20 rounded-lg transition-colors duration-200"
                                       >
                                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
@@ -773,34 +681,15 @@
                                       </button>
                                     </div>
                                   {:else}
-                                    <!-- Enhanced Changelog Lines -->
-                                    <div class="space-y-0 md:space-y-3">
-                                      {#each formatChangelog(changelogContents[build.id]) as line, i}
-                                        <div
-                                          class="group flex items-start space-x-3 md:space-x-4 text-gray-700 dark:text-gray-300 hover:bg-white/30 dark:hover:bg-gray-700/30 p-1 md:p-3 rounded-lg transition-all duration-200"
-                                          in:fly={{ y: 10, duration: 300, delay: i * 30 }}
-                                        >
-                                          <div class="w-2 h-2 bg-gradient-to-r from-orange-500 to-red-500 rounded-full mt-2 flex-shrink-0 group-hover:scale-125 transition-transform duration-200"></div>
-                                          <span class="text-sm md:text-base leading-relaxed font-mono break-words">{line}</span>
+                                    <!-- Changelog Lines -->
+                                    <div class="space-y-2">
+                                      {#each formatChangelog(changelogContents[build.id]) as line}
+                                        <div class="text-gray-700 dark:text-gray-300 hover:bg-white/30 dark:hover:bg-gray-700/30 p-2 rounded transition-colors duration-200">
+                                          <span class="text-sm font-mono break-words">{line}</span>
                                         </div>
                                       {/each}
                                     </div>
                                   {/if}
-                                </div>
-
-                                <!-- Mobile Changelog Source Link -->
-                                <div class="mt-4 flex justify-center sm:hidden">
-                                  <a
-                                    href={build.changelogUrl}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    class="inline-flex items-center text-sm text-gray-500 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors duration-200 bg-gray-100/50 dark:bg-gray-800/50 backdrop-blur-sm px-4 py-2 rounded-lg"
-                                  >
-                                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-                                    </svg>
-                                    View raw file
-                                  </a>
                                 </div>
                               {/if}
                             </div>

@@ -185,55 +185,28 @@
 
 <div class="min-h-screen pt-16">
   <!-- Hero Section -->
-  <section class="relative py-20 overflow-hidden">
-    <!-- Background Effects -->
-    <div class="absolute inset-0 bg-gradient-to-br from-blue-50/70 via-indigo-50/50 to-purple-50/70 dark:from-gray-900/95 dark:via-black/90 dark:to-gray-800/95"></div>
-    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-500/15 via-transparent to-transparent"></div>
-
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div
-        class="text-center transform transition-all duration-1000 ease-out"
-        class:translate-y-0={mounted}
-        class:opacity-100={mounted}
-        class:translate-y-8={!mounted}
-        class:opacity-0={!mounted}
-      >
-        <div class="group inline-flex items-center justify-center mb-8">
-          <div class="relative">
-            <div class="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full blur-lg opacity-75 group-hover:opacity-100 transition-opacity duration-300"></div>
-            <div class="relative w-24 h-24 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
-              <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
-              </svg>
-            </div>
-          </div>
-        </div>
-        <h1 class="text-xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-6 px-4">
-          Supported <span class="bg-gradient-to-r from-blue-400 via-purple-500 to-indigo-600 bg-clip-text text-transparent">Devices</span>
+  <section class="py-8 sm:py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+          Supported <span class="text-blue-600 dark:text-blue-400">Devices</span>
         </h1>
-        <p class="md:text-lg text-sm text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-8 px-4">
+        <p class="text-sm sm:text-base text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-8">
           Browse all devices officially supported by OrionOS. Find your device and download the latest build.
         </p>
 
         <!-- Stats -->
-        <div class="flex justify-center items-center space-x-8 mt-12">
+        <div class="flex justify-center items-center space-x-8">
           <div class="text-center">
-            <div class="text-2xl sm:text-3xl font-bold text-blue-600 dark:text-blue-400">{devices.length}</div>
+            <div class="text-xl sm:text-2xl font-bold text-blue-600 dark:text-blue-400">{devices.length}</div>
             <div class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Supported Devices</div>
           </div>
-          <div class="w-px h-12 bg-gradient-to-r from-transparent via-gray-300 dark:via-gray-600 to-transparent"></div>
+          <div class="w-px h-8 bg-gray-300 dark:bg-gray-600"></div>
           <div class="text-center">
-            <div class="text-2xl sm:text-3xl font-bold text-purple-600 dark:text-purple-400">
+            <div class="text-xl sm:text-2xl font-bold text-purple-600 dark:text-purple-400">
               {devices.filter(d => d.status === 'ACTIVE').length}
             </div>
             <div class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Active Devices</div>
-          </div>
-          <div class="w-px h-12 bg-gradient-to-r from-transparent via-gray-300 dark:via-gray-600 to-transparent"></div>
-          <div class="text-center">
-            <div class="text-2xl sm:text-3xl font-bold text-indigo-600 dark:text-indigo-400">
-              {devices.reduce((acc, d) => acc + d.builds.length, 0)}
-            </div>
-            <div class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Total Builds</div>
           </div>
         </div>
       </div>
@@ -398,6 +371,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {#each displayDevices as device, index (device.id)}
             <div
+              id={device.codename}
               class="group relative"
               in:fly={{ y: 30, duration: 600, delay: index * 150, easing: cubicOut }}
             >
@@ -411,7 +385,7 @@
                   <img
                     src={device.image}
                     alt="{device.name}"
-                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
                     loading="lazy"
                   />
                   <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
@@ -457,7 +431,6 @@
                     />
                     <div>
                       <p class="text-sm font-semibold text-gray-900 dark:text-white">{device.maintainer.name}</p>
-                      <p class="text-xs text-gray-600 dark:text-gray-400">{device.maintainer.role.replace('_', ' ')}</p>
                     </div>
                   </div>
 

@@ -154,8 +154,8 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
               </svg>
             </div>
-            <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-1">Linux/macOS</h4>
-            <p class="text-sm text-gray-600 dark:text-gray-300">Required operating system</p>
+            <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-1">Linux</h4>
+            <p class="text-sm text-gray-600 dark:text-gray-300">Recomended operating system</p>
           </div>
         </div>
       </div>

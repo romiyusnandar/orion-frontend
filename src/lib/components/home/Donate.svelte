@@ -1,8 +1,11 @@
 <section id="donate" class="py-20" style="content-visibility: auto; contain-intrinsic-size: 1px 1000px;">
   <div class="max-w-6xl mx-auto px-4">
     <div class="text-center mb-16">
-      <h2 class="text-2xl md:text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-        💖 Support OrionOS Development
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4 flex items-center justify-center gap-3">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-10 text-red-500">
+            <path d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
+        </svg>
+        Support OrionOS Development
       </h2>
       <p class="text-md md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
         Help us continue developing amazing features and maintaining this open-source project. Every contribution makes a difference!
