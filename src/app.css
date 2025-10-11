@@ -1,4 +1,6 @@
-@import 'tailwindcss';
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
 @layer base {
 	html, body {
@@ -14,13 +16,6 @@
 
 	/* Default page colors that respond to theme */
 	body {
-		background-color: white;
-		color: rgb(17 24 39);
-		font-feature-settings: "kern";
-	}
-
-	.dark body {
-		background-color: rgb(3 7 18);
-		color: rgb(243 244 246);
+		@apply bg-white text-gray-900 dark:bg-gray-950 dark:text-gray-100 antialiased;
 	}
 }
