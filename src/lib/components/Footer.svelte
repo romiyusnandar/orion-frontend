@@ -16,7 +16,7 @@
           <div class="inline-flex items-center space-x-3 mb-4">
             <div class="relative">
               <div class="relative w-12 h-12 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                <img src={logo} />
+                <img src={logo} alt="OrionOS Logo" />
               </div>
             </div>
             <h3 class="text-3xl font-bold bg-gradient-to-r from-white via-cyan-200 to-purple-200 bg-clip-text text-transparent">
@@ -30,7 +30,7 @@
           <!-- Social Links -->
           <div class="flex justify-center lg:justify-start space-x-4">
             <a href="https://github.com/OrionOS-Project" target="_blank" rel="noopener noreferrer"
-               class="group relative">
+               class="group relative" aria-label="Visit OrionOS Project on GitHub">
               <div class="absolute inset-0 bg-gradient-to-r from-gray-600/20 to-gray-400/20 rounded-lg blur-sm group-hover:blur-md transition-all duration-300"></div>
               <div class="relative p-3 bg-white/5 backdrop-blur-sm rounded-lg border border-white/10 hover:border-white/20 hover:bg-white/10 transition-all duration-300 group-hover:scale-110">
                 <svg class="w-5 h-5 text-gray-300 group-hover:text-white transition-colors duration-300" fill="currentColor" viewBox="0 0 24 24">
@@ -40,7 +40,7 @@
             </a>
 
             <a href="https://t.me/OrionOS_Update" target="_blank" rel="noopener noreferrer"
-               class="group relative">
+               class="group relative" aria-label="Join OrionOS Telegram Channel">
               <div class="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-blue-400/20 rounded-lg blur-sm group-hover:blur-md transition-all duration-300"></div>
               <div class="relative p-3 bg-white/5 backdrop-blur-sm rounded-lg border border-white/10 hover:border-blue-400/40 hover:bg-blue-500/10 transition-all duration-300 group-hover:scale-110">
                 <svg class="w-5 h-5 text-gray-300 group-hover:text-blue-400 transition-colors duration-300" fill="currentColor" viewBox="0 0 24 24">
