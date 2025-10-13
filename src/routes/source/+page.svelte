@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import { PUBLIC_API_BASE } from '$env/static/public';
   import { fly, fade } from 'svelte/transition';
   import { cubicOut } from 'svelte/easing';
   import { formatDate } from '$lib/components/utils/formatters';
@@ -28,7 +29,7 @@
     try {
       loading = true;
 
-      const response = await fetch('https://orionos-api.onrender.com/api/v1/sources', {
+  const response = await fetch(`${PUBLIC_API_BASE}/api/v1/sources`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

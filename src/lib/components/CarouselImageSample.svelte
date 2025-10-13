@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import { PUBLIC_API_BASE } from '$env/static/public';
 
   type UiSample = {
     id: string | number;
@@ -30,7 +31,7 @@
       isLoading = true;
       error = null;
 
-      const response = await fetch('https://orionos-api.onrender.com/api/v1/ui-samples');
+  const response = await fetch(`${PUBLIC_API_BASE}/api/v1/ui-samples`);
 
       if (!response.ok) {
         throw new Error(`Failed to fetch: ${response.statusText}`);

@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import { PUBLIC_API_BASE } from '$env/static/public';
   import { page } from '$app/stores';
   import { fly, fade, scale, blur } from 'svelte/transition';
   import { cubicOut, backOut, elasticOut } from 'svelte/easing';
@@ -60,7 +61,7 @@
     try {
       loading = true;
 
-      const response = await fetch(`https://orionos-api.onrender.com/api/v1/devices/codename/${codename}`, {
+  const response = await fetch(`${PUBLIC_API_BASE}/api/v1/devices/codename/${codename}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -406,7 +407,7 @@
             </h1>
 
             <!-- Codename -->
-            <div class="flex items-center justify-center space-x-2 text-lg text-gray-300 mb-8">
+            <div class="flex items-center justify-center space-x-2 text-base sm:text-lg md:text-xl text-gray-300 mb-8">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
               </svg>
@@ -416,12 +417,12 @@
             <!-- Simple Stats -->
             <div class="flex justify-center items-center space-x-8">
               <div class="text-center">
-                <div class="text-2xl font-bold text-white">{device.builds.length}</div>
+                <div class="text-xl sm:text-2xl md:text-3xl font-bold text-white">{device.builds.length}</div>
                 <div class="text-sm text-gray-300">Available Builds</div>
               </div>
               <div class="w-px h-8 bg-white/30"></div>
               <div class="text-center">
-                <div class="text-2xl font-bold text-white">{formatDate(device.updatedAt)}</div>
+                <div class="text-xl sm:text-2xl md:text-3xl font-bold text-white">{formatDate(device.updatedAt)}</div>
                 <div class="text-sm text-gray-300">Last Updated</div>
               </div>
             </div>
@@ -452,10 +453,10 @@
                   <img
                     src={device.maintainer.profileImage}
                     alt={device.maintainer.name}
-                    class="w-16 h-16 md:w-20 md:h-20 rounded-full border-3 border-white/50 dark:border-gray-700/50 shadow-lg mb-4"
+                    class="size-16 md:w-20 md:h-20 rounded-full border-2 sm:border-3 border-white/50 dark:border-gray-700/50 shadow-lg mb-3 sm:mb-4"
                     loading="lazy"
                   />
-                  <h4 class="text-base md:text-lg font-bold text-gray-900 dark:text-white mb-3">{device.maintainer.name}</h4>
+                  <h4 class="text-sm sm:text-base md:text-lg font-bold text-gray-900 dark:text-white mb-2 sm:mb-3">{device.maintainer.name}</h4>
 
                   <!-- Social Links -->
                   {#if device.maintainer.socialLinks.length > 0}
@@ -490,7 +491,7 @@
                   <h3 class="text-lg md:text-xl font-bold text-gray-900 dark:text-white">Flash Instructions</h3>
                 </div>
 
-                <p class="text-gray-600 dark:text-gray-400 mb-6 text-sm leading-relaxed">
+                <p class="text-gray-600 dark:text-gray-400 mb-4 sm:mb-6 text-sm sm:text-base leading-relaxed">
                   Learn how to install OrionOS on your {device.name}. Follow our step-by-step guide for a successful installation.
                 </p>
 
@@ -499,7 +500,7 @@
                     href={device.flashInstruction}
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="relative z-10 inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded-lg hover:from-purple-600 hover:to-pink-700 transition-colors duration-300 text-sm font-semibold shadow-lg w-full justify-center cursor-pointer"
+                    class="relative z-10 inline-flex items-center px-4 sm:px-6 py-2.5 sm:py-3 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded-lg hover:from-purple-600 hover:to-pink-700 transition-colors duration-300 text-sm sm:text-base font-semibold shadow-lg w-full justify-center cursor-pointer"
                     role="button"
                     tabindex="0"
                   >
@@ -508,8 +509,8 @@
                     </svg>
                     <span>View Installation Guide</span>
                   </a>
-                {:else}
-                  <div class="inline-flex items-center px-6 py-3 bg-gray-400 text-white rounded-lg text-sm font-semibold shadow-lg w-full justify-center cursor-not-allowed opacity-60">
+                  {:else}
+                  <div class="inline-flex items-center px-4 sm:px-6 py-2.5 sm:py-3 bg-gray-400 text-white rounded-lg text-sm sm:text-base font-semibold shadow-lg w-full justify-center cursor-not-allowed opacity-60">
                     <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.268 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
                     </svg>
@@ -564,11 +565,11 @@
                       <div class="bg-gray-50/80 dark:bg-gray-800/80 rounded-lg p-4 border border-gray-200/60 dark:border-gray-700/60 hover:border-blue-500/50 hover:bg-white/50 dark:hover:bg-gray-700/50 transition-colors duration-300">
                         <div class="flex flex-col gap-4">
                           <!-- Build Header -->
-                          <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                          <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3 sm:gap-4">
                             <!-- Build Info -->
                             <div class="flex-1 min-w-0">
-                              <div class="flex flex-wrap items-center gap-3 mb-3">
-                                <span class="inline-flex items-center px-3 py-1 text-xs font-bold rounded-lg {getBuildTypeColor(build.type)}">
+                              <div class="flex flex-wrap items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
+                                <span class="inline-flex items-center px-2.5 sm:px-3 py-0.5 sm:py-1 text-xs sm:text-xs font-bold rounded-lg {getBuildTypeColor(build.type)}">
                                   <div class="w-2 h-2 bg-current rounded-full mr-2"></div>
                                   {build.type}
                                 </span>
@@ -576,7 +577,7 @@
                                   {formatDate(build.createdAt)}
                                 </span>
                               </div>
-                              <h4 class="font-bold text-gray-900 dark:text-white mb-2 text-base md:text-lg">{build.version}</h4>
+                              <h4 class="font-bold text-gray-900 dark:text-white mb-2 text-sm sm:text-base md:text-lg">{build.version}</h4>
                               <div class="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4V2a1 1 0 011-1h8a1 1 0 011 1v2h4a1 1 0 011 1v1a1 1 0 01-1 1H3a1 1 0 01-1-1V5a1 1 0 011-1h4z"></path>
@@ -587,7 +588,7 @@
                             </div>
 
                             <!-- Action Buttons -->
-                            <div class="flex flex-col sm:flex-row gap-3">
+                              <div class="flex flex-col sm:flex-row gap-2 sm:gap-3">
                               <!-- Changelog Toggle Button -->
                               {#if build.changelogUrl}
                                 <button
@@ -632,7 +633,7 @@
 
                           <!-- Expanded Changelog -->
                           {#if expandedChangelogs[build.id]}
-                            <div class="mt-4 border-t border-gray-200/60 dark:border-gray-700/60 pt-4">
+                              <div class="mt-4 border-t border-gray-200/60 dark:border-gray-700/60 pt-3 sm:pt-4">
                               <!-- Changelog Header -->
                               <div class="flex items-center justify-between mb-4">
                                 <div class="flex items-center">
@@ -659,13 +660,13 @@
                                 <!-- Loading State -->
                                 <div class="flex items-center justify-center py-8">
                                   <div class="text-center">
-                                    <div class="w-8 h-8 border-4 border-orange-200 dark:border-orange-800 border-t-orange-500 rounded-full animate-spin mb-2"></div>
+                                    <div class="size-8 border-4 border-orange-200 dark:border-orange-800 border-t-orange-500 rounded-full animate-spin mb-2"></div>
                                     <p class="text-gray-600 dark:text-gray-400 text-sm">Loading changelog...</p>
                                   </div>
                                 </div>
                               {:else if changelogContents[build.id]}
                                 <!-- Changelog Content -->
-                                <div class="bg-gray-100/70 dark:bg-gray-800/70 rounded-lg p-4 max-h-64 overflow-y-auto border border-gray-200/30 dark:border-gray-700/30">
+                                <div class="bg-gray-100/70 dark:bg-gray-800/70 rounded-lg p-3 sm:p-4 max-h-52 sm:max-h-64 overflow-y-auto border border-gray-200/30 dark:border-gray-700/30">
                                   {#if changelogContents[build.id].startsWith('Failed to load')}
                                     <!-- Error State -->
                                     <div class="text-center py-6">
@@ -682,10 +683,10 @@
                                     </div>
                                   {:else}
                                     <!-- Changelog Lines -->
-                                    <div class="space-y-2">
+                                    <div class="">
                                       {#each formatChangelog(changelogContents[build.id]) as line}
-                                        <div class="text-gray-700 dark:text-gray-300 hover:bg-white/30 dark:hover:bg-gray-700/30 p-2 rounded transition-colors duration-200">
-                                          <span class="text-sm font-mono break-words">{line}</span>
+                                        <div class="text-gray-700 dark:text-gray-300 hover:bg-white/30 dark:hover:bg-gray-700/30 rounded transition-colors duration-200">
+                                          <span class="text-xs md:text-sm font-mono break-words">{line}</span>
                                         </div>
                                       {/each}
                                     </div>
