@@ -5,8 +5,18 @@
 	import Navbar from '$lib/components/Navbar.svelte';
     import MoleculeBackground from '$lib/components/MoleculeBackground.svelte';
     import Footer from '$lib/components/Footer.svelte';
+    import { inject } from '@vercel/analytics';
+    import { injectAnalytics } from '@vercel/analytics/sveltekit';
+    import { onMount } from 'svelte';
+  import { browser, dev } from '$app/environment';
 
 	let { children } = $props();
+    onMount(() => {
+        if (!dev && browser) {
+            inject();
+            injectAnalytics();
+        }
+    });
 </script>
 
 <svelte:head>

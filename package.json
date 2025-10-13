@@ -25,13 +25,14 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@fontsource/poppins": "^5.2.6"
+		"@fontsource/poppins": "^5.2.6",
+		"@vercel/analytics": "^1.5.0"
 	},
 	"optionalDependencies": {
-		"@rollup/rollup-linux-x64-gnu": "^4.22.4",
-		"@rollup/rollup-win32-x64-msvc": "^4.22.4",
+		"@rollup/rollup-darwin-arm64": "^4.22.4",
 		"@rollup/rollup-darwin-x64": "^4.22.4",
-		"@rollup/rollup-darwin-arm64": "^4.22.4"
+		"@rollup/rollup-linux-x64-gnu": "^4.22.4",
+		"@rollup/rollup-win32-x64-msvc": "^4.22.4"
 	},
 	"overrides": {
 		"rollup": "^4.22.4"
