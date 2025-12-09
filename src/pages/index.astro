@@ -1,32 +1,11 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
 ---
 
 <Layout>
-	<!-- Hero Section - Demonstrates container and section utilities -->
-	<section class="section">
-		<div class="container">
-			<div class="space-y-airy text-center">
-				<h1 class="text-balance">
-					Welcome to<br />
-					<span class="text-orion font-bold">Orion OS</span>
-				</h1>
-				<p class="text-lg max-w-2xl mx-auto">
-					Experience the next generation of Android. Premium design
-					meets powerful performance in a minimalist package.
-				</p>
-				<div class="flex gap-4 justify-center flex-wrap">
-					<button class="btn btn-primary bg-orion hover:opacity-90"
-						>Download Now</button
-					>
-					<button
-						class="btn btn-secondary border-orion text-orion hover:bg-orion hover:text-white"
-						>Learn More</button
-					>
-				</div>
-			</div>
-		</div>
-	</section>
+	<!-- Hero Section -->
+	<Hero />
 
 	<!-- Orion Color Demo Section -->
 	<section class="section bg-orion/5">

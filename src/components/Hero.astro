@@ -1,0 +1,564 @@
+---
+// Hero Component - Flagship Product Style
+
+// Fetch UI samples from API
+interface UISample {
+    id: string;
+    url: string;
+    createdAt: string;
+    updatedAt: string;
+}
+
+interface APIResponse {
+    success: boolean;
+    message: string;
+    data: UISample[];
+}
+
+// Get API base URL from environment variable
+const API_BASE_URL = import.meta.env.PUBLIC_API_BASE_URL;
+
+let uiSamples: UISample[] = [];
+
+try {
+    const response = await fetch(`${API_BASE_URL}/ui-samples`);
+    const data: APIResponse = await response.json();
+
+    if (data.success && data.data) {
+        uiSamples = data.data;
+    }
+} catch (error) {
+    console.error("Failed to fetch UI samples:", error);
+    // Fallback to empty array if API fails
+    uiSamples = [];
+}
+---
+
+<section class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <!-- Headline -->
+            <h1 class="hero-headline">
+                Orion OS.
+                <span class="hero-headline-accent">Pure Performance.</span>
+            </h1>
+
+            <!-- Sub-headline -->
+            <p class="hero-subheadline">
+                Experience Android the way it was meant to be.<br />
+                Lightweight, Secure, Beautiful.
+            </p>
+
+            <!-- CTA Buttons -->
+            <div class="hero-cta">
+                <a href="/device" class="btn-hero-primary">
+                    Download Now
+                    <svg
+                        class="btn-icon"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 20 20"
+                        fill="none"
+                    >
+                        <path
+                            d="M10 3V15M10 15L15 10M10 15L5 10"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"></path>
+                    </svg>
+                </a>
+                <a href="/about" class="btn-hero-secondary"> Learn More </a>
+            </div>
+
+            <!-- Phone Mockup with UI Samples -->
+            <div class="hero-mockup">
+                <div class="mockup-placeholder">
+                    <div class="mockup-screen">
+                        <div class="mockup-notch"></div>
+                        
+                        {uiSamples.length > 0 ? (
+                            <!-- Carousel of UI Samples -->
+                            <div class="mockup-carousel" id="mockup-carousel">
+                                {uiSamples.map((sample, index) => (
+                                    <div 
+                                        class={`carousel-slide ${index === 0 ? 'active' : ''}`}
+                                        data-slide={index}
+                                    >
+                                        <img 
+                                            src={sample.url} 
+                                            alt={`Orion OS UI Sample ${index + 1}`}
+                                            class="carousel-image"
+                                            loading={index === 0 ? 'eager' : 'lazy'}
+                                        />
+                                    </div>
+                                ))}
+                                
+                                <!-- Carousel Indicators -->
+                                {uiSamples.length > 1 && (
+                                    <div class="carousel-indicators">
+                                        {uiSamples.map((_, index) => (
+                                            <button 
+                                                class={`indicator ${index === 0 ? 'active' : ''}`}
+                                                data-slide-to={index}
+                                                aria-label={`Go to slide ${index + 1}`}
+                                            ></button>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+                        ) : (
+                            <!-- Fallback: Placeholder Icon -->
+                            <div class="mockup-content">
+                                <svg
+                                    class="mockup-icon"
+                                    width="80"
+                                    height="80"
+                                    viewBox="0 0 80 80"
+                                    fill="none"
+                                >
+                                    <circle
+                                        cx="40"
+                                        cy="40"
+                                        r="35"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        opacity="0.3"></circle>
+                                    <circle cx="40" cy="25" r="3" fill="currentColor" opacity="0.5"></circle>
+                                    <circle cx="30" cy="40" r="3" fill="currentColor" opacity="0.5"></circle>
+                                    <circle cx="50" cy="40" r="3" fill="currentColor" opacity="0.5"></circle>
+                                    <circle cx="40" cy="55" r="3" fill="currentColor" opacity="0.5"></circle>
+                                    <line x1="40" y1="25" x2="30" y2="40" stroke="currentColor" stroke-width="2" opacity="0.3"></line>
+                                    <line x1="40" y1="25" x2="50" y2="40" stroke="currentColor" stroke-width="2" opacity="0.3"></line>
+                                    <line x1="30" y1="40" x2="40" y2="55" stroke="currentColor" stroke-width="2" opacity="0.3"></line>
+                                    <line x1="50" y1="40" x2="40" y2="55" stroke="currentColor" stroke-width="2" opacity="0.3"></line>
+                                </svg>
+                                <p class="mockup-text">Orion OS</p>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    /* ============================================
+     HERO SECTION - Flagship Product Style
+     ============================================ */
+    .hero {
+        position: relative;
+        min-height: calc(100vh - 72px); /* Full viewport minus navbar */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+        overflow: hidden;
+        padding: 4rem 0 2rem;
+    }
+
+    .hero-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 2rem;
+        animation: fadeInUp 1s ease-out;
+    }
+
+    /* ============================================
+     HEADLINE - Large & Bold
+     ============================================ */
+    .hero-headline {
+        font-size: clamp(2.5rem, 8vw, 5rem); /* Responsive: 40px → 80px */
+        font-weight: 800;
+        line-height: 1.1;
+        letter-spacing: -0.03em;
+        color: var(--color-text-primary);
+        margin: 0;
+        animation: fadeIn 1s ease-out 0.2s both;
+    }
+
+    .hero-headline-accent {
+        display: block;
+        background: linear-gradient(
+            135deg,
+            var(--color-orion) 0%,
+            #4a5fd9 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: fadeIn 1s ease-out 0.4s both;
+    }
+
+    /* ============================================
+     SUB-HEADLINE
+     ============================================ */
+    .hero-subheadline {
+        font-size: clamp(1rem, 2.5vw, 1.375rem); /* Responsive: 16px → 22px */
+        font-weight: 400;
+        line-height: 1.6;
+        color: var(--color-text-secondary);
+        max-width: 600px;
+        margin: 0;
+        animation: fadeIn 1s ease-out 0.6s both;
+    }
+
+    /* ============================================
+     CTA BUTTONS
+     ============================================ */
+    .hero-cta {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 1rem;
+        animation: fadeIn 1s ease-out 0.8s both;
+    }
+
+    .btn-hero-primary,
+    .btn-hero-secondary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 1rem 2.5rem;
+        font-size: 1rem;
+        font-weight: 600;
+        border-radius: var(--radius-xl);
+        text-decoration: none;
+        transition: all var(--transition-base);
+        white-space: nowrap;
+    }
+
+    .btn-hero-primary {
+        background-color: var(--color-text-primary);
+        color: var(--color-bg-primary);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-hero-primary:hover {
+        background-color: var(--color-orion);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn-hero-secondary {
+        background-color: transparent;
+        color: var(--color-text-primary);
+        border: 2px solid var(--color-border);
+    }
+
+    .btn-hero-secondary:hover {
+        border-color: var(--color-text-primary);
+        background-color: var(--color-bg-secondary);
+    }
+
+    .btn-icon {
+        transition: transform var(--transition-base);
+    }
+
+    .btn-hero-primary:hover .btn-icon {
+        transform: translateY(2px);
+    }
+
+    /* ============================================
+     PHONE MOCKUP PLACEHOLDER
+     ============================================ */
+    .hero-mockup {
+        margin-top: 2rem;
+        animation: fadeIn 1.2s ease-out 1s both;
+    }
+
+    .mockup-placeholder {
+        position: relative;
+        width: 280px;
+        height: 560px;
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        border-radius: 2.5rem;
+        padding: 0.75rem;
+        box-shadow:
+            0 20px 40px rgba(0, 0, 0, 0.1),
+            0 0 0 1px rgba(0, 0, 0, 0.05);
+        animation: float 6s ease-in-out infinite;
+    }
+
+    .mockup-screen {
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+        border-radius: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .mockup-notch {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 120px;
+        height: 24px;
+        background: #1a1a1a;
+        border-radius: 0 0 1rem 1rem;
+    }
+
+    .mockup-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        padding: 2rem;
+    }
+
+    .mockup-icon {
+        color: var(--color-orion);
+        opacity: 0.8;
+        animation: pulse 3s ease-in-out infinite;
+    }
+
+    .mockup-text {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--color-text-primary);
+        opacity: 0.6;
+    }
+
+    /* ============================================
+     CAROUSEL STYLES
+     ============================================ */
+    .mockup-carousel {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .carousel-slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity 0.8s ease-in-out;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .carousel-slide.active {
+        opacity: 1;
+        z-index: 1;
+    }
+
+    .carousel-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 2rem;
+    }
+
+    .carousel-indicators {
+        position: absolute;
+        bottom: 1rem;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 0.5rem;
+        z-index: 10;
+        padding: 0.5rem 1rem;
+        background: rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(8px);
+        border-radius: 2rem;
+    }
+
+    .indicator {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.5);
+        border: none;
+        cursor: pointer;
+        transition: all var(--transition-base);
+        padding: 0;
+    }
+
+    .indicator.active {
+        background: white;
+        width: 24px;
+        border-radius: 4px;
+    }
+
+    .indicator:hover {
+        background: rgba(255, 255, 255, 0.8);
+    }
+
+    /* ============================================
+     ANIMATIONS
+     ============================================ */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes float {
+        0%,
+        100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-20px);
+        }
+    }
+
+    @keyframes pulse {
+        0%,
+        100% {
+            opacity: 0.8;
+            transform: scale(1);
+        }
+        50% {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+    }
+
+    /* ============================================
+     RESPONSIVE
+     ============================================ */
+    @media (min-width: 768px) {
+        .hero {
+            padding: 6rem 0 3rem;
+        }
+
+        .hero-content {
+            gap: 2.5rem;
+        }
+
+        .mockup-placeholder {
+            width: 320px;
+            height: 640px;
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .hero-content {
+            gap: 3rem;
+        }
+
+        .mockup-placeholder {
+            width: 360px;
+            height: 720px;
+        }
+    }
+
+    /* ============================================
+     REDUCED MOTION
+     ============================================ */
+    @media (prefers-reduced-motion: reduce) {
+        .hero-content,
+        .hero-headline,
+        .hero-headline-accent,
+        .hero-subheadline,
+        .hero-cta,
+        .hero-mockup {
+            animation: none;
+        }
+
+        .mockup-placeholder {
+            animation: none;
+        }
+
+        .mockup-icon {
+            animation: none;
+        }
+    }
+</style>
+
+<script>
+    // Carousel functionality
+    const carousel = document.getElementById('mockup-carousel');
+    
+    if (carousel) {
+        const slides = carousel.querySelectorAll('.carousel-slide');
+        const indicators = carousel.querySelectorAll('.indicator');
+        let currentSlide = 0;
+        let autoSlideInterval: number;
+
+        function showSlide(index: number) {
+            // Remove active class from all slides and indicators
+            slides.forEach(slide => slide.classList.remove('active'));
+            indicators.forEach(indicator => indicator.classList.remove('active'));
+
+            // Add active class to current slide and indicator
+            if (slides[index]) {
+                slides[index].classList.add('active');
+            }
+            if (indicators[index]) {
+                indicators[index].classList.add('active');
+            }
+
+            currentSlide = index;
+        }
+
+        function nextSlide() {
+            const next = (currentSlide + 1) % slides.length;
+            showSlide(next);
+        }
+
+        // Auto-slide every 4 seconds
+        function startAutoSlide() {
+            autoSlideInterval = window.setInterval(nextSlide, 4000);
+        }
+
+        function stopAutoSlide() {
+            clearInterval(autoSlideInterval);
+        }
+
+        // Manual control via indicators
+        indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => {
+                stopAutoSlide();
+                showSlide(index);
+                startAutoSlide(); // Restart auto-slide
+            });
+        });
+
+        // Start auto-slide if there are multiple slides
+        if (slides.length > 1) {
+            startAutoSlide();
+        }
+
+        // Pause on hover (optional)
+        carousel.addEventListener('mouseenter', stopAutoSlide);
+        carousel.addEventListener('mouseleave', () => {
+            if (slides.length > 1) {
+                startAutoSlide();
+            }
+        });
+    }
+</script>
