@@ -1,1 +1,397 @@
 @import "tailwindcss";
+
+/* ============================================
+   TAILWIND V4 THEME CONFIGURATION
+   ============================================ */
+@theme {
+    /* Orion Brand Color - Available as utility classes */
+    --color-orion: oklch(60.9% 0.126 221.723);
+}
+
+/* ============================================
+   GOOGLE FONTS - Plus Jakarta Sans
+   ============================================ */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+/* ============================================
+   CSS CUSTOM PROPERTIES (Design Tokens)
+   ============================================ */
+:root {
+    /* Brand Colors */
+    --color-orion: oklch(60.9% 0.126 221.723);
+
+    /* Colors - Premium & Minimalist Palette */
+    --color-bg-primary: #ffffff;
+    --color-bg-secondary: #f8f9fa;
+    --color-bg-tertiary: #f1f3f5;
+
+    --color-text-primary: #1a1a1a;
+    --color-text-secondary: #6b7280;
+    --color-text-tertiary: #9ca3af;
+
+    --color-accent: #ff6900;
+    /* Xiaomi-inspired orange */
+    --color-accent-hover: #e55f00;
+
+    --color-border: #e5e7eb;
+    --color-border-light: #f3f4f6;
+
+    /* Spacing - Generous Whitespace */
+    --spacing-section-y: 6rem;
+    /* 96px */
+    --spacing-section-y-mobile: 3rem;
+    /* 48px */
+
+    --spacing-container-x: 1.5rem;
+    /* 24px */
+    --spacing-container-x-desktop: 2rem;
+    /* 32px */
+
+    /* Typography Scale */
+    --font-size-xs: 0.75rem;
+    /* 12px */
+    --font-size-sm: 0.875rem;
+    /* 14px */
+    --font-size-base: 1rem;
+    /* 16px */
+    --font-size-lg: 1.125rem;
+    /* 18px */
+    --font-size-xl: 1.25rem;
+    /* 20px */
+    --font-size-2xl: 1.5rem;
+    /* 24px */
+    --font-size-3xl: 1.875rem;
+    /* 30px */
+    --font-size-4xl: 2.25rem;
+    /* 36px */
+    --font-size-5xl: 3rem;
+    /* 48px */
+    --font-size-6xl: 3.75rem;
+    /* 60px */
+
+    /* Border Radius */
+    --radius-sm: 0.375rem;
+    /* 6px */
+    --radius-md: 0.5rem;
+    /* 8px */
+    --radius-lg: 0.75rem;
+    /* 12px */
+    --radius-xl: 1rem;
+    /* 16px */
+    --radius-2xl: 1.5rem;
+    /* 24px */
+
+    /* Shadows - Subtle & Premium */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.05), 0 4px 6px -4px rgb(0 0 0 / 0.05);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.05), 0 8px 10px -6px rgb(0 0 0 / 0.05);
+
+    /* Transitions */
+    --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* Max Widths */
+    --max-width-sm: 640px;
+    --max-width-md: 768px;
+    --max-width-lg: 1024px;
+    --max-width-xl: 1280px;
+    --max-width-2xl: 1440px;
+}
+
+/* ============================================
+   BASE STYLES - Clean & Modern
+   ============================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+    font-size: var(--font-size-base);
+    line-height: 1.6;
+    color: var(--color-text-primary);
+    background-color: var(--color-bg-primary);
+    font-weight: 400;
+}
+
+/* Typography Defaults */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--color-text-primary);
+    letter-spacing: -0.02em;
+}
+
+h1 {
+    font-size: var(--font-size-5xl);
+    font-weight: 800;
+}
+
+h2 {
+    font-size: var(--font-size-4xl);
+}
+
+h3 {
+    font-size: var(--font-size-3xl);
+}
+
+h4 {
+    font-size: var(--font-size-2xl);
+}
+
+h5 {
+    font-size: var(--font-size-xl);
+}
+
+h6 {
+    font-size: var(--font-size-lg);
+}
+
+p {
+    margin-bottom: 1rem;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+}
+
+a {
+    color: var(--color-text-primary);
+    text-decoration: none;
+    transition: color var(--transition-base);
+}
+
+a:hover {
+    color: var(--color-accent);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+button {
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+    background: none;
+}
+
+/* ============================================
+   UTILITY CLASSES - Container & Layout
+   ============================================ */
+
+/* Container - Centered with responsive padding */
+.container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--spacing-container-x);
+    padding-right: var(--spacing-container-x);
+}
+
+@media (min-width: 640px) {
+    .container {
+        max-width: var(--max-width-sm);
+    }
+}
+
+@media (min-width: 768px) {
+    .container {
+        max-width: var(--max-width-md);
+        padding-left: var(--spacing-container-x-desktop);
+        padding-right: var(--spacing-container-x-desktop);
+    }
+}
+
+@media (min-width: 1024px) {
+    .container {
+        max-width: var(--max-width-lg);
+    }
+}
+
+@media (min-width: 1280px) {
+    .container {
+        max-width: var(--max-width-xl);
+    }
+}
+
+@media (min-width: 1536px) {
+    .container {
+        max-width: var(--max-width-2xl);
+    }
+}
+
+/* Container Variants */
+.container-narrow {
+    max-width: var(--max-width-lg);
+}
+
+.container-wide {
+    max-width: 100%;
+    padding-left: var(--spacing-container-x);
+    padding-right: var(--spacing-container-x);
+}
+
+/* Section Spacing - Generous Whitespace */
+.section {
+    padding-top: var(--spacing-section-y-mobile);
+    padding-bottom: var(--spacing-section-y-mobile);
+}
+
+@media (min-width: 768px) {
+    .section {
+        padding-top: var(--spacing-section-y);
+        padding-bottom: var(--spacing-section-y);
+    }
+}
+
+/* Airy Layout Utilities */
+.space-y-airy>*+* {
+    margin-top: 2rem;
+}
+
+.space-y-airy-lg>*+* {
+    margin-top: 3rem;
+}
+
+@media (min-width: 768px) {
+    .space-y-airy>*+* {
+        margin-top: 3rem;
+    }
+
+    .space-y-airy-lg>*+* {
+        margin-top: 4rem;
+    }
+}
+
+/* Grid Utilities with Gap */
+.grid-airy {
+    display: grid;
+    gap: 2rem;
+}
+
+@media (min-width: 768px) {
+    .grid-airy {
+        gap: 3rem;
+    }
+}
+
+/* ============================================
+   COMPONENT UTILITIES
+   ============================================ */
+
+/* Premium Button Base */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.875rem 2rem;
+    font-size: var(--font-size-base);
+    font-weight: 600;
+    border-radius: var(--radius-lg);
+    transition: all var(--transition-base);
+    white-space: nowrap;
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: var(--color-text-primary);
+    color: var(--color-bg-primary);
+}
+
+.btn-primary:hover {
+    background-color: var(--color-accent);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-lg);
+}
+
+.btn-secondary {
+    background-color: var(--color-bg-secondary);
+    color: var(--color-text-primary);
+    border: 1px solid var(--color-border);
+}
+
+.btn-secondary:hover {
+    background-color: var(--color-bg-tertiary);
+    border-color: var(--color-text-primary);
+}
+
+/* Card Component */
+.card {
+    background-color: var(--color-bg-primary);
+    border-radius: var(--radius-xl);
+    padding: 2rem;
+    box-shadow: var(--shadow-md);
+    transition: all var(--transition-base);
+}
+
+.card:hover {
+    box-shadow: var(--shadow-xl);
+    transform: translateY(-2px);
+}
+
+/* Text Utilities */
+.text-balance {
+    text-wrap: balance;
+}
+
+.text-gradient {
+    background: linear-gradient(135deg, var(--color-text-primary) 0%, var(--color-text-secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ============================================
+   RESPONSIVE TYPOGRAPHY
+   ============================================ */
+@media (min-width: 768px) {
+    h1 {
+        font-size: var(--font-size-6xl);
+    }
+
+    h2 {
+        font-size: var(--font-size-5xl);
+    }
+
+    h3 {
+        font-size: var(--font-size-4xl);
+    }
+}
+
+/* ============================================
+   ACCESSIBILITY & FOCUS STATES
+   ============================================ */
+:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}

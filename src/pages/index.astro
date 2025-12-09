@@ -1,16 +1,180 @@
 ---
-
+import Layout from "../layouts/Layout.astro";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout>
+	<!-- Hero Section - Demonstrates container and section utilities -->
+	<section class="section">
+		<div class="container">
+			<div class="space-y-airy text-center">
+				<h1 class="text-balance">
+					Welcome to<br />
+					<span class="text-orion font-bold">Orion OS</span>
+				</h1>
+				<p class="text-lg max-w-2xl mx-auto">
+					Experience the next generation of Android. Premium design
+					meets powerful performance in a minimalist package.
+				</p>
+				<div class="flex gap-4 justify-center flex-wrap">
+					<button class="btn btn-primary bg-orion hover:opacity-90"
+						>Download Now</button
+					>
+					<button
+						class="btn btn-secondary border-orion text-orion hover:bg-orion hover:text-white"
+						>Learn More</button
+					>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Orion Color Demo Section -->
+	<section class="section bg-orion/5">
+		<div class="container">
+			<div class="space-y-airy-lg">
+				<div class="text-center">
+					<h2 class="text-orion">Orion Brand Color Showcase</h2>
+					<p class="text-lg mt-4">
+						Demonstrating all Orion color utilities: bg-orion,
+						text-orion, border-orion, ring-orion
+					</p>
+				</div>
+
+				<div
+					class="grid-airy"
+					style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));"
+				>
+					<!-- bg-orion -->
+					<div class="card bg-orion text-white">
+						<h3
+							style="font-size: var(--font-size-xl); margin-bottom: 0.75rem; color: white;"
+						>
+							🎨 bg-orion
+						</h3>
+						<p style="color: rgba(255,255,255,0.9);">
+							Background menggunakan warna brand Orion dengan
+							oklch color space untuk vibrancy maksimal.
+						</p>
+					</div>
+
+					<!-- text-orion -->
+					<div class="card">
+						<h3
+							class="text-orion"
+							style="font-size: var(--font-size-xl); margin-bottom: 0.75rem;"
+						>
+							✍️ text-orion
+						</h3>
+						<p>
+							Text color menggunakan <span
+								class="text-orion font-semibold"
+								>warna brand Orion</span
+							> untuk emphasis dan branding yang konsisten.
+						</p>
+					</div>
+
+					<!-- border-orion -->
+					<div class="card border-4 border-orion">
+						<h3
+							style="font-size: var(--font-size-xl); margin-bottom: 0.75rem;"
+						>
+							🔲 border-orion
+						</h3>
+						<p>
+							Border dengan warna Orion untuk highlight dan visual
+							separation yang menarik.
+						</p>
+					</div>
+
+					<!-- ring-orion -->
+					<div class="card ring-4 ring-orion ring-offset-4">
+						<h3
+							style="font-size: var(--font-size-xl); margin-bottom: 0.75rem;"
+						>
+							💍 ring-orion
+						</h3>
+						<p>
+							Ring utility dengan warna Orion untuk focus states
+							dan interactive elements.
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Features Section - Demonstrates grid and card utilities -->
+	<section
+		class="section"
+		style="background-color: var(--color-bg-secondary);"
+	>
+		<div class="container">
+			<div class="space-y-airy-lg">
+				<div class="text-center max-w-3xl mx-auto">
+					<h2>Built for Excellence</h2>
+					<p class="text-lg mt-4">
+						Every detail crafted with precision. Every feature
+						designed for you.
+					</p>
+				</div>
+
+				<div
+					class="grid-airy"
+					style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));"
+				>
+					<div class="card">
+						<h3
+							style="font-size: var(--font-size-xl); margin-bottom: 0.75rem;"
+						>
+							⚡ Lightning Fast
+						</h3>
+						<p>
+							Optimized performance that keeps your device running
+							smoothly all day long.
+						</p>
+					</div>
+
+					<div class="card">
+						<h3
+							style="font-size: var(--font-size-xl); margin-bottom: 0.75rem;"
+						>
+							🎨 Minimal Design
+						</h3>
+						<p>
+							Clean, modern interface that puts your content first
+							without distractions.
+						</p>
+					</div>
+
+					<div class="card">
+						<h3
+							style="font-size: var(--font-size-xl); margin-bottom: 0.75rem;"
+						>
+							🔒 Privacy First
+						</h3>
+						<p>
+							Your data stays yours. Built with security and
+							privacy at its core.
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- CTA Section - Demonstrates container-narrow -->
+	<section class="section">
+		<div class="container container-narrow text-center">
+			<div class="space-y-airy">
+				<h2>Ready to Experience Orion?</h2>
+				<p class="text-lg">
+					Join thousands of users who have already made the switch to
+					a better Android experience.
+				</p>
+				<button class="btn btn-primary bg-orion"
+					>Get Started Today</button
+				>
+			</div>
+		</div>
+	</section>
+</Layout>
