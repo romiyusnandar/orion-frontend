@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import Navbar from "../components/Navbar.astro";
 
 interface Props {
     title?: string;
@@ -44,7 +45,8 @@ const {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     </head>
-    <body>
+    <body style="padding-top: 72px;">
+        <Navbar />
         <slot />
     </body>
 </html>

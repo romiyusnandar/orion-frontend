@@ -1,0 +1,363 @@
+---
+// Navbar Component - Premium Glassmorphism Design
+---
+
+<nav id="navbar" class="navbar">
+    <div class="container">
+        <div class="navbar-content">
+            <!-- Logo -->
+            <a href="/" class="navbar-logo">
+                <!-- Logo Icon from Asset -->
+                <img src="/orion-lg.png" alt="Orion OS Logo" class="logo-icon" />
+                <span class="logo-text">Orion OS</span>
+            </a>
+
+            <!-- Desktop Menu -->
+            <div class="navbar-menu">
+                <a href="/developers" class="nav-link">Developers</a>
+                <a href="/changelog" class="nav-link">Changelog</a>
+                <a href="/about" class="nav-link">About</a>
+            </div>
+
+            <!-- CTA Button -->
+            <div class="navbar-cta">
+                <a href="/device" class="btn-download">Download Now</a>
+            </div>
+
+            <!-- Mobile Hamburger -->
+            <button id="hamburger" class="hamburger" aria-label="Toggle menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu">
+        <div class="mobile-menu-content">
+            <a href="#developers" class="mobile-nav-link">Developers</a>
+            <a href="#changelog" class="mobile-nav-link">Changelog</a>
+            <a href="#about" class="mobile-nav-link">About</a>
+            <a href="#download" class="btn-download mobile">Download Now</a>
+        </div>
+    </div>
+</nav>
+
+<style>
+    /* ============================================
+     NAVBAR - Fixed with Glassmorphism
+     ============================================ */
+    .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        background-color: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        transition: all var(--transition-base);
+    }
+
+    .navbar.scrolled {
+        background-color: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        box-shadow: var(--shadow-md);
+        border-bottom-color: rgba(0, 0, 0, 0.08);
+    }
+
+    .navbar-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 72px;
+        gap: 2rem;
+    }
+
+    /* ============================================
+     LOGO
+     ============================================ */
+    .navbar-logo {
+        display: flex;
+        align-items: center;
+        gap: 0.625rem; /* 10px */
+        text-decoration: none;
+        transition: transform var(--transition-base);
+    }
+
+    .navbar-logo:hover {
+        transform: translateY(-1px);
+    }
+
+    .logo-icon {
+        width: 40px;
+        height: 40px;
+        flex-shrink: 0;
+        transition: transform var(--transition-base);
+        object-fit: contain;
+    }
+
+    .navbar-logo:hover .logo-icon {
+        transform: scale(1.05);
+    }
+
+    .logo-text {
+        font-size: 1.25rem;
+        font-weight: 800;
+        color: var(--color-text-primary);
+        letter-spacing: -0.02em;
+        white-space: nowrap;
+        /* Hide text on mobile, show on desktop */
+        display: none;
+    }
+
+    @media (min-width: 640px) {
+        .logo-text {
+            display: block;
+        }
+    }
+
+    /* ============================================
+     DESKTOP MENU
+     ============================================ */
+    .navbar-menu {
+        display: none;
+        align-items: center;
+        gap: 2.5rem;
+        flex: 1;
+        justify-content: center;
+    }
+
+    @media (min-width: 768px) {
+        .navbar-menu {
+            display: flex;
+        }
+    }
+
+    .nav-link {
+        font-size: var(--font-size-base);
+        font-weight: 500;
+        color: var(--color-text-secondary);
+        text-decoration: none;
+        position: relative;
+        transition: color var(--transition-base);
+        padding: 0.5rem 0;
+    }
+
+    .nav-link::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: var(--color-orion);
+        transition: width var(--transition-base);
+    }
+
+    .nav-link:hover {
+        color: var(--color-text-primary);
+    }
+
+    .nav-link:hover::after {
+        width: 100%;
+    }
+
+    /* ============================================
+     CTA BUTTON - Pill Shape
+     ============================================ */
+    .navbar-cta {
+        display: none;
+    }
+
+    @media (min-width: 768px) {
+        .navbar-cta {
+            display: block;
+        }
+    }
+
+    .btn-download {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.75rem 1.75rem;
+        background-color: var(--color-text-primary);
+        color: var(--color-bg-primary);
+        font-size: var(--font-size-sm);
+        font-weight: 600;
+        border-radius: 9999px; /* rounded-full */
+        text-decoration: none;
+        transition: all var(--transition-base);
+        white-space: nowrap;
+    }
+
+    .btn-download:hover {
+        background-color: var(--color-orion);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+    }
+
+    .btn-download.mobile {
+        width: 100%;
+        margin-top: 1rem;
+        padding: 1rem 2rem;
+        font-size: var(--font-size-base);
+    }
+
+    /* ============================================
+     HAMBURGER MENU
+     ============================================ */
+    .hamburger {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        padding: 0.5rem;
+        background: none;
+        border: none;
+        cursor: pointer;
+        z-index: 1001;
+    }
+
+    @media (min-width: 768px) {
+        .hamburger {
+            display: none;
+        }
+    }
+
+    .hamburger-line {
+        width: 24px;
+        height: 2px;
+        background-color: var(--color-text-primary);
+        border-radius: 2px;
+        transition: all var(--transition-base);
+    }
+
+    .hamburger.active .hamburger-line:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+    }
+
+    .hamburger.active .hamburger-line:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active .hamburger-line:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* ============================================
+     MOBILE MENU
+     ============================================ */
+    .mobile-menu {
+        position: fixed;
+        top: 72px;
+        left: 0;
+        right: 0;
+        background-color: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height var(--transition-slow);
+    }
+
+    @media (min-width: 768px) {
+        .mobile-menu {
+            display: none;
+        }
+    }
+
+    .mobile-menu.active {
+        max-height: 400px;
+        box-shadow: var(--shadow-lg);
+    }
+
+    .mobile-menu-content {
+        padding: 1.5rem var(--spacing-container-x);
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .mobile-nav-link {
+        padding: 1rem;
+        font-size: var(--font-size-base);
+        font-weight: 500;
+        color: var(--color-text-secondary);
+        text-decoration: none;
+        border-radius: var(--radius-lg);
+        transition: all var(--transition-base);
+    }
+
+    .mobile-nav-link:hover,
+    .mobile-nav-link:active {
+        background-color: var(--color-bg-secondary);
+        color: var(--color-text-primary);
+    }
+
+    /* ============================================
+     SMOOTH ANIMATIONS
+     ============================================ */
+    @media (prefers-reduced-motion: reduce) {
+        .navbar,
+        .nav-link,
+        .btn-download,
+        .hamburger-line,
+        .mobile-menu {
+            transition: none;
+        }
+    }
+</style>
+
+<script>
+    // Navbar scroll effect
+    const navbar = document.getElementById("navbar");
+    let lastScroll = 0;
+
+    window.addEventListener("scroll", () => {
+        const currentScroll = window.pageYOffset;
+
+        if (currentScroll > 50) {
+            navbar?.classList.add("scrolled");
+        } else {
+            navbar?.classList.remove("scrolled");
+        }
+
+        lastScroll = currentScroll;
+    });
+
+    // Mobile menu toggle
+    const hamburger = document.getElementById("hamburger");
+    const mobileMenu = document.getElementById("mobile-menu");
+
+    hamburger?.addEventListener("click", () => {
+        hamburger.classList.toggle("active");
+        mobileMenu?.classList.toggle("active");
+    });
+
+    // Close mobile menu when clicking a link
+    const mobileLinks = document.querySelectorAll(
+        ".mobile-nav-link, .btn-download.mobile",
+    );
+    mobileLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+            hamburger?.classList.remove("active");
+            mobileMenu?.classList.remove("active");
+        });
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener("click", (e) => {
+        const target = e.target as HTMLElement;
+        if (
+            !target.closest(".navbar") &&
+            mobileMenu?.classList.contains("active")
+        ) {
+            hamburger?.classList.remove("active");
+            mobileMenu?.classList.remove("active");
+        }
+    });
+</script>
