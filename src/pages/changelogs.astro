@@ -1,0 +1,485 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
+
+// TypeScript Interface
+interface Release {
+    id: string;
+    version: string;
+    codenameVersion: string;
+    banner: string;
+    releaseDate: string;
+    description: string;
+    changelog: string[];
+    screenshots: string[];
+    createdAt: string;
+    updatedAt: string;
+}
+
+interface APIResponse {
+    success: boolean;
+    message: string;
+    data: Release[];
+}
+
+// Get API base URL from environment variable
+const API_BASE_URL = import.meta.env.PUBLIC_API_BASE_URL;
+
+// Fetch releases from API
+let releases: Release[] = [];
+
+try {
+    const response = await fetch(`${API_BASE_URL}/sources`);
+    
+    if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    
+    const data: APIResponse = await response.json();
+    
+    if (data.success && Array.isArray(data.data)) {
+        // Ensure each release has valid arrays
+        releases = data.data.map(release => ({
+            ...release,
+            changelog: Array.isArray(release.changelog) ? release.changelog : [],
+            screenshots: Array.isArray(release.screenshots) ? release.screenshots : []
+        }));
+        console.log(`✅ Fetched ${releases.length} releases from API`);
+    } else {
+        console.warn('⚠️ API response invalid or empty');
+    }
+} catch (err) {
+    console.error("❌ Failed to fetch releases:", err);
+}
+
+// Helper function to format date
+function formatDate(isoDate: string): string {
+    try {
+        const date = new Date(isoDate);
+        return new Intl.DateTimeFormat('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        }).format(date);
+    } catch {
+        return 'Invalid Date';
+    }
+}
+---
+
+<Layout title="Changelog - Orion OS" description="View the latest updates and changes in Orion OS">
+    <section class="changelog-section">
+        <div class="container">
+            <!-- Header -->
+            <div class="changelog-header">
+                <h1 class="changelog-title">Changelog</h1>
+                <p class="changelog-subtitle">
+                    Track the evolution of Orion OS with detailed release notes
+                </p>
+            </div>
+
+            <!-- Releases Timeline -->
+            <div class="releases-timeline">
+                {releases.map((release) => (
+                    <div class="release-card">
+                        <!-- Banner -->
+                        <div class="release-banner">
+                            {/* <img 
+                                src={release.banner} 
+                                alt={`${release.version} ${release.codenameVersion}`}
+                                class="banner-image"
+                                loading="lazy"
+                                referrerpolicy="no-referrer"
+                                onerror="this.src='https://via.placeholder.com/1200x400?text=Banner+Not+Available'"
+                            /> */}
+                            <Image 
+                                src={release.banner} 
+                                alt={`${release.version} ${release.codenameVersion}`}
+                                class="banner-image"
+                                loading="lazy"
+                                inferSize={true}
+                                referrerpolicy="no-referrer"
+                                onerror="this.src='https://via.placeholder.com/1200x400?text=Banner+Not+Available'"
+                            />
+                            <div class="banner-overlay">
+                                <div class="version-badge">
+                                    <span class="version-number">v{release.version}</span>
+                                    <span class="version-codename">{release.codenameVersion}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Content -->
+                        <div class="release-content">
+                            <!-- Meta Info -->
+                            <div class="release-meta">
+                                <time class="release-date">
+                                    {formatDate(release.releaseDate)}
+                                </time>
+                            </div>
+
+                            <!-- Description -->
+                            <p class="release-description">
+                                {release.description}
+                            </p>
+
+                            <!-- Changelog -->
+                            <div class="release-changelog">
+                                <h3 class="changelog-heading">What's New</h3>
+                                <ul class="changelog-list">
+                                    {release.changelog.map((item) => (
+                                        <li class="changelog-item">
+                                            <svg class="check-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                <circle cx="10" cy="10" r="10" fill="currentColor" opacity="0.1"/>
+                                                <path d="M6 10L9 13L14 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                            <span>{item}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+
+                            <!-- Screenshots -->
+                            {release.screenshots.length > 0 && (
+                                <div class="release-screenshots">
+                                    <h3 class="screenshots-heading">Screenshots</h3>
+                                    <div class="screenshots-scroll">
+                                        {release.screenshots.map((screenshot, index) => (
+                                            <div class="screenshot-item">
+                                                {/* <img 
+                                                    src={screenshot} 
+                                                    alt={`Screenshot ${index + 1}`}
+                                                    class="screenshot-image"
+                                                    loading="lazy"
+                                                    referrerpolicy="no-referrer"
+                                                    onerror="this.src='https://via.placeholder.com/400x800?text=Screenshot+Not+Available'"
+                                                /> */}
+                                                <Image 
+                                                    src={screenshot} 
+                                                    alt={`Screenshot ${index + 1}`}
+                                                    class="screenshot-image"
+                                                    loading="lazy"
+                                                    inferSize={true}
+                                                    referrerpolicy="no-referrer"
+                                                    onerror="this.src='https://via.placeholder.com/400x800?text=Screenshot+Not+Available'"
+                                                />
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </section>
+</Layout>
+
+<style>
+    /* ============================================
+     CHANGELOG SECTION
+     ============================================ */
+    .changelog-section {
+        padding: calc(var(--spacing-section-y) + 72px) 0 var(--spacing-section-y);
+        background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+        min-height: 100vh;
+    }
+
+    /* ============================================
+     HEADER
+     ============================================ */
+    .changelog-header {
+        text-align: center;
+        margin-bottom: 4rem;
+        animation: fadeIn 0.8s ease-out;
+    }
+
+    .changelog-title {
+        font-size: clamp(2.5rem, 6vw, 4rem);
+        font-weight: 800;
+        color: var(--color-text-primary);
+        margin-bottom: 1rem;
+        letter-spacing: -0.02em;
+    }
+
+    .changelog-subtitle {
+        font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+        color: var(--color-text-secondary);
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    /* ============================================
+     RELEASES TIMELINE
+     ============================================ */
+    .releases-timeline {
+        max-width: 900px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
+    }
+
+    /* ============================================
+     RELEASE CARD
+     ============================================ */
+    .release-card {
+        background: #ffffff;
+        border-radius: var(--radius-2xl);
+        overflow: hidden;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        transition: all var(--transition-base);
+        animation: fadeInUp 1s ease-out both;
+    }
+
+    .release-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        border-color: var(--color-orion);
+    }
+
+    /* ============================================
+     BANNER
+     ============================================ */
+    .release-banner {
+        position: relative;
+        width: 100%;
+        height: 250px;
+        overflow: hidden;
+    }
+
+    .banner-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .banner-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.6) 100%);
+        display: flex;
+        align-items: flex-end;
+        padding: 2rem;
+    }
+
+    .version-badge {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    .version-number {
+        font-size: 2rem;
+        font-weight: 800;
+        color: white;
+        line-height: 1;
+    }
+
+    .version-codename {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.9);
+    }
+
+    /* ============================================
+     CONTENT
+     ============================================ */
+    .release-content {
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .release-meta {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .release-date {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: var(--color-orion);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    .release-description {
+        font-size: 1.125rem;
+        line-height: 1.7;
+        color: var(--color-text-secondary);
+        margin: 0;
+    }
+
+    /* ============================================
+     CHANGELOG
+     ============================================ */
+    .release-changelog {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .changelog-heading {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--color-text-primary);
+        margin: 0;
+    }
+
+    .changelog-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .changelog-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.75rem;
+        font-size: 1rem;
+        line-height: 1.6;
+        color: var(--color-text-secondary);
+    }
+
+    .check-icon {
+        flex-shrink: 0;
+        margin-top: 0.125rem;
+        color: var(--color-orion);
+    }
+
+    /* ============================================
+     SCREENSHOTS
+     ============================================ */
+    .release-screenshots {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .screenshots-heading {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--color-text-primary);
+        margin: 0;
+    }
+
+    .screenshots-scroll {
+        display: flex;
+        gap: 1rem;
+        overflow-x: auto;
+        overflow-y: hidden;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 0.5rem;
+        
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE and Edge */
+    }
+
+    .screenshots-scroll::-webkit-scrollbar {
+        display: none; /* Chrome, Safari, Opera */
+    }
+
+    .screenshot-item {
+        flex-shrink: 0;
+        width: 192px; /* w-48 equivalent */
+        aspect-ratio: 9 / 16;
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        background: #f8f9fa;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        scroll-snap-align: start;
+        transition: transform var(--transition-base);
+    }
+
+    .screenshot-item:hover {
+        transform: scale(1.02);
+    }
+
+    .screenshot-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    /* ============================================
+     ANIMATIONS
+     ============================================ */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* ============================================
+     RESPONSIVE
+     ============================================ */
+    @media (max-width: 768px) {
+        .release-banner {
+            height: 200px;
+        }
+
+        .banner-overlay {
+            padding: 1.5rem;
+        }
+
+        .version-number {
+            font-size: 1.5rem;
+        }
+
+        .version-codename {
+            font-size: 1rem;
+        }
+
+        .release-content {
+            padding: 1.5rem;
+        }
+
+        .screenshot-item {
+            width: 160px; /* Smaller on mobile */
+        }
+    }
+
+    /* ============================================
+     REDUCED MOTION
+     ============================================ */
+    @media (prefers-reduced-motion: reduce) {
+        .changelog-header,
+        .release-card {
+            animation: none;
+        }
+
+        .release-card:hover,
+        .screenshot-image {
+            transform: none;
+        }
+    }
+</style>

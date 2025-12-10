@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
 
 // TypeScript Interfaces
 interface SocialLink {
@@ -116,13 +117,20 @@ function formatRole(role: Developer["role"]): string {
             <!-- Developers Grid -->
             <div class="developers-grid" id="developers-grid">
                 {developers.map((dev) => (
-                    <div class="developer-card">
+                    <div class="developer-card" id={dev.name.toLowerCase()}>
                         <!-- Profile Image -->
                         <div class="developer-avatar">
-                            <img 
+                            {/* <img 
                                 src={dev.profileImage} 
                                 alt={dev.name}
                                 class="avatar-image"
+                            /> */}
+                            <Image 
+                                src={dev.profileImage}
+                                alt={dev.name}
+                                class="avatar-image"
+                                width={100}
+                                height={100}
                             />
                         </div>
 
