@@ -1,0 +1,435 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+// TypeScript Interface
+interface Device {
+    name: string;
+    codename: string;
+    image: string;
+    status: "OFFICIAL" | "ACTIVE" | "DISCONTINUED";
+}
+
+interface APIResponse {
+    success: boolean;
+    message: string;
+    data: Device[];
+}
+
+// Get API base URL from environment variable
+const API_BASE_URL = import.meta.env.PUBLIC_API_BASE_URL;
+
+// Fetch devices from API
+let devices: Device[] = [];
+
+try {
+    const response = await fetch(`${API_BASE_URL}/devices`);
+    
+    if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    
+    const data: APIResponse = await response.json();
+    
+    if (data.success && Array.isArray(data.data)) {
+        devices = data.data;
+        console.log(`✅ Fetched ${devices.length} devices from API`);
+    } else {
+        console.warn('⚠️ API response invalid or empty');
+    }
+} catch (err) {
+    console.error("❌ Failed to fetch devices:", err);
+}
+
+// Helper function to get status color
+const getStatusColor = (status: Device["status"]): string => 
+    status === 'DISCONTINUED' ? 'bg-red-100 text-red-600' : 'bg-green-100 text-green-600';
+---
+
+<Layout title="Supported Devices - Orion OS" description="Browse all devices supported by Orion OS">
+    <section class="devices-section">
+        <div class="container">
+            <!-- Hero Section -->
+            <div class="hero-section">
+                <h1 class="hero-title">Find your Device</h1>
+                <p class="hero-subtitle">
+                    Download the latest Orion OS build for your specific model.
+                </p>
+
+                <!-- Search Bar -->
+                <div class="search-wrapper">
+                    <div class="search-container">
+                        <!-- Search Icon -->
+                        <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                        
+                        <!-- Search Input -->
+                        <input 
+                            type="text" 
+                            id="search-input"
+                            class="search-input"
+                            placeholder="Search by device name or codename..."
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Devices Grid -->
+            <div class="devices-grid">
+                {devices.map((device) => (
+                    <a 
+                        href={`/devices/${device.codename}`} 
+                        class="device-card"
+                        data-name={device.name.toLowerCase()}
+                        data-codename={device.codename.toLowerCase()}
+                    >
+                        <!-- Device Image -->
+                        <div class="device-image-wrapper">
+                            <img 
+                                src={device.image} 
+                                alt={device.name}
+                                class="device-image"
+                                loading="lazy"
+                                referrerpolicy="no-referrer"
+                            />
+                        </div>
+
+                        <!-- Device Info -->
+                        <div class="device-info">
+                            <h3 class="device-name">{device.name}</h3>
+                            <p class="device-codename">{device.codename}</p>
+                            <span class={`device-status ${getStatusColor(device.status)}`}>
+                                {device.status}
+                            </span>
+                        </div>
+                    </a>
+                ))}
+            </div>
+
+            <!-- No Results Message -->
+            <div id="no-results" class="no-results" style="display: none;">
+                <svg class="no-results-icon" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
+                    <line x1="11" y1="8" x2="11" y2="14"></line>
+                    <line x1="11" y1="16" x2="11.01" y2="16"></line>
+                </svg>
+                <h3 class="no-results-title">No devices found</h3>
+                <p class="no-results-text">
+                    We couldn't find any devices matching your search. Try a different keyword or browse all devices below.
+                </p>
+            </div>
+        </div>
+    </section>
+</Layout>
+
+<style>
+    /* ============================================
+     DEVICES SECTION
+     ============================================ */
+    .devices-section {
+        padding: calc(var(--spacing-section-y) + 72px) 0 var(--spacing-section-y);
+        background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+        min-height: 100vh;
+    }
+
+    /* ============================================
+     HERO SECTION
+     ============================================ */
+    .hero-section {
+        text-align: center;
+        margin-bottom: 4rem;
+        animation: fadeIn 0.8s ease-out;
+    }
+
+    .hero-title {
+        font-size: clamp(2.5rem, 6vw, 4rem);
+        font-weight: 800;
+        color: var(--color-text-primary);
+        margin-bottom: 1rem;
+        letter-spacing: -0.02em;
+    }
+
+    .hero-subtitle {
+        font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+        color: var(--color-text-secondary);
+        max-width: 600px;
+        margin: 0 auto 2.5rem;
+    }
+
+    /* ============================================
+     SEARCH BAR
+     ============================================ */
+    .search-wrapper {
+        max-width: 42rem; /* max-w-xl */
+        margin: 0 auto;
+    }
+
+    .search-container {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
+    .search-icon {
+        position: absolute;
+        left: 1.5rem;
+        color: var(--color-orion);
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    .search-input {
+        width: 100%;
+        padding: 1rem 1.5rem 1rem 3.5rem; /* Extra left padding for icon */
+        border-radius: 9999px; /* rounded-full */
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        background: #ffffff;
+        font-size: 1rem;
+        color: var(--color-text-primary);
+        transition: all var(--transition-base);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    .search-input::placeholder {
+        color: #9ca3af;
+    }
+
+    .search-input:focus {
+        outline: none;
+        border-color: var(--color-orion);
+        box-shadow: 0 4px 16px rgba(99, 102, 241, 0.15);
+    }
+
+    /* ============================================
+     DEVICES GRID
+     ============================================ */
+    .devices-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    @media (min-width: 640px) {
+        .devices-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .devices-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    @media (min-width: 1280px) {
+        .devices-grid {
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
+
+    /* ============================================
+     DEVICE CARD
+     ============================================ */
+    .device-card {
+        background: #ffffff;
+        border-radius: var(--radius-2xl);
+        overflow: hidden;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        transition: all var(--transition-base);
+        text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        animation: fadeInUp 1s ease-out both;
+    }
+
+    .device-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        border-color: var(--color-orion);
+    }
+
+    /* Device Image */
+    .device-image-wrapper {
+        width: 100%;
+        aspect-ratio: 4 / 3;
+        background: #f8f9fa;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .device-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: top; /* Crop from top */
+        transition: transform var(--transition-base);
+    }
+
+    .device-card:hover .device-image {
+        transform: scale(1.05);
+    }
+
+    /* Device Info */
+    .device-info {
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .device-name {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--color-text-primary);
+        margin: 0;
+    }
+
+    .device-codename {
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: #6b7280;
+        font-family: 'Courier New', monospace;
+        margin: 0;
+    }
+
+    .device-status {
+        display: inline-block;
+        align-self: flex-start;
+        padding: 0.375rem 0.75rem;
+        border-radius: var(--radius-lg);
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-top: 0.5rem;
+    }
+
+    /* ============================================
+     NO RESULTS MESSAGE
+     ============================================ */
+    .no-results {
+        text-align: center;
+        padding: 4rem 2rem;
+        animation: fadeIn 0.5s ease-out;
+    }
+
+    .no-results-icon {
+        margin: 0 auto 1.5rem;
+        color: #9ca3af;
+    }
+
+    .no-results-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--color-text-primary);
+        margin: 0 0 0.75rem 0;
+    }
+
+    .no-results-text {
+        font-size: 1rem;
+        color: var(--color-text-secondary);
+        max-width: 500px;
+        margin: 0 auto;
+        line-height: 1.6;
+    }
+
+    /* ============================================
+     ANIMATIONS
+     ============================================ */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Stagger animation for cards */
+    .device-card:nth-child(1) { animation-delay: 0.1s; }
+    .device-card:nth-child(2) { animation-delay: 0.2s; }
+    .device-card:nth-child(3) { animation-delay: 0.3s; }
+    .device-card:nth-child(4) { animation-delay: 0.4s; }
+    .device-card:nth-child(5) { animation-delay: 0.5s; }
+
+    /* ============================================
+     REDUCED MOTION
+     ============================================ */
+    @media (prefers-reduced-motion: reduce) {
+        .devices-header,
+        .device-card {
+            animation: none;
+        }
+
+        .device-card:hover,
+        .device-image {
+            transform: none;
+        }
+    }
+</style>
+
+<script>
+    // Search functionality
+    document.addEventListener('DOMContentLoaded', () => {
+        // Get search input element
+        const searchInput = document.getElementById('search-input') as HTMLInputElement;
+        
+        // Get all device cards
+        const deviceCards = document.querySelectorAll('.device-card');
+        
+        // Get no results message
+        const noResults = document.getElementById('no-results') as HTMLElement;
+
+        // Add input event listener
+        searchInput?.addEventListener('input', (e) => {
+            // Get search query and convert to lowercase
+            const target = e.target as HTMLInputElement;
+            const query = target.value.toLowerCase().trim();
+
+            let visibleCount = 0;
+
+            // Loop through all device cards
+            deviceCards.forEach((card) => {
+                const htmlCard = card as HTMLElement;
+                
+                // Get device name and codename from data attributes
+                const deviceName = htmlCard.getAttribute('data-name') || '';
+                const deviceCodename = htmlCard.getAttribute('data-codename') || '';
+
+                // Check if query matches name or codename
+                const matchesName = deviceName.includes(query);
+                const matchesCodename = deviceCodename.includes(query);
+
+                // Show card if matches, hide if not
+                if (matchesName || matchesCodename) {
+                    htmlCard.style.display = '';
+                    visibleCount++;
+                } else {
+                    htmlCard.style.display = 'none';
+                }
+            });
+
+            // Show/hide no results message
+            if (visibleCount === 0 && query !== '') {
+                noResults.style.display = 'block';
+            } else {
+                noResults.style.display = 'none';
+            }
+        });
+    });
+</script>
