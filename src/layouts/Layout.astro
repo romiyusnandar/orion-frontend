@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
 
 interface Props {
     title?: string;
@@ -48,5 +49,6 @@ const {
     <body style="padding-top: 72px;">
         <Navbar />
         <slot />
+        <Footer />
     </body>
 </html>

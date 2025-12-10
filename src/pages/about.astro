@@ -1,0 +1,610 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout
+    title="About - Orion OS"
+    description="Learn about Orion OS - an open-source Android project designed for minimal, lag-free, and secure experience"
+>
+    <!-- Hero Section -->
+    <section class="about-hero">
+        <div class="container">
+            <div class="hero-content">
+                <!-- Headline -->
+                <h1 class="hero-headline">
+                    Redefining Android<span class="accent-dot">.</span>
+                </h1>
+
+                <!-- Sub-headline -->
+                <p class="hero-subheadline">
+                    Orion OS is an open-source project designed to provide a
+                    minimal, lag-free, and secure Android experience. We strip
+                    away the clutter so you can focus on what matters.
+                </p>
+
+                <!-- Separator -->
+                <div class="hero-separator"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Storytelling Section -->
+    <section class="storytelling-section">
+        <div class="container">
+            <!-- Item 1: Text Left - Image Right -->
+            <div class="story-item">
+                <div class="story-content">
+                    <h2 class="story-title">Performance First</h2>
+                    <p class="story-text">
+                        We believe speed shouldn't be a luxury. Orion OS removes
+                        unnecessary bloatware and background processes that slow
+                        down your device. Every line of code is optimized to
+                        deliver maximum performance, ensuring your phone runs as
+                        fast on day 100 as it did on day one.
+                    </p>
+                </div>
+                <div class="story-image">
+                    <img
+                        src="/performance_benchmark_1765350931457.png"
+                        alt="Performance Benchmark"
+                        class="story-img"
+                        loading="lazy"
+                    />
+                </div>
+            </div>
+
+            <!-- Item 2: Image Left - Text Right -->
+            <div class="story-item reverse">
+                <div class="story-image">
+                    <img
+                        src="/privacy_dashboard_1765350957828.png"
+                        alt="Privacy Dashboard"
+                        class="story-img"
+                        loading="lazy"
+                    />
+                </div>
+                <div class="story-content">
+                    <h2 class="story-title">Privacy Focused</h2>
+                    <p class="story-text">
+                        Your data belongs to you, not corporations. Orion OS is
+                        built on open-source code that anyone can audit. We
+                        don't collect telemetry, we don't track your usage, and
+                        we don't sell your information. Complete transparency,
+                        complete control.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Item 3: Text Left - Image Right -->
+            <div class="story-item">
+                <div class="story-content">
+                    <h2 class="story-title">Pixel Perfect Design</h2>
+                    <p class="story-text">
+                        Beauty meets functionality. Every pixel, every
+                        animation, every interaction is carefully crafted to
+                        provide a delightful user experience. Our UI/UX team
+                        obsesses over the details so you can enjoy a polished,
+                        intuitive interface that feels natural and responsive.
+                    </p>
+                </div>
+                <div class="story-image">
+                    <img
+                        src="/ui_quick_settings_1765350984574.png"
+                        alt="UI Quick Settings"
+                        class="story-img"
+                        loading="lazy"
+                    />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Donation Section -->
+    <section class="donation-section" id="donation">
+        <div class="container">
+            <div class="donation-header">
+                <h2 class="donation-title">Keep the Project Alive</h2>
+                <p class="donation-description">
+                    Orion OS is free and open source. Your support helps us
+                    cover server costs and coffee for developers.
+                </p>
+            </div>
+
+            <div class="donation-grid">
+                <!-- Ko-fi -->
+                <div class="donation-card">
+                    <div class="donation-icon">
+                        <svg
+                            width="48"
+                            height="48"
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                        >
+                            <path
+                                d="M23.881 8.948c-.773-4.085-4.859-4.593-4.859-4.593H.723c-.604 0-.679.798-.679.798s-.082 7.324-.033 11.774c.049 4.45 2.309 4.73 2.309 4.73s1.991.048 8.727-.024c6.736-.072 8.919-.404 8.919-.404s2.21-.259 2.915-4.175c.705-3.916-.04-7.106-.04-7.106zm-4.479 1.634s.006.773-.055 1.324c-.061.551-.111.992-.111.992s-.735.024-1.382.024-1.382-.024-1.382-.024-.05-.441-.111-.992c-.061-.551-.055-1.324-.055-1.324s.624-.024 1.548-.024 1.548.024 1.548.024zM8.832 13.93c-2.013 0-3.645-1.631-3.645-3.645s1.632-3.645 3.645-3.645 3.645 1.631 3.645 3.645-1.632 3.645-3.645 3.645z"
+                            ></path>
+                        </svg>
+                    </div>
+                    <h3 class="donation-card-title">Ko-fi</h3>
+                    <p class="donation-card-text">
+                        Support us with a coffee on Ko-fi
+                    </p>
+                    <a
+                        href="https://ko-fi.com/teamorion"
+                        target="_blank"
+                        class="donation-button">Buy a Coffee</a
+                    >
+                </div>
+
+                <!-- PayPal -->
+                <div class="donation-card">
+                    <div class="donation-icon">
+                        <svg
+                            width="48"
+                            height="48"
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                        >
+                            <path
+                                d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944 3.72a.77.77 0 0 1 .76-.653h8.53c2.347 0 4.203.645 5.072 1.765.826 1.065.99 2.51.434 3.87-.03.073-.063.146-.098.219-.868 1.835-2.49 2.85-4.704 2.943l-.226.007H11.65a.77.77 0 0 0-.76.653l-.045.22-1.254 7.933-.028.143a.641.641 0 0 1-.633.537zm11.31-9.75c-.03.073-.063.146-.098.219-.868 1.835-2.49 2.85-4.704 2.943l-.226.007H10.295a.77.77 0 0 0-.76.653l-.045.22-1.254 7.933-.028.143a.641.641 0 0 1-.633.537H5.108a.641.641 0 0 1-.633-.74l2.107-13.378a.77.77 0 0 1 .76-.653h3.065c2.347 0 4.203.645 5.072 1.765.826 1.065.99 2.51.434 3.87z"
+                            ></path>
+                        </svg>
+                    </div>
+                    <h3 class="donation-card-title">PayPal</h3>
+                    <p class="donation-card-text">
+                        Make a one-time donation via PayPal
+                    </p>
+                    <a
+                        href="https://paypal.me/Romiyusnandar"
+                        target="_blank"
+                        class="donation-button">Donate</a
+                    >
+                </div>
+
+                <!-- Other -->
+                <div class="donation-card">
+                    <div class="donation-icon">
+                        <svg
+                            width="48"
+                            height="48"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                        >
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M12 16v-4"></path>
+                            <path d="M12 8h.01"></path>
+                        </svg>
+                    </div>
+                    <h3 class="donation-card-title">Other</h3>
+                    <p class="donation-card-text">
+                        Explore other ways to support the project
+                    </p>
+                    <a
+                        href="https://t.me/RyuDev21"
+                        target="_blank"
+                        class="donation-button">Learn More</a
+                    >
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Meet the Team CTA -->
+    <section class="team-cta-section scroll-reveal">
+        <div class="container">
+            <div class="team-cta-content">
+                <p class="team-cta-text">
+                    Built by passionate developers from around the world.
+                </p>
+                <a href="/developers" class="team-cta-button">
+                    Meet the Team
+                </a>
+            </div>
+        </div>
+    </section>
+</Layout>
+
+<script>
+    // Scroll Reveal Animation using Intersection Observer
+    document.addEventListener("DOMContentLoaded", () => {
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px",
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("revealed");
+                    // Optional: unobserve after reveal
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe all elements with scroll-reveal class
+        const revealElements = document.querySelectorAll(".scroll-reveal");
+        revealElements.forEach((el) => observer.observe(el));
+
+        // Also observe story items individually
+        const storyItems = document.querySelectorAll(".story-item");
+        storyItems.forEach((el) => {
+            el.classList.add("scroll-reveal");
+            observer.observe(el);
+        });
+
+        // Observe donation cards individually
+        const donationCards = document.querySelectorAll(".donation-card");
+        donationCards.forEach((card, index) => {
+            const htmlCard = card as HTMLElement;
+            htmlCard.classList.add("scroll-reveal");
+            htmlCard.style.transitionDelay = `${index * 0.1}s`;
+            observer.observe(htmlCard);
+        });
+    });
+</script>
+
+<style>
+    /* ============================================
+     ABOUT HERO SECTION
+     ============================================ */
+    .about-hero {
+        background: #ffffff;
+        padding: calc(var(--spacing-section-y) + 72px) 0
+            var(--spacing-section-y);
+        min-height: 80vh;
+        display: flex;
+        align-items: center;
+    }
+
+    .hero-content {
+        text-align: center;
+        max-width: 1200px;
+        margin: 0 auto;
+        animation: fadeIn 1s ease-out;
+    }
+
+    /* ============================================
+     HEADLINE
+     ============================================ */
+    .hero-headline {
+        font-size: clamp(3rem, 8vw, 6rem);
+        font-weight: 800;
+        color: var(--color-text-primary);
+        margin: 0 0 2rem 0;
+        letter-spacing: -0.03em;
+        line-height: 1.1;
+    }
+
+    .accent-dot {
+        color: var(--color-orion);
+    }
+
+    /* ============================================
+     SUB-HEADLINE
+     ============================================ */
+    .hero-subheadline {
+        font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+        color: #4b5563;
+        max-width: 42rem;
+        margin: 0 auto 3rem;
+        line-height: 1.7;
+        font-weight: 400;
+    }
+
+    /* ============================================
+     SEPARATOR
+     ============================================ */
+    .hero-separator {
+        width: 4px;
+        height: 80px;
+        background: var(--color-orion);
+        margin: 0 auto;
+        border-radius: 2px;
+    }
+
+    /* ============================================
+     ANIMATIONS
+     ============================================ */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* ============================================
+     RESPONSIVE
+     ============================================ */
+    @media (max-width: 768px) {
+        .about-hero {
+            min-height: 70vh;
+        }
+
+        .hero-separator {
+            height: 60px;
+        }
+    }
+
+    /* ============================================
+     STORYTELLING SECTION
+     ============================================ */
+    .storytelling-section {
+        background: #ffffff;
+        padding: 6rem 0;
+    }
+
+    .story-item {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        padding: 6rem 0;
+        align-items: center;
+    }
+
+    @media (min-width: 1024px) {
+        .story-item {
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+        }
+    }
+
+    /* Reverse layout for alternating pattern */
+    .story-item.reverse {
+        direction: rtl;
+    }
+
+    .story-item.reverse > * {
+        direction: ltr;
+    }
+
+    /* Story Content */
+    .story-content {
+        max-width: 600px;
+    }
+
+    .story-title {
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 800;
+        color: #000000;
+        margin: 0 0 1.5rem 0;
+        letter-spacing: -0.02em;
+        line-height: 1.2;
+    }
+
+    .story-text {
+        font-size: clamp(1.125rem, 2vw, 1.25rem);
+        color: #4b5563;
+        line-height: 1.8;
+        margin: 0;
+        font-weight: 400;
+    }
+
+    /* Story Image */
+    .story-image {
+        width: 100%;
+    }
+
+    .image-placeholder {
+        width: 100%;
+        aspect-ratio: 4 / 3;
+        background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+        border-radius: var(--radius-2xl);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .image-placeholder::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 60px;
+        height: 60px;
+        background: rgba(0, 0, 0, 0.05);
+        border-radius: 50%;
+    }
+
+    .story-img {
+        width: 100%;
+        height: auto;
+        border-radius: var(--radius-2xl);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        transition: transform var(--transition-base);
+    }
+
+    .story-item:hover .story-img {
+        transform: scale(1.02);
+    }
+
+    /* ============================================
+     DONATION SECTION
+     ============================================ */
+    .donation-section {
+        background: #f9fafb; /* bg-gray-50 */
+        padding: 6rem 0;
+    }
+
+    .donation-header {
+        text-align: center;
+        max-width: 700px;
+        margin: 0 auto 4rem;
+    }
+
+    .donation-title {
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 800;
+        color: var(--color-text-primary);
+        margin: 0 0 1rem 0;
+        letter-spacing: -0.02em;
+    }
+
+    .donation-description {
+        font-size: clamp(1.125rem, 2vw, 1.25rem);
+        color: #6b7280;
+        margin: 0;
+        line-height: 1.6;
+    }
+
+    /* Donation Grid */
+    .donation-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    @media (min-width: 768px) {
+        .donation-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    /* Donation Card */
+    .donation-card {
+        background: #ffffff;
+        border-radius: var(--radius-2xl);
+        padding: 2.5rem 2rem;
+        border: 2px solid transparent;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        transition: all var(--transition-base);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .donation-card:hover {
+        border-color: var(--color-orion);
+        transform: translateY(-8px);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    .donation-icon {
+        width: 80px;
+        height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #f3f4f6;
+        border-radius: 50%;
+        margin-bottom: 1.5rem;
+        color: var(--color-text-primary);
+    }
+
+    .donation-card-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--color-text-primary);
+        margin: 0 0 0.75rem 0;
+    }
+
+    .donation-card-text {
+        font-size: 1rem;
+        color: #6b7280;
+        margin: 0 0 2rem 0;
+        line-height: 1.6;
+        flex: 1;
+    }
+
+    .donation-button {
+        display: inline-block;
+        padding: 0.875rem 2rem;
+        background: var(--color-orion);
+        color: white;
+        border-radius: var(--radius-lg);
+        font-weight: 600;
+        text-decoration: none;
+        transition: all var(--transition-base);
+    }
+
+    .donation-button:hover {
+        background: #4a5fd9;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+    }
+
+    /* ============================================
+     MEET THE TEAM CTA
+     ============================================ */
+    .team-cta-section {
+        background: #ffffff;
+        padding: 6rem 0;
+    }
+
+    .team-cta-content {
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .team-cta-text {
+        font-size: clamp(1.25rem, 3vw, 1.75rem);
+        color: var(--color-text-primary);
+        margin: 0 0 2rem 0;
+        font-weight: 500;
+        line-height: 1.5;
+    }
+
+    .team-cta-button {
+        display: inline-block;
+        padding: 1rem 2.5rem;
+        border: 2px solid #111827;
+        color: #111827;
+        background: transparent;
+        border-radius: var(--radius-lg);
+        font-weight: 600;
+        font-size: 1.125rem;
+        text-decoration: none;
+        transition: all var(--transition-base);
+    }
+
+    .team-cta-button:hover {
+        background: #111827;
+        color: #ffffff;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    /* ============================================
+     REDUCED MOTION
+     ============================================ */
+    @media (prefers-reduced-motion: reduce) {
+        .hero-content {
+            animation: none;
+        }
+    }
+
+    /* ============================================
+     SCROLL REVEAL ANIMATION
+     ============================================ */
+    .scroll-reveal {
+        opacity: 0;
+        transform: translateY(40px);
+        transition:
+            opacity 0.8s ease-out,
+            transform 0.8s ease-out;
+    }
+
+    .scroll-reveal.revealed {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* Disable scroll reveal animations for reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+        .scroll-reveal {
+            opacity: 1;
+            transform: none;
+            transition: none;
+        }
+    }
+</style>
