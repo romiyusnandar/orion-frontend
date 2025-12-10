@@ -1,0 +1,617 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+// TypeScript Interfaces
+interface SocialLink {
+    url: string;
+    platform: "github" | "telegram" | "twitter" | "instagram";
+}
+
+interface MaintainedDevice {
+    id: string;
+    name: string;
+    codename: string;
+}
+
+
+interface Developer {
+    id: string;
+    email: string;
+    name: string;
+    profileImage: string;
+    role: "ADMIN" | "FOUNDER" | "CO_FOUNDER" | "CORE_DEVELOPER" | "UI_UX_DESIGNER" | "GROUP_SUPPORT" | "MAINTAINER";
+    socialLinks: SocialLink[];
+    isActive: boolean;
+    createdAt: string;
+    updatedAt: string;
+    maintainedDevices: MaintainedDevice[];
+}
+
+interface APIResponse {
+    success: boolean;
+    message: string;
+    data: Developer[];
+}
+
+// Get API base URL from environment variable
+const API_BASE_URL = import.meta.env.PUBLIC_API_BASE_URL;
+
+// Fetch developers from API
+let developers: Developer[] = [];
+let isLoading = true;
+let error: string | null = null;
+
+try {
+    const response = await fetch(`${API_BASE_URL}/users`);
+    const data: APIResponse = await response.json();
+    
+    if (data.success && data.data) {
+        developers = data.data;
+    }
+    isLoading = false;
+} catch (err) {
+    console.error("Failed to fetch developers:", err);
+    error = "Failed to load developers";
+    isLoading = false;
+}
+
+// Role priority for sorting (lower number = higher priority)
+// ADMIN, FOUNDER, CO_FOUNDER are sorted, others remain in random order
+const rolePriority: Record<Developer["role"], number> = {
+    "ADMIN": 0,
+    "FOUNDER": 1,
+    "CO_FOUNDER": 2,
+    "CORE_DEVELOPER": 888,   // Random order
+    "UI_UX_DESIGNER": 888,   // Random order
+    "GROUP_SUPPORT": 888,    // Random order
+    "MAINTAINER": 999        // Random order
+};
+
+// Sort developers by role priority (ADMIN → FOUNDER → CO_FOUNDER → random)
+developers.sort((a, b) => {
+    const priorityA = rolePriority[a.role] ?? 999;
+    const priorityB = rolePriority[b.role] ?? 999;
+    return priorityA - priorityB;
+});
+
+// Helper function to get role badge color
+function getRoleBadgeClass(role: Developer["role"]): string {
+    switch (role) {
+        case "ADMIN":
+            return "role-admin";
+        case "FOUNDER":
+            return "role-founder";
+        case "CO_FOUNDER":
+            return "role-cofounder";
+        case "CORE_DEVELOPER":
+            return "role-core-developer";
+        case "UI_UX_DESIGNER":
+            return "role-ui-ux-designer";
+        case "GROUP_SUPPORT":
+            return "role-group-support";
+        case "MAINTAINER":
+            return "role-maintainer";
+        default:
+            return "";
+    }
+}
+
+// Helper function to format role text
+function formatRole(role: Developer["role"]): string {
+    return role.replace(/_/g, " ");
+}
+---
+
+<Layout title="Developers - Orion OS" description="Meet the talented developers behind Orion OS">
+    <section class="developers-section">
+        <div class="container">
+            <!-- Header -->
+            <div class="developers-header">
+                <h1 class="developers-title">Our Developers</h1>
+                <p class="developers-subtitle">
+                    Meet the talented team building the future of Android
+                </p>
+            </div>
+
+            <!-- Developers Grid -->
+            <div class="developers-grid" id="developers-grid">
+                {developers.map((dev) => (
+                    <div class="developer-card">
+                        <!-- Profile Image -->
+                        <div class="developer-avatar">
+                            <img 
+                                src={dev.profileImage} 
+                                alt={dev.name}
+                                class="avatar-image"
+                            />
+                        </div>
+
+                        <!-- Developer Info -->
+                        <div class="developer-info">
+                            <h3 class="developer-name">{dev.name}</h3>
+                            <span class={`developer-role ${getRoleBadgeClass(dev.role)}`}>
+                                {formatRole(dev.role)}
+                            </span>
+                        </div>
+
+                        <!-- Social Links -->
+                        {dev.socialLinks.length > 0 && (
+                            <div class="developer-social">
+                                {dev.socialLinks.map((social) => (
+                                    <a 
+                                        href={social.url} 
+                                        target="_blank" 
+                                        rel="noopener noreferrer"
+                                        class="social-icon"
+                                        aria-label={`${dev.name}'s ${social.platform}`}
+                                    >
+                                        {social.platform === "github" && (
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                                <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
+                                            </svg>
+                                        )}
+                                        {social.platform === "telegram" && (
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
+                                            </svg>
+                                        )}
+                                        {social.platform === "twitter" && (
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                                            </svg>
+                                        )}
+                                    </a>
+                                ))}
+                            </div>
+                        )}
+
+                        <!-- Maintained Devices -->
+                        {dev.maintainedDevices.length > 0 && (
+                            <div class="developer-devices">
+                                <h4 class="devices-title">Maintained Devices</h4>
+                                <div class="devices-list">
+                                    {dev.maintainedDevices.map((device) => (
+                                        <div class="device-badge">
+                                            <span class="device-name">{device.name}</span>
+                                            <span class="device-codename">{device.codename}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                ))}
+
+                <!-- Skeleton Loading (shown initially, hidden by JS when loaded) -->
+                <div class="skeleton-grid" id="skeleton-grid">
+                    {[...Array(3)].map(() => (
+                        <div class="skeleton-card">
+                            <div class="skeleton-avatar"></div>
+                            <div class="skeleton-info">
+                                <div class="skeleton-name"></div>
+                                <div class="skeleton-role"></div>
+                            </div>
+                            <div class="skeleton-social">
+                                <div class="skeleton-icon"></div>
+                                <div class="skeleton-icon"></div>
+                            </div>
+                            <div class="skeleton-devices">
+                                <div class="skeleton-device"></div>
+                                <div class="skeleton-device"></div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </div>
+    </section>
+</Layout>
+
+<style>
+    /* ============================================
+     DEVELOPERS SECTION
+     ============================================ */
+    .developers-section {
+        padding: calc(var(--spacing-section-y) + 72px) 0 var(--spacing-section-y);
+        background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+        min-height: 100vh;
+    }
+
+    /* ============================================
+     HEADER
+     ============================================ */
+    .developers-header {
+        text-align: center;
+        margin-bottom: 4rem;
+        animation: fadeIn 0.8s ease-out;
+    }
+
+    .developers-title {
+        font-size: clamp(2.5rem, 6vw, 4rem);
+        font-weight: 800;
+        color: var(--color-text-primary);
+        margin-bottom: 1rem;
+        letter-spacing: -0.02em;
+    }
+
+    .developers-subtitle {
+        font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+        color: var(--color-text-secondary);
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    /* ============================================
+     DEVELOPERS GRID
+     ============================================ */
+    .developers-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        position: relative;
+    }
+
+    @media (min-width: 768px) {
+        .developers-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .developers-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    /* ============================================
+     SKELETON LOADING
+     ============================================ */
+    .skeleton-grid {
+        display: contents;
+    }
+
+    .skeleton-card {
+        background: #ffffff;
+        border-radius: var(--radius-2xl);
+        padding: 2rem;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        animation: fadeInUp 1s ease-out 0.2s both;
+    }
+
+    .skeleton-avatar {
+        width: 100px;
+        height: 100px;
+        margin: 0 auto;
+        border-radius: 50%;
+        background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+        background-size: 200% 100%;
+        animation: shimmer 1.5s infinite;
+    }
+
+    .skeleton-info {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        align-items: center;
+    }
+
+    .skeleton-name {
+        width: 150px;
+        height: 24px;
+        border-radius: var(--radius-md);
+        background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+        background-size: 200% 100%;
+        animation: shimmer 1.5s infinite;
+    }
+
+    .skeleton-role {
+        width: 100px;
+        height: 20px;
+        border-radius: var(--radius-xl);
+        background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+        background-size: 200% 100%;
+        animation: shimmer 1.5s infinite;
+    }
+
+    .skeleton-social {
+        display: flex;
+        justify-content: center;
+        gap: 0.75rem;
+    }
+
+    .skeleton-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+        background-size: 200% 100%;
+        animation: shimmer 1.5s infinite;
+    }
+
+    .skeleton-devices {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        padding-top: 1rem;
+        border-top: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    .skeleton-device {
+        height: 40px;
+        border-radius: var(--radius-lg);
+        background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+        background-size: 200% 100%;
+        animation: shimmer 1.5s infinite;
+    }
+
+    @keyframes shimmer {
+        0% {
+            background-position: -200% 0;
+        }
+        100% {
+            background-position: 200% 0;
+        }
+    }
+
+    /* Hide skeleton when loaded */
+    .developers-grid:not(:empty) .skeleton-grid {
+        display: none;
+    }
+
+    /* ============================================
+     DEVELOPER CARD
+     ============================================ */
+    .developer-card {
+        background: #ffffff;
+        border-radius: var(--radius-2xl);
+        padding: 2rem;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        transition: all var(--transition-base);
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        animation: fadeInUp 1s ease-out 0.2s both;
+    }
+
+    .developer-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        border-color: var(--color-orion);
+    }
+
+    /* ============================================
+     AVATAR
+     ============================================ */
+    .developer-avatar {
+        width: 100px;
+        height: 100px;
+        margin: 0 auto;
+    }
+
+    .avatar-image {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 4px solid var(--color-orion);
+    }
+
+    /* ============================================
+     DEVELOPER INFO
+     ============================================ */
+    .developer-info {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .developer-name {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--color-text-primary);
+        margin: 0;
+    }
+
+    .developer-role {
+        display: inline-block;
+        padding: 0.375rem 0.875rem;
+        border-radius: var(--radius-xl);
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    .role-admin {
+        background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+        color: #1a1a1a;
+        box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+    }
+
+    .role-founder {
+        background: linear-gradient(135deg, #8B5CF6 0%, #6366F1 100%);
+        color: white;
+        box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+    }
+
+    .role-cofounder {
+        background: linear-gradient(135deg, var(--color-orion) 0%, #4a5fd9 100%);
+        color: white;
+    }
+
+    .role-core-developer {
+        background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+        color: white;
+    }
+
+    .role-ui-ux-designer {
+        background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+        color: white;
+    }
+
+    .role-group-support {
+        background: linear-gradient(135deg, #EC4899 0%, #DB2777 100%);
+        color: white;
+    }
+
+    .role-maintainer {
+        background: #e9ecef;
+        color: var(--color-text-primary);
+    }
+
+    /* ============================================
+     SOCIAL LINKS
+     ============================================ */
+    .developer-social {
+        display: flex;
+        justify-content: center;
+        gap: 0.75rem;
+    }
+
+    .social-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: #f8f9fa;
+        color: var(--color-text-secondary);
+        transition: all var(--transition-base);
+    }
+
+    .social-icon:hover {
+        background: var(--color-orion);
+        color: white;
+        transform: translateY(-2px);
+    }
+
+    /* ============================================
+     DEVICES
+     ============================================ */
+    .developer-devices {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        padding-top: 1rem;
+        border-top: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    .devices-title {
+        font-size: 0.875rem;
+        font-weight: 700;
+        color: var(--color-text-primary);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin: 0;
+    }
+
+    .devices-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .device-badge {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.75rem 1rem;
+        background: #f8f9fa;
+        border-radius: var(--radius-lg);
+        transition: background var(--transition-base);
+    }
+
+    .device-badge:hover {
+        background: #e9ecef;
+    }
+
+    .device-name {
+        font-size: 0.9375rem;
+        font-weight: 600;
+        color: var(--color-text-primary);
+    }
+
+    .device-codename {
+        font-size: 0.8125rem;
+        font-weight: 500;
+        color: var(--color-text-secondary);
+        font-family: 'Courier New', monospace;
+        background: rgba(0, 0, 0, 0.05);
+        padding: 0.25rem 0.5rem;
+        border-radius: var(--radius-md);
+    }
+
+    /* ============================================
+     ANIMATIONS
+     ============================================ */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* ============================================
+     REDUCED MOTION
+     ============================================ */
+    @media (prefers-reduced-motion: reduce) {
+        .developers-header,
+        .developer-card,
+        .skeleton-card {
+            animation: none;
+        }
+
+        .developer-card:hover,
+        .social-icon:hover {
+            transform: none;
+        }
+
+        .skeleton-avatar,
+        .skeleton-name,
+        .skeleton-role,
+        .skeleton-icon,
+        .skeleton-device {
+            animation: none;
+        }
+    }
+</style>
+
+<script>
+    // Hide skeleton when page is fully loaded
+    document.addEventListener('DOMContentLoaded', () => {
+        const skeletonGrid = document.getElementById('skeleton-grid');
+        const developersGrid = document.getElementById('developers-grid');
+        
+        // Check if we have developer cards
+        const developerCards = developersGrid?.querySelectorAll('.developer-card');
+        
+        if (developerCards && developerCards.length > 0) {
+            // Hide skeleton after a short delay to show loading state
+            setTimeout(() => {
+                if (skeletonGrid) {
+                    skeletonGrid.style.display = 'none';
+                }
+            }, 500);
+        }
+    });
+</script>
