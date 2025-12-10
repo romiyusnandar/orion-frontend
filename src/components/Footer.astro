@@ -16,8 +16,8 @@
                     <span class="footer-logo-text">Orion OS</span>
                 </div>
                 <p class="footer-description">
-                    Next level Android experience. Built for performance, designed
-                    for you.
+                    Next level Android experience. Built for performance,
+                    designed for you.
                 </p>
             </div>
 
@@ -31,11 +31,13 @@
                         </li>
                         <li>
                             <a href="/changelog" class="footer-link"
-                                >Changelog</a>
+                                >Changelog</a
+                            >
                         </li>
                         <li>
                             <a href="/developers" class="footer-link"
-                                >Developers</a>
+                                >Developers</a
+                            >
                         </li>
                     </ul>
                 </div>
@@ -48,14 +50,16 @@
                                 href="https://t.me/OrionOS_Update"
                                 target="_blank"
                                 rel="noopener"
-                                class="footer-link">Telegram</a>
+                                class="footer-link">Telegram</a
+                            >
                         </li>
                         <li>
                             <a
                                 href="https://github.com/OrionOS-Project"
                                 target="_blank"
                                 rel="noopener"
-                                class="footer-link">GitHub</a>
+                                class="footer-link">GitHub</a
+                            >
                         </li>
                     </ul>
                 </div>
@@ -141,8 +145,12 @@
      FOOTER
      ============================================ */
     .footer {
-        background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 100%);
-        border-top: 1px solid rgba(0, 0, 0, 0.08);
+        background: linear-gradient(
+            180deg,
+            var(--color-bg-secondary) 0%,
+            var(--color-bg-tertiary) 100%
+        );
+        border-top: 1px solid var(--color-border);
         padding: 4rem 0 2rem;
         margin-top: auto;
     }
@@ -258,7 +266,7 @@
         align-items: center;
         gap: 1.5rem;
         padding-top: 2rem;
-        border-top: 1px solid rgba(0, 0, 0, 0.08);
+        border-top: 1px solid var(--color-border);
     }
 
     @media (min-width: 768px) {
@@ -289,7 +297,7 @@
         width: 36px;
         height: 36px;
         border-radius: 50%;
-        background: rgba(0, 0, 0, 0.05);
+        background: var(--color-bg-tertiary);
         color: var(--color-text-secondary);
         transition: all var(--transition-base);
     }

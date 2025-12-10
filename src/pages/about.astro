@@ -251,7 +251,7 @@ import Layout from "../layouts/Layout.astro";
      ABOUT HERO SECTION
      ============================================ */
     .about-hero {
-        background: #ffffff;
+        background: var(--color-bg-primary);
         padding: calc(var(--spacing-section-y) + 72px) 0
             var(--spacing-section-y);
         min-height: 80vh;
@@ -287,7 +287,7 @@ import Layout from "../layouts/Layout.astro";
      ============================================ */
     .hero-subheadline {
         font-size: clamp(1.125rem, 2.5vw, 1.5rem);
-        color: #4b5563;
+        color: var(--color-text-secondary);
         max-width: 42rem;
         margin: 0 auto 3rem;
         line-height: 1.7;
@@ -336,7 +336,7 @@ import Layout from "../layouts/Layout.astro";
      STORYTELLING SECTION
      ============================================ */
     .storytelling-section {
-        background: #ffffff;
+        background: var(--color-bg-primary);
         padding: 6rem 0;
     }
 
@@ -372,7 +372,7 @@ import Layout from "../layouts/Layout.astro";
     .story-title {
         font-size: clamp(2rem, 4vw, 3rem);
         font-weight: 800;
-        color: #000000;
+        color: var(--color-text-primary);
         margin: 0 0 1.5rem 0;
         letter-spacing: -0.02em;
         line-height: 1.2;
@@ -380,7 +380,7 @@ import Layout from "../layouts/Layout.astro";
 
     .story-text {
         font-size: clamp(1.125rem, 2vw, 1.25rem);
-        color: #4b5563;
+        color: var(--color-text-secondary);
         line-height: 1.8;
         margin: 0;
         font-weight: 400;
@@ -394,7 +394,11 @@ import Layout from "../layouts/Layout.astro";
     .image-placeholder {
         width: 100%;
         aspect-ratio: 4 / 3;
-        background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+        background: linear-gradient(
+            135deg,
+            var(--color-bg-secondary) 0%,
+            var(--color-bg-tertiary) 100%
+        );
         border-radius: var(--radius-2xl);
         position: relative;
         overflow: hidden;
@@ -428,7 +432,7 @@ import Layout from "../layouts/Layout.astro";
      DONATION SECTION
      ============================================ */
     .donation-section {
-        background: #f9fafb; /* bg-gray-50 */
+        background: var(--color-bg-secondary);
         padding: 6rem 0;
     }
 
@@ -448,7 +452,7 @@ import Layout from "../layouts/Layout.astro";
 
     .donation-description {
         font-size: clamp(1.125rem, 2vw, 1.25rem);
-        color: #6b7280;
+        color: var(--color-text-secondary);
         margin: 0;
         line-height: 1.6;
     }
@@ -470,11 +474,11 @@ import Layout from "../layouts/Layout.astro";
 
     /* Donation Card */
     .donation-card {
-        background: #ffffff;
+        background: var(--color-bg-primary);
         border-radius: var(--radius-2xl);
         padding: 2.5rem 2rem;
         border: 2px solid transparent;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        box-shadow: var(--shadow-sm);
         transition: all var(--transition-base);
         display: flex;
         flex-direction: column;
@@ -485,7 +489,7 @@ import Layout from "../layouts/Layout.astro";
     .donation-card:hover {
         border-color: var(--color-orion);
         transform: translateY(-8px);
-        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        box-shadow: var(--shadow-lg);
     }
 
     .donation-icon {
@@ -494,7 +498,7 @@ import Layout from "../layouts/Layout.astro";
         display: flex;
         align-items: center;
         justify-content: center;
-        background: #f3f4f6;
+        background: var(--color-bg-secondary);
         border-radius: 50%;
         margin-bottom: 1.5rem;
         color: var(--color-text-primary);
@@ -509,7 +513,7 @@ import Layout from "../layouts/Layout.astro";
 
     .donation-card-text {
         font-size: 1rem;
-        color: #6b7280;
+        color: var(--color-text-secondary);
         margin: 0 0 2rem 0;
         line-height: 1.6;
         flex: 1;
@@ -536,7 +540,7 @@ import Layout from "../layouts/Layout.astro";
      MEET THE TEAM CTA
      ============================================ */
     .team-cta-section {
-        background: #ffffff;
+        background: var(--color-bg-primary);
         padding: 6rem 0;
     }
 
@@ -557,8 +561,8 @@ import Layout from "../layouts/Layout.astro";
     .team-cta-button {
         display: inline-block;
         padding: 1rem 2.5rem;
-        border: 2px solid #111827;
-        color: #111827;
+        border: 2px solid var(--color-text-primary);
+        color: var(--color-text-primary);
         background: transparent;
         border-radius: var(--radius-lg);
         font-weight: 600;
@@ -568,10 +572,10 @@ import Layout from "../layouts/Layout.astro";
     }
 
     .team-cta-button:hover {
-        background: #111827;
-        color: #ffffff;
+        background: var(--color-text-primary);
+        color: var(--color-bg-primary);
         transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        box-shadow: var(--shadow-md);
     }
 
     /* ============================================

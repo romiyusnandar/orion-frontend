@@ -111,7 +111,7 @@ if (!deviceData) {
 
 // Helper function to get status color
 const getStatusColor = (status: Device["status"]): string => 
-    status === 'DISCONTINUED' ? 'bg-red-100 text-red-600' : 'bg-green-100 text-green-600';
+    status === 'DISCONTINUED' ? 'status-discontinued' : 'status-active';
 
 // Sort builds by createdAt (newest first)
 deviceData.builds.sort((a, b) => {
@@ -283,7 +283,7 @@ function formatRole(role: Maintainer["role"]): string {
      ============================================ */
     .device-section {
         padding: calc(var(--spacing-section-y) + 72px) 0 var(--spacing-section-y);
-        background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+        background: linear-gradient(180deg, var(--color-bg-primary) 0%, var(--color-bg-secondary) 100%);
         min-height: 100vh;
     }
 
@@ -351,6 +351,30 @@ function formatRole(role: Maintainer["role"]): string {
         letter-spacing: 0.05em;
     }
 
+    /* Status Colors - Light Mode */
+    .status-active {
+        background-color: #dcfce7; /* green-100 */
+        color: #16a34a; /* green-600 */
+    }
+
+    .status-discontinued {
+        background-color: #fee2e2; /* red-100 */
+        color: #dc2626; /* red-600 */
+    }
+
+    /* Status Colors - Dark Mode */
+    :where(html.dark) .status-active,
+    html.dark .status-active {
+        background-color: rgba(22, 163, 74, 0.2); /* green with opacity */
+        color: #86efac; /* green-300 */
+    }
+
+    :where(html.dark) .status-discontinued,
+    html.dark .status-discontinued {
+        background-color: rgba(220, 38, 38, 0.2); /* red with opacity */
+        color: #fca5a5; /* red-300 */
+    }
+
     /* ============================================
      DEVICE IMAGE (Right Column)
      ============================================ */
@@ -381,7 +405,7 @@ function formatRole(role: Maintainer["role"]): string {
      MAINTAINER CARD
      ============================================ */
     .maintainer-card {
-        background: #f9fafb;
+        background: var(--color-bg-secondary);
         border-radius: var(--radius-xl);
         padding: 1rem;
         margin-top: 1.5rem;
@@ -443,8 +467,8 @@ function formatRole(role: Maintainer["role"]): string {
         width: 32px;
         height: 32px;
         border-radius: 50%;
-        background: white;
-        color: #6b7280;
+        background: var(--color-bg-primary);
+        color: var(--color-text-secondary);
         transition: all var(--transition-base);
     }
 
@@ -480,10 +504,10 @@ function formatRole(role: Maintainer["role"]): string {
      BUILD CARD (Horizontal Row)
      ============================================ */
     .build-card {
-        background: #ffffff;
+        background: var(--color-bg-primary);
         border-radius: var(--radius-xl);
         padding: 1.25rem;
-        border: 1px solid rgba(0, 0, 0, 0.08);
+        border: 1px solid var(--color-border);
         transition: all var(--transition-base);
         display: flex;
         flex-direction: column;
@@ -499,7 +523,7 @@ function formatRole(role: Maintainer["role"]): string {
     }
 
     .build-card:hover {
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        box-shadow: var(--shadow-lg);
         border-color: var(--color-orion);
     }
 

@@ -227,7 +227,11 @@
      ============================================ */
     .features-section {
         padding: var(--spacing-section-y-mobile) 0;
-        background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+        background: linear-gradient(
+            180deg,
+            var(--color-bg-primary) 0%,
+            var(--color-bg-secondary) 100%
+        );
     }
 
     @media (min-width: 768px) {
@@ -287,11 +291,11 @@
      FEATURE CARDS
      ============================================ */
     .feature-card {
-        background: #f8f9fa;
+        background: var(--color-bg-secondary);
         border-radius: var(--radius-2xl);
         padding: 2rem;
         transition: all var(--transition-base);
-        border: 1px solid rgba(0, 0, 0, 0.05);
+        border: 1px solid var(--color-border);
         display: flex;
         flex-direction: column;
         gap: 1rem;
@@ -299,15 +303,17 @@
 
     .feature-card:hover {
         transform: translateY(-4px) scale(1.02);
-        box-shadow:
-            0 20px 40px rgba(0, 0, 0, 0.08),
-            0 0 0 1px rgba(0, 0, 0, 0.02);
-        background: #ffffff;
+        box-shadow: var(--shadow-xl);
+        background: var(--color-bg-primary);
     }
 
     /* Large Card (High Performance) */
     .feature-large {
-        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        background: linear-gradient(
+            135deg,
+            var(--color-bg-secondary) 0%,
+            var(--color-bg-tertiary) 100%
+        );
     }
 
     @media (min-width: 768px) {
@@ -324,7 +330,11 @@
     }
 
     .feature-large:hover {
-        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        background: linear-gradient(
+            135deg,
+            var(--color-bg-primary) 0%,
+            var(--color-bg-secondary) 100%
+        );
     }
 
     /* ============================================
@@ -333,13 +343,13 @@
     .feature-icon-wrapper {
         width: fit-content;
         padding: 1rem;
-        background: rgba(255, 255, 255, 0.8);
+        background: var(--color-bg-primary);
         border-radius: var(--radius-xl);
         transition: all var(--transition-base);
     }
 
     .feature-card:hover .feature-icon-wrapper {
-        background: rgba(255, 255, 255, 1);
+        background: var(--color-bg-primary);
         transform: scale(1.1);
     }
 

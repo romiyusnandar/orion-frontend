@@ -153,7 +153,7 @@ try {
         display: flex;
         align-items: center;
         justify-content: center;
-        background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+        background: linear-gradient(180deg, var(--color-bg-primary) 0%, var(--color-bg-secondary) 100%);
         overflow: hidden;
         padding: 4rem 0 2rem;
     }
@@ -276,19 +276,17 @@ try {
         position: relative;
         width: 280px;
         height: 560px;
-        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        background: linear-gradient(135deg, var(--color-bg-secondary) 0%, var(--color-bg-tertiary) 100%);
         border-radius: 2.5rem;
         padding: 0.75rem;
-        box-shadow:
-            0 20px 40px rgba(0, 0, 0, 0.1),
-            0 0 0 1px rgba(0, 0, 0, 0.05);
+        box-shadow: var(--shadow-xl);
         animation: float 6s ease-in-out infinite;
     }
 
     .mockup-screen {
         width: 100%;
         height: 100%;
-        background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+        background: linear-gradient(180deg, var(--color-bg-primary) 0%, var(--color-bg-secondary) 100%);
         border-radius: 2rem;
         display: flex;
         flex-direction: column;
@@ -305,7 +303,7 @@ try {
         transform: translateX(-50%);
         width: 120px;
         height: 24px;
-        background: #1a1a1a;
+        background: var(--color-text-primary);
         border-radius: 0 0 1rem 1rem;
     }
 

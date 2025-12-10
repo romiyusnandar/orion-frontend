@@ -1,5 +1,6 @@
 ---
 // Navbar Component - Premium Glassmorphism Design
+import ThemeToggle from "./ThemeToggle.astro";
 ---
 
 <nav id="navbar" class="navbar">
@@ -23,17 +24,25 @@
                 <a href="/about" class="nav-link">About</a>
             </div>
 
-            <!-- CTA Button -->
-            <div class="navbar-cta">
+            <!-- Theme Toggle & CTA (Desktop) -->
+            <div class="navbar-actions">
+                <ThemeToggle />
                 <a href="/devices" class="btn-download">Download Now</a>
             </div>
 
-            <!-- Mobile Hamburger -->
-            <button id="hamburger" class="hamburger" aria-label="Toggle menu">
-                <span class="hamburger-line"></span>
-                <span class="hamburger-line"></span>
-                <span class="hamburger-line"></span>
-            </button>
+            <!-- Mobile Actions (Theme Toggle + Hamburger) -->
+            <div class="mobile-actions">
+                <ThemeToggle />
+                <button
+                    id="hamburger"
+                    class="hamburger"
+                    aria-label="Toggle menu"
+                >
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+            </div>
         </div>
     </div>
 
@@ -65,12 +74,25 @@
         transition: all var(--transition-base);
     }
 
+    /* Dark mode navbar */
+    :where(html.dark) .navbar,
+    html.dark .navbar {
+        background-color: rgba(10, 10, 10, 0.8) !important;
+        border-bottom-color: rgba(255, 255, 255, 0.1) !important;
+    }
+
     .navbar.scrolled {
         background-color: rgba(255, 255, 255, 0.85);
         backdrop-filter: blur(16px);
         -webkit-backdrop-filter: blur(16px);
         box-shadow: var(--shadow-md);
         border-bottom-color: rgba(0, 0, 0, 0.08);
+    }
+
+    :where(html.dark) .navbar.scrolled,
+    html.dark .navbar.scrolled {
+        background-color: rgba(10, 10, 10, 0.9) !important;
+        border-bottom-color: rgba(255, 255, 255, 0.15) !important;
     }
 
     .navbar-content {
@@ -171,15 +193,17 @@
     }
 
     /* ============================================
-     CTA BUTTON - Pill Shape
+     NAVBAR ACTIONS - Theme Toggle & CTA
      ============================================ */
-    .navbar-cta {
+    .navbar-actions {
         display: none;
+        align-items: center;
+        gap: 1rem;
     }
 
     @media (min-width: 768px) {
-        .navbar-cta {
-            display: block;
+        .navbar-actions {
+            display: flex;
         }
     }
 
@@ -209,6 +233,21 @@
         margin-top: 1rem;
         padding: 1rem 2rem;
         font-size: var(--font-size-base);
+    }
+
+    /* ============================================
+     MOBILE ACTIONS - Theme Toggle + Hamburger
+     ============================================ */
+    .mobile-actions {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    @media (min-width: 768px) {
+        .mobile-actions {
+            display: none;
+        }
     }
 
     /* ============================================
@@ -266,6 +305,13 @@
         max-height: 0;
         overflow: hidden;
         transition: max-height var(--transition-slow);
+    }
+
+    /* Dark mode mobile menu */
+    :where(html.dark) .mobile-menu,
+    html.dark .mobile-menu {
+        background-color: rgba(10, 10, 10, 0.95) !important;
+        border-bottom-color: rgba(255, 255, 255, 0.1) !important;
     }
 
     @media (min-width: 768px) {

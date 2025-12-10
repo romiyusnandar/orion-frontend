@@ -42,7 +42,7 @@ try {
 
 // Helper function to get status color
 const getStatusColor = (status: Device["status"]): string => 
-    status === 'DISCONTINUED' ? 'bg-red-100 text-red-600' : 'bg-green-100 text-green-600';
+    status === 'DISCONTINUED' ? 'status-discontinued' : 'status-active';
 ---
 
 <Layout title="Supported Devices - Orion OS" description="Browse all devices supported by Orion OS">
@@ -130,7 +130,7 @@ const getStatusColor = (status: Device["status"]): string =>
      ============================================ */
     .devices-section {
         padding: calc(var(--spacing-section-y) + 72px) 0 var(--spacing-section-y);
-        background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+        background: linear-gradient(180deg, var(--color-bg-primary) 0%, var(--color-bg-secondary) 100%);
         min-height: 100vh;
     }
 
@@ -184,12 +184,12 @@ const getStatusColor = (status: Device["status"]): string =>
         width: 100%;
         padding: 1rem 1.5rem 1rem 3.5rem; /* Extra left padding for icon */
         border-radius: 9999px; /* rounded-full */
-        border: 1px solid rgba(0, 0, 0, 0.1);
-        background: #ffffff;
+        border: 1px solid var(--color-border);
+        background: var(--color-bg-primary);
         font-size: 1rem;
         color: var(--color-text-primary);
         transition: all var(--transition-base);
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        box-shadow: var(--shadow-sm);
     }
 
     .search-input::placeholder {
@@ -233,10 +233,10 @@ const getStatusColor = (status: Device["status"]): string =>
      DEVICE CARD
      ============================================ */
     .device-card {
-        background: #ffffff;
+        background: var(--color-bg-primary);
         border-radius: var(--radius-2xl);
         overflow: hidden;
-        border: 1px solid rgba(0, 0, 0, 0.08);
+        border: 1px solid var(--color-border);
         transition: all var(--transition-base);
         text-decoration: none;
         display: flex;
@@ -246,7 +246,7 @@ const getStatusColor = (status: Device["status"]): string =>
 
     .device-card:hover {
         transform: translateY(-8px);
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        box-shadow: var(--shadow-xl);
         border-color: var(--color-orion);
     }
 
@@ -254,7 +254,7 @@ const getStatusColor = (status: Device["status"]): string =>
     .device-image-wrapper {
         width: 100%;
         aspect-ratio: 4 / 3;
-        background: #f8f9fa;
+        background: var(--color-bg-secondary);
         overflow: hidden;
         position: relative;
     }
@@ -304,6 +304,30 @@ const getStatusColor = (status: Device["status"]): string =>
         text-transform: uppercase;
         letter-spacing: 0.05em;
         margin-top: 0.5rem;
+    }
+
+    /* Status Colors - Light Mode */
+    .status-active {
+        background-color: #dcfce7; /* green-100 */
+        color: #16a34a; /* green-600 */
+    }
+
+    .status-discontinued {
+        background-color: #fee2e2; /* red-100 */
+        color: #dc2626; /* red-600 */
+    }
+
+    /* Status Colors - Dark Mode */
+    :where(html.dark) .status-active,
+    html.dark .status-active {
+        background-color: rgba(22, 163, 74, 0.2); /* green with opacity */
+        color: #86efac; /* green-300 */
+    }
+
+    :where(html.dark) .status-discontinued,
+    html.dark .status-discontinued {
+        background-color: rgba(220, 38, 38, 0.2); /* red with opacity */
+        color: #fca5a5; /* red-300 */
     }
 
     /* ============================================

@@ -45,6 +45,30 @@ const {
         <!-- Preconnect to Google Fonts for better performance -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+        <!-- Dark Mode Prevention Script (Inline to prevent FOUC) -->
+        <script is:inline>
+            // Immediately check and apply theme before page renders
+            (function () {
+                // Get theme from localStorage
+                const theme = localStorage.getItem("theme");
+
+                // Check system preference
+                const systemPrefersDark = window.matchMedia(
+                    "(prefers-color-scheme: dark)",
+                ).matches;
+
+                // Apply dark mode if:
+                // 1. User explicitly set 'dark' in localStorage, OR
+                // 2. No preference set AND system prefers dark
+                if (theme === "dark" || (!theme && systemPrefersDark)) {
+                    document.documentElement.classList.add("dark");
+                } else if (theme === "light") {
+                    // Explicitly remove dark class if user prefers light
+                    document.documentElement.classList.remove("dark");
+                }
+            })();
+        </script>
     </head>
     <body style="padding-top: 72px;">
         <Navbar />
