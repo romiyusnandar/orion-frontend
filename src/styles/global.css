@@ -141,11 +141,46 @@
     box-sizing: border-box;
 }
 
+/* Smooth transitions for dark mode - applies to all elements */
+*,
+*::before,
+*::after {
+    transition-property: background-color, border-color, color, fill, stroke;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
+}
+
+/* Disable dark mode transition for elements with animations */
+@media (prefers-reduced-motion: no-preference) {
+
+    [style*="animation"],
+    [class*="animate"] {
+        transition: none;
+    }
+}
+
 html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
     scroll-behavior: smooth;
+
+    /* Fix mobile viewport - use min-height with dvh for dynamic viewport */
+    min-height: 100vh;
+    min-height: 100dvh;
+    /* Dynamic viewport height - adapts to mobile address bar */
+
+    /* Background color to prevent white gaps */
+    background-color: white;
+
+    /* Smooth transition for dark mode */
+    transition: background-color 0.3s ease-in-out;
+}
+
+/* Dark mode html background */
+.dark html {
+    background-color: rgb(3 7 18);
+    /* gray-950 */
 }
 
 /* ============================================
@@ -159,13 +194,27 @@ html {
         line-height: 1.6;
         font-weight: 400;
 
+        /* Fix mobile viewport - use min-height NOT height */
+        min-height: 100vh;
+        min-height: 100dvh;
+        /* Dynamic viewport height */
+
+        /* Spacing for fixed navbar */
+        padding-top: 72px;
+
+        /* Prevent horizontal scroll only */
+        overflow-x: hidden;
+
         /* Light mode defaults */
         background-color: white;
         color: rgb(17 24 39);
         /* gray-900 */
+
+        /* Smooth transition for dark mode */
+        transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
     }
 
-    /* Dark mode overrides (using CSS nesting) */
+    /* Dark mode overrides */
     .dark body {
         background-color: rgb(3 7 18);
         /* gray-950 - premium dark */
