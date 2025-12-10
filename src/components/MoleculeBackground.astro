@@ -1,0 +1,161 @@
+---
+// MoleculeBackground.astro - Animated molecule background
+---
+
+<canvas id="molecule-canvas" class="molecule-canvas"></canvas>
+
+<style>
+    .molecule-canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        pointer-events: none;
+    }
+</style>
+
+<script>
+    interface Molecule {
+        x: number;
+        y: number;
+        vx: number;
+        vy: number;
+        radius: number;
+        opacity: number;
+    }
+
+    class MoleculeBackground {
+        private canvas: HTMLCanvasElement;
+        private ctx: CanvasRenderingContext2D;
+        private molecules: Molecule[] = [];
+        private animationFrame: number = 0;
+        private isDark: boolean = false;
+
+        constructor(canvas: HTMLCanvasElement) {
+            this.canvas = canvas;
+            const context = canvas.getContext("2d");
+            if (!context) {
+                throw new Error("Could not get canvas context");
+            }
+            this.ctx = context;
+
+            this.checkDarkMode();
+            this.resizeCanvas();
+            this.initMolecules();
+            this.animate();
+
+            // Event listeners
+            window.addEventListener("resize", () => this.handleResize());
+
+            // Watch for dark mode changes
+            const observer = new MutationObserver(() => {
+                this.checkDarkMode();
+            });
+            observer.observe(document.documentElement, {
+                attributes: true,
+                attributeFilter: ["class"],
+            });
+        }
+
+        private checkDarkMode(): void {
+            this.isDark = document.documentElement.classList.contains("dark");
+        }
+
+        private handleResize(): void {
+            this.resizeCanvas();
+            this.initMolecules();
+        }
+
+        private resizeCanvas(): void {
+            this.canvas.width = this.canvas.offsetWidth;
+            this.canvas.height = this.canvas.offsetHeight;
+        }
+
+        private initMolecules(): void {
+            this.molecules = [];
+            const count = Math.floor(
+                (this.canvas.width * this.canvas.height) / 15000,
+            );
+
+            for (let i = 0; i < count; i++) {
+                this.molecules.push({
+                    x: Math.random() * this.canvas.width,
+                    y: Math.random() * this.canvas.height,
+                    vx: (Math.random() - 0.5) * 0.5,
+                    vy: (Math.random() - 0.5) * 0.5,
+                    radius: Math.random() * 3 + 1,
+                    opacity: Math.random() * 0.5 + 0.1,
+                });
+            }
+        }
+
+        private animate = (): void => {
+            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+            // Get color based on theme
+            const baseColor = this.isDark
+                ? "99, 102, 241" // Orion color for dark mode (more vibrant)
+                : "59, 130, 246"; // Blue for light mode
+
+            // Update and draw molecules
+            this.molecules.forEach((molecule) => {
+                molecule.x += molecule.vx;
+                molecule.y += molecule.vy;
+
+                // Bounce off edges
+                if (molecule.x <= 0 || molecule.x >= this.canvas.width)
+                    molecule.vx *= -1;
+                if (molecule.y <= 0 || molecule.y >= this.canvas.height)
+                    molecule.vy *= -1;
+
+                // Draw molecule
+                this.ctx.beginPath();
+                this.ctx.arc(
+                    molecule.x,
+                    molecule.y,
+                    molecule.radius,
+                    0,
+                    Math.PI * 2,
+                );
+                this.ctx.fillStyle = `rgba(${baseColor}, ${molecule.opacity})`;
+                this.ctx.fill();
+            });
+
+            // Draw connections
+            this.molecules.forEach((mol1, i) => {
+                this.molecules.slice(i + 1).forEach((mol2) => {
+                    const dx = mol1.x - mol2.x;
+                    const dy = mol1.y - mol2.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 150) {
+                        this.ctx.beginPath();
+                        this.ctx.moveTo(mol1.x, mol1.y);
+                        this.ctx.lineTo(mol2.x, mol2.y);
+                        this.ctx.strokeStyle = `rgba(${baseColor}, ${(1 - distance / 150) * 0.2})`;
+                        this.ctx.stroke();
+                    }
+                });
+            });
+
+            this.animationFrame = requestAnimationFrame(this.animate);
+        };
+
+        public destroy(): void {
+            cancelAnimationFrame(this.animationFrame);
+            window.removeEventListener("resize", () => this.handleResize());
+        }
+    }
+
+    // Initialize on page load
+    document.addEventListener("DOMContentLoaded", () => {
+        const canvas = document.getElementById(
+            "molecule-canvas",
+        ) as HTMLCanvasElement;
+        if (canvas) {
+            new MoleculeBackground(canvas);
+        }
+    });
+</script>

@@ -1,5 +1,6 @@
 ---
 // Hero Component - Flagship Product Style
+import MoleculeBackground from './MoleculeBackground.astro';
 
 // Fetch UI samples from API
 interface UISample {
@@ -35,6 +36,9 @@ try {
 ---
 
 <section class="hero">
+    <!-- Animated Molecule Background -->
+    <MoleculeBackground />
+    
     <div class="container">
         <div class="hero-content">
             <!-- Headline -->
@@ -159,6 +163,8 @@ try {
     }
 
     .hero-content {
+        position: relative;
+        z-index: 1;
         display: flex;
         flex-direction: column;
         align-items: center;
