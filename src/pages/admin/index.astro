@@ -1,0 +1,27 @@
+---
+// Admin index - redirects to login or dashboard
+---
+
+<script is:inline>
+    // Check if user is authenticated
+    const token = localStorage.getItem("admin_token");
+
+    if (token) {
+        // If authenticated, redirect to dashboard
+        window.location.href = "/admin/dashboard";
+    } else {
+        // If not authenticated, redirect to login
+        window.location.href = "/admin/login";
+    }
+</script>
+
+<html lang="id">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Redirecting...</title>
+    </head>
+    <body>
+        <p>Redirecting...</p>
+    </body>
+</html>

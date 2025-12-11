@@ -1,0 +1,431 @@
+---
+// Admin Dashboard Home
+import DashboardLayout from "../../layouts/DashboardLayout.astro";
+
+// Get API base URL
+const API_BASE_URL = import.meta.env.PUBLIC_API_BASE_URL;
+---
+
+<DashboardLayout title="Dashboard - Orion OS Admin">
+    <div class="dashboard-home">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1 class="page-title">Dashboard</h1>
+            <p class="page-subtitle">
+                Welcome back! Here's what's happening with Orion OS.
+            </p>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon devices">
+                    <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                    >
+                        <rect x="5" y="2" width="14" height="20" rx="2" ry="2"
+                        ></rect>
+                        <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                    </svg>
+                </div>
+                <div class="stat-content">
+                    <p class="stat-label">Total Devices</p>
+                    <p class="stat-value" id="totalDevices">-</p>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon developers">
+                    <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                    >
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"
+                        ></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                </div>
+                <div class="stat-content">
+                    <p class="stat-label">Developers</p>
+                    <p class="stat-value" id="totalDevelopers">-</p>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon ui-samples">
+                    <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                    >
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"
+                        ></rect>
+                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                        <polyline points="21 15 16 10 5 21"></polyline>
+                    </svg>
+                </div>
+                <div class="stat-content">
+                    <p class="stat-label">UI Samples</p>
+                    <p class="stat-value" id="totalUiSamples">-</p>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon changelogs">
+                    <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                    >
+                        <path
+                            d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+                        ></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                    </svg>
+                </div>
+                <div class="stat-content">
+                    <p class="stat-label">Changelogs</p>
+                    <p class="stat-value" id="totalChangelogs">-</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="section">
+            <h2 class="section-title">Quick Actions</h2>
+            <div class="actions-grid">
+                <a href="/admin/devices" class="action-card">
+                    <svg
+                        class="action-icon"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                    >
+                        <rect x="5" y="2" width="14" height="20" rx="2" ry="2"
+                        ></rect>
+                        <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                    </svg>
+                    <h3 class="action-title">Manage Devices</h3>
+                    <p class="action-description">
+                        Add, edit, or remove supported devices
+                    </p>
+                </a>
+
+                <a href="/admin/developers" class="action-card">
+                    <svg
+                        class="action-icon"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                    >
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"
+                        ></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                    <h3 class="action-title">Manage Developers</h3>
+                    <p class="action-description">
+                        Add or update developer information
+                    </p>
+                </a>
+
+                <a href="/admin/ui-samples" class="action-card">
+                    <svg
+                        class="action-icon"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                    >
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"
+                        ></rect>
+                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                        <polyline points="21 15 16 10 5 21"></polyline>
+                    </svg>
+                    <h3 class="action-title">Upload UI Samples</h3>
+                    <p class="action-description">Add new UI screenshots</p>
+                </a>
+
+                <a href="/admin/changelogs" class="action-card">
+                    <svg
+                        class="action-icon"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                    >
+                        <path
+                            d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+                        ></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                    </svg>
+                    <h3 class="action-title">Publish Changelog</h3>
+                    <p class="action-description">Create new release notes</p>
+                </a>
+            </div>
+        </div>
+    </div>
+</DashboardLayout>
+
+<style>
+    .dashboard-home {
+        max-width: 1400px;
+    }
+
+    /* ============================================
+     PAGE HEADER
+     ============================================ */
+    .page-header {
+        margin-bottom: 2rem;
+    }
+
+    .page-title {
+        font-size: 2rem;
+        font-weight: 800;
+        color: var(--color-text-primary);
+        margin: 0 0 0.5rem 0;
+    }
+
+    .page-subtitle {
+        font-size: 1rem;
+        color: var(--color-text-secondary);
+        margin: 0;
+    }
+
+    /* ============================================
+     STATS GRID
+     ============================================ */
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 3rem;
+    }
+
+    .stat-card {
+        background: var(--color-bg-secondary);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-xl);
+        padding: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        transition: all var(--transition-base);
+    }
+
+    .stat-card:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-lg);
+    }
+
+    .stat-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: var(--radius-lg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    .stat-icon.devices {
+        background: rgba(99, 102, 241, 0.1);
+        color: var(--color-orion);
+    }
+
+    .stat-icon.developers {
+        background: rgba(16, 185, 129, 0.1);
+        color: #10b981;
+    }
+
+    .stat-icon.ui-samples {
+        background: rgba(245, 158, 11, 0.1);
+        color: #f59e0b;
+    }
+
+    .stat-icon.changelogs {
+        background: rgba(236, 72, 153, 0.1);
+        color: #ec4899;
+    }
+
+    .stat-content {
+        flex: 1;
+    }
+
+    .stat-label {
+        font-size: 0.875rem;
+        color: var(--color-text-secondary);
+        margin: 0 0 0.25rem 0;
+    }
+
+    .stat-value {
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: var(--color-text-primary);
+        margin: 0;
+    }
+
+    /* ============================================
+     SECTION
+     ============================================ */
+    .section {
+        margin-bottom: 3rem;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--color-text-primary);
+        margin: 0 0 1.5rem 0;
+    }
+
+    /* ============================================
+     ACTIONS GRID
+     ============================================ */
+    .actions-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .action-card {
+        background: var(--color-bg-secondary);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-xl);
+        padding: 1.5rem;
+        text-decoration: none;
+        transition: all var(--transition-base);
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .action-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-xl);
+        border-color: var(--color-orion);
+    }
+
+    .action-icon {
+        width: 48px;
+        height: 48px;
+        padding: 12px;
+        background: rgba(99, 102, 241, 0.1);
+        color: var(--color-orion);
+        border-radius: var(--radius-lg);
+    }
+
+    .action-title {
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: var(--color-text-primary);
+        margin: 0;
+    }
+
+    .action-description {
+        font-size: 0.875rem;
+        color: var(--color-text-secondary);
+        margin: 0;
+        line-height: 1.5;
+    }
+
+    /* ============================================
+     RESPONSIVE
+     ============================================ */
+    @media (max-width: 768px) {
+        .page-title {
+            font-size: 1.5rem;
+        }
+
+        .stats-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .actions-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+<script define:vars={{ API_BASE_URL }}>
+    // Fetch dashboard stats
+    async function fetchStats() {
+        const token = localStorage.getItem("admin_token");
+
+        if (!token) {
+            window.location.href = "/admin/login";
+            return;
+        }
+
+        try {
+            // Fetch devices count
+            const devicesRes = await fetch(`${API_BASE_URL}/devices`);
+            const devicesData = await devicesRes.json();
+            if (devicesData.success) {
+                document.getElementById("totalDevices").textContent =
+                    devicesData.data.length;
+            }
+
+            // Fetch developers count
+            const devsRes = await fetch(`${API_BASE_URL}/developers`);
+            const devsData = await devsRes.json();
+            if (devsData.success) {
+                document.getElementById("totalDevelopers").textContent =
+                    devsData.data.length;
+            }
+
+            // Fetch UI samples count
+            const uiRes = await fetch(`${API_BASE_URL}/ui-samples`);
+            const uiData = await uiRes.json();
+            if (uiData.success) {
+                document.getElementById("totalUiSamples").textContent =
+                    uiData.data.length;
+            }
+
+            // Fetch changelogs count
+            const changelogsRes = await fetch(`${API_BASE_URL}/changelogs`);
+            const changelogsData = await changelogsRes.json();
+            if (changelogsData.success) {
+                document.getElementById("totalChangelogs").textContent =
+                    changelogsData.data.length;
+            }
+        } catch (error) {
+            console.error("Error fetching stats:", error);
+        }
+    }
+
+    // Load stats on page load
+    fetchStats();
+</script>
