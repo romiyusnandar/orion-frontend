@@ -99,6 +99,32 @@ import Layout from "../layouts/Layout.astro";
         </div>
     </section>
 
+    <!-- Indonesian Pride Section -->
+    <section class="indonesian-pride-section scroll-reveal" id="country">
+        <div class="container">
+            <div class="indonesian-card">
+                <!-- ID Flag Icon -->
+                <div class="id-flag-icon">
+                    <div class="flag-top"></div>
+                    <div class="flag-bottom"></div>
+                </div>
+
+                <h2 class="indonesian-title">
+                    Proudly <span class="text-red">Indonesian</span>
+                    <span class="id-badge">ID</span>
+                </h2>
+
+                <p class="indonesian-text">
+                    OrionOS is developed by a passionate team of Indonesian
+                    developers who believe in creating world-class technology
+                    solutions from Indonesia. We are committed to showcasing
+                    Indonesian talent in the global open-source community while
+                    providing the best Android experience for users worldwide.
+                </p>
+            </div>
+        </div>
+    </section>
+
     <!-- Donation Section -->
     <section class="donation-section" id="donation">
         <div class="container">
@@ -426,6 +452,105 @@ import Layout from "../layouts/Layout.astro";
 
     .story-item:hover .story-img {
         transform: scale(1.02);
+    }
+
+    /* ============================================
+     INDONESIAN PRIDE SECTION
+     ============================================ */
+    .indonesian-pride-section {
+        padding: 6rem 0;
+        background: var(--color-bg-primary);
+    }
+
+    .indonesian-card {
+        background: var(--color-bg-secondary);
+        border-radius: var(--radius-2xl);
+        padding: 4rem 2rem;
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto;
+        border: 1px solid var(--color-border);
+        box-shadow: var(--shadow-lg);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .indonesian-card::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(
+            circle,
+            rgba(255, 50, 50, 0.08) 0%,
+            rgba(0, 0, 0, 0) 70%
+        );
+        pointer-events: none;
+    }
+
+    .id-flag-icon {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        margin: 0 auto 2rem;
+        overflow: hidden;
+        box-shadow: var(--shadow-md);
+        position: relative;
+        background: white;
+        border: 1px solid var(--color-border);
+    }
+
+    .flag-top {
+        height: 50%;
+        width: 100%;
+        background: #ff0000;
+    }
+
+    .flag-bottom {
+        height: 50%;
+        width: 100%;
+        background: #ffffff;
+    }
+
+    .indonesian-title {
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 800;
+        color: var(--color-text-primary);
+        margin-bottom: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+        letter-spacing: -0.02em;
+    }
+
+    .text-red {
+        color: #ef4444;
+    }
+
+    .id-badge {
+        background: var(--color-bg-tertiary);
+        border-radius: 8px;
+        padding: 0.25rem 0.6rem;
+        font-size: 1.25rem;
+        font-weight: 800;
+        color: var(--color-text-primary);
+        vertical-align: middle;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        border: 1px solid var(--color-border);
+    }
+
+    .indonesian-text {
+        font-size: clamp(1.125rem, 2vw, 1.25rem);
+        line-height: 1.8;
+        color: var(--color-text-secondary);
+        max-width: 90%;
+        margin: 0 auto;
     }
 
     /* ============================================
