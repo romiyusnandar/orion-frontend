@@ -380,9 +380,33 @@ const API_BASE_URL = import.meta.env.PUBLIC_API_BASE_URL;
 </style>
 
 <script define:vars={{ API_BASE_URL }}>
+    // Check user role - only admins can access dashboard
+    (function () {
+        const authUser = localStorage.getItem("auth_user");
+        if (authUser) {
+            try {
+                const user = JSON.parse(authUser);
+                const adminRoles = ["ADMIN", "FOUNDER", "CO_FOUNDER"];
+
+                // If not admin, redirect to contributor dashboard
+                if (!adminRoles.includes(user.role)) {
+                    window.location.href = "/admin/contributor";
+                    return;
+                }
+            } catch (error) {
+                console.error("Error checking user role:", error);
+                window.location.href = "/admin/login";
+                return;
+            }
+        } else {
+            window.location.href = "/admin/login";
+            return;
+        }
+    })();
+
     // Fetch dashboard stats
     async function fetchStats() {
-        const token = localStorage.getItem("admin_token");
+        const token = localStorage.getItem("auth_token");
 
         if (!token) {
             window.location.href = "/admin/login";

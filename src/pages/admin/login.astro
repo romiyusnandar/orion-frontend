@@ -8,7 +8,7 @@ import Layout from "../../layouts/Layout.astro";
     <script is:inline>
         // If user already has token, redirect to dashboard
         (function () {
-            const token = localStorage.getItem("admin_token");
+            const token = localStorage.getItem("auth_token");
             if (token) {
                 window.location.href = "/admin/dashboard";
             }
@@ -41,7 +41,7 @@ import Layout from "../../layouts/Layout.astro";
                                 id="email"
                                 name="email"
                                 class="form-input"
-                                placeholder="email@orionos.com"
+                                placeholder="account@email.com"
                                 required
                                 autocomplete="email"
                             />
@@ -370,14 +370,23 @@ import Layout from "../../layouts/Layout.astro";
 
             if (response.ok && data.success) {
                 // Store token in localStorage
-                localStorage.setItem("admin_token", data.data.token);
+                localStorage.setItem("auth_token", data.data.token);
                 localStorage.setItem(
-                    "admin_user",
+                    "auth_user",
                     JSON.stringify(data.data.user),
                 );
 
-                // Redirect to dashboard
-                window.location.href = "/admin/dashboard";
+                // Check user role and redirect accordingly
+                const userRole = data.data.user.role;
+                const adminRoles = ["ADMIN", "FOUNDER", "CO_FOUNDER"];
+
+                if (adminRoles.includes(userRole)) {
+                    // Full admin access - redirect to dashboard
+                    window.location.href = "/admin/dashboard";
+                } else {
+                    // Limited access - redirect to limited dashboard
+                    window.location.href = "/admin/contributor";
+                }
             } else {
                 // Show error
                 errorMessage.textContent =

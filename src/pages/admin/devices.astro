@@ -167,7 +167,6 @@ const API_BASE_URL = import.meta.env.PUBLIC_API_BASE_URL;
                                 type="text"
                                 id="deviceCodename"
                                 name="codename"
-                                required
                                 placeholder="e.g., tissot"
                             />
                         </div>
@@ -178,7 +177,6 @@ const API_BASE_URL = import.meta.env.PUBLIC_API_BASE_URL;
                             type="url"
                             id="deviceImage"
                             name="image"
-                            required
                             placeholder="https://example.com/image.jpg"
                         />
                     </div>
@@ -211,7 +209,7 @@ const API_BASE_URL = import.meta.env.PUBLIC_API_BASE_URL;
                             type="url"
                             id="flashInstruction"
                             name="flashInstruction"
-                            placeholder="https://example.com/flash-guide (optional)"
+                            placeholder="https://example.com/flash-guide"
                         />
                     </div>
                     <div
@@ -925,6 +923,13 @@ const API_BASE_URL = import.meta.env.PUBLIC_API_BASE_URL;
     }
 
     /* ============================================
+     CONTRIBUTOR MODE
+     ============================================ */
+    body.contributor-mode .btn-action.delete {
+        display: none !important;
+    }
+
+    /* ============================================
      TOAST NOTIFICATION
      ============================================ */
     .toast {
@@ -1044,7 +1049,37 @@ const API_BASE_URL = import.meta.env.PUBLIC_API_BASE_URL;
         const emptyState = document.getElementById("emptyState");
 
         try {
-            const response = await fetch(`${API_BASE_URL}/devices`);
+            // Get user role to determine endpoint
+            const authUser = localStorage.getItem("auth_user");
+            const token = localStorage.getItem("auth_token");
+            let user = null;
+            let isAdmin = false;
+
+            if (authUser) {
+                try {
+                    user = JSON.parse(authUser);
+                    const adminRoles = ["ADMIN", "FOUNDER", "CO_FOUNDER"];
+                    isAdmin = adminRoles.includes(user.role);
+                } catch (e) {
+                    console.error("Error parsing user:", e);
+                }
+            }
+
+            // Determine API endpoint based on role
+            const endpoint = isAdmin
+                ? `${API_BASE_URL}/devices`
+                : `${API_BASE_URL}/devices/my/devices`;
+
+            // Prepare fetch options
+            const fetchOptions = isAdmin
+                ? {} // Admin doesn't need auth for /devices
+                : {
+                      headers: {
+                          Authorization: `Bearer ${token}`,
+                      },
+                  };
+
+            const response = await fetch(endpoint, fetchOptions);
             const data = await response.json();
 
             if (data.success && data.data && data.data.length > 0) {
@@ -1084,12 +1119,18 @@ const API_BASE_URL = import.meta.env.PUBLIC_API_BASE_URL;
                                         <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
                                     </svg>
                                 </button>
+                                ${
+                                    isAdmin
+                                        ? `
                                 <button class="btn-action delete" onclick="deleteDevice('${device.id}', '${device.name}')" title="Delete">
                                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                         <polyline points="3 6 5 6 21 6"></polyline>
                                         <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
                                     </svg>
                                 </button>
+                                `
+                                        : ""
+                                }
                             </div>
                         </td>
                     </tr>
@@ -1269,7 +1310,7 @@ const API_BASE_URL = import.meta.env.PUBLIC_API_BASE_URL;
 
         try {
             // Get token
-            const token = localStorage.getItem("admin_token");
+            const token = localStorage.getItem("auth_token");
             if (!token) {
                 showToast("No authentication token found", "error");
                 return;
@@ -1328,7 +1369,7 @@ const API_BASE_URL = import.meta.env.PUBLIC_API_BASE_URL;
 
         try {
             // Get token
-            const token = localStorage.getItem("admin_token");
+            const token = localStorage.getItem("auth_token");
             if (!token) {
                 throw new Error("No authentication token found");
             }
@@ -1525,4 +1566,31 @@ const API_BASE_URL = import.meta.env.PUBLIC_API_BASE_URL;
 
     // Load devices
     fetchAndStoreDevices();
+
+    // Role-based button visibility
+    (function () {
+        const authUser = localStorage.getItem("auth_user");
+        if (authUser) {
+            try {
+                const user = JSON.parse(authUser);
+                const adminRoles = ["ADMIN", "FOUNDER", "CO_FOUNDER"];
+                const isAdmin = adminRoles.includes(user.role);
+
+                if (!isAdmin) {
+                    // Hide Add Device button for contributors
+                    const addDeviceBtn =
+                        document.getElementById("addDeviceBtn");
+                    if (addDeviceBtn) {
+                        addDeviceBtn.style.display = "none";
+                    }
+
+                    // Note: Delete buttons will be hidden via CSS when rendered
+                    // We'll add a class to body to control this
+                    document.body.classList.add("contributor-mode");
+                }
+            } catch (e) {
+                console.error("Error checking user role:", e);
+            }
+        }
+    })();
 </script>
