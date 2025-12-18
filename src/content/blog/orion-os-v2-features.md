@@ -1,20 +1,20 @@
 ---
-title: "Fitur Terbaru Orion OS v2.0"
-description: "Kenali fitur-fitur baru yang hadir di Orion OS versi 2.0 yang membuat pengalaman pengguna semakin maksimal."
+title: "Orion OS v2.0 New Features"
+description: "Discover the amazing new features in Orion OS version 2.0 that maximize the user experience."
 pubDate: 2025-12-10
 author: "Orion OS Team"
 tags: ["update", "features", "v2.0"]
 ---
 
-# Fitur Terbaru Orion OS v2.0 🚀
+# Orion OS v2.0 New Features 🚀
 
-Kami dengan bangga mempersembahkan Orion OS v2.0 dengan berbagai fitur baru yang menakjubkan!
+We're proud to present Orion OS v2.0 with amazing new features!
 
-## Apa yang Baru?
+## What's New?
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 
-### 1. UI/UX yang Lebih Modern
+### 1. More Modern UI/UX
 
 Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
@@ -24,7 +24,7 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
 - Customizable Themes
 - Dynamic Color Palette
 
-### 2. Performa yang Lebih Cepat
+### 2. Faster Performance
 
 Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
 
@@ -32,7 +32,7 @@ Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dolor
 
 Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
 
-> Dengan optimasi kernel terbaru, battery life meningkat hingga 30%!
+> With the latest kernel optimization, battery life increased up to 30%!
 
 ### 4. Gaming Mode
 
@@ -42,7 +42,7 @@ At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praese
 
 Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus.
 
-## Peningkatan Performa
+## Performance Improvements
 
 Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae.
 
@@ -54,19 +54,19 @@ Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saep
 | Geekbench | 2800 | 3200 | +14.3% |
 | 3DMark | 4500 | 5100 | +13.3% |
 
-## Cara Update
+## How to Update
 
 Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.
 
-1. Download ROM terbaru dari website resmi
-2. Backup data Anda
-3. Boot ke recovery mode
-4. Flash ROM baru
+1. Download the latest ROM from the official website
+2. Backup your data
+3. Boot to recovery mode
+4. Flash the new ROM
 5. Wipe cache
 6. Reboot
 
-## Feedback Komunitas
+## Community Feedback
 
 Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur.
 
-Terima kasih kepada semua yang telah memberikan feedback dan kontribusi untuk membuat Orion OS v2.0 menjadi kenyataan! 💙
+Thank you to everyone who provided feedback and contributions to make Orion OS v2.0 a reality! 💙
