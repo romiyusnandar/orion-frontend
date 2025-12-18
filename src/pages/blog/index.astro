@@ -1,0 +1,184 @@
+---
+export const prerender = true; // Pre-render halaman ini meskipun output: 'server'
+
+import Layout from "../../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+// Ambil semua postingan blog dan urutkan berdasarkan tanggal (terbaru di atas)
+const allPosts = await getCollection("blog");
+const sortedPosts = allPosts.sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+// Format tanggal
+function formatDate(date: Date): string {
+    return new Intl.DateTimeFormat("id-ID", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+    }).format(date);
+}
+---
+
+<Layout
+    title="Blog - Orion OS"
+    description="Temukan artikel, tutorial, dan berita terbaru seputar Orion OS"
+>
+    <main class="min-h-screen bg-white dark:bg-gray-950">
+        <!-- Hero Section -->
+        <section class="section bg-gradient-to-br from-blue-50 via-cyan-50 to-white dark:from-gray-900 dark:via-blue-950 dark:to-gray-950">
+            <div class="container mx-auto px-6 text-center">
+                <div class="max-w-3xl mx-auto space-y-6">
+                    <!-- Badge -->
+                    <div class="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-full text-sm font-semibold">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                        </svg>
+                        Blog Orion OS
+                    </div>
+
+                    <!-- Title -->
+                    <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-white leading-tight">
+                        Artikel & <span class="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">Berita</span>
+                    </h1>
+
+                    <!-- Description -->
+                    <p class="text-xl text-gray-600 dark:text-gray-400 leading-relaxed">
+                        Temukan update terbaru, tutorial mendalam, dan berita seputar ekosistem Orion OS
+                    </p>
+
+                    <!-- Stats -->
+                    <div class="flex items-center justify-center gap-8 pt-4">
+                        <div class="text-center">
+                            <p class="text-3xl font-bold text-gray-900 dark:text-white">{sortedPosts.length}</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Artikel</p>
+                        </div>
+                        <div class="w-px h-12 bg-gray-300 dark:bg-gray-700"></div>
+                        <div class="text-center">
+                            <p class="text-3xl font-bold text-gray-900 dark:text-white">∞</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Inspirasi</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blog Posts Grid -->
+        <section class="section">
+            <div class="container mx-auto px-6">
+                {sortedPosts.length === 0 ? (
+                    <!-- Empty State -->
+                    <div class="text-center py-20">
+                        <div class="w-24 h-24 mx-auto mb-6 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
+                            <svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                        </div>
+                        <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Belum Ada Artikel</h2>
+                        <p class="text-gray-600 dark:text-gray-400">Artikel pertama akan segera hadir!</p>
+                    </div>
+                ) : (
+                    <!-- Posts Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {sortedPosts.map((post) => (
+                            <article class="group bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 overflow-hidden hover:shadow-2xl hover:shadow-blue-500/10 dark:hover:shadow-blue-500/20 transition-all duration-300 hover:-translate-y-1">
+                                <a href={`/blog/${post.slug}`} class="block">
+                                    <!-- Image Placeholder or Actual Image -->
+                                    {post.data.image ? (
+                                        <div class="aspect-video overflow-hidden">
+                                            <img
+                                                src={post.data.image.src}
+                                                alt={post.data.title}
+                                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                            />
+                                        </div>
+                                    ) : (
+                                        <div class="aspect-video bg-gradient-to-br from-blue-500 via-cyan-500 to-blue-600 flex items-center justify-center relative overflow-hidden">
+                                            <!-- Decorative Pattern -->
+                                            <div class="absolute inset-0 opacity-20">
+                                                <div class="absolute top-0 left-0 w-40 h-40 bg-white rounded-full -translate-x-1/2 -translate-y-1/2"></div>
+                                                <div class="absolute bottom-0 right-0 w-60 h-60 bg-white rounded-full translate-x-1/3 translate-y-1/3"></div>
+                                            </div>
+                                            <!-- Icon -->
+                                            <svg class="w-20 h-20 text-white relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                                            </svg>
+                                        </div>
+                                    )}
+
+                                    <!-- Content -->
+                                    <div class="p-6 space-y-4">
+                                        <!-- Tags -->
+                                        {post.data.tags && post.data.tags.length > 0 && (
+                                            <div class="flex flex-wrap gap-2">
+                                                {post.data.tags.slice(0, 2).map((tag) => (
+                                                    <span class="px-3 py-1 text-xs font-medium bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-full">
+                                                        #{tag}
+                                                    </span>
+                                                ))}
+                                                {post.data.tags.length > 2 && (
+                                                    <span class="px-3 py-1 text-xs font-medium bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 rounded-full">
+                                                        +{post.data.tags.length - 2}
+                                                    </span>
+                                                )}
+                                            </div>
+                                        )}
+
+                                        <!-- Title -->
+                                        <h2 class="text-2xl font-bold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-2">
+                                            {post.data.title}
+                                        </h2>
+
+                                        <!-- Description -->
+                                        <p class="text-gray-600 dark:text-gray-400 line-clamp-3 leading-relaxed">
+                                            {post.data.description}
+                                        </p>
+
+                                        <!-- Meta -->
+                                        <div class="flex items-center gap-3 pt-4 border-t border-gray-200 dark:border-gray-800">
+                                            <!-- Author Avatar -->
+                                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center flex-shrink-0">
+                                                <span class="text-white font-bold text-sm">
+                                                    {post.data.author.charAt(0)}
+                                                </span>
+                                            </div>
+
+                                            <div class="flex-1 min-w-0">
+                                                <p class="font-semibold text-gray-900 dark:text-white text-sm truncate">
+                                                    {post.data.author}
+                                                </p>
+                                                <time
+                                                    datetime={post.data.pubDate.toISOString()}
+                                                    class="text-xs text-gray-500 dark:text-gray-400"
+                                                >
+                                                    {formatDate(post.data.pubDate)}
+                                                </time>
+                                            </div>
+
+                                            <!-- Arrow Icon -->
+                                            <svg class="w-5 h-5 text-blue-600 dark:text-blue-400 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </a>
+                            </article>
+                        ))}
+                    </div>
+                )}
+            </div>
+        </section>
+    </main>
+</Layout>
+
+<style>
+    .section {
+        padding: 5rem 0;
+    }
+
+    @media (max-width: 768px) {
+        .section {
+            padding: 3rem 0;
+        }
+    }
+</style>
