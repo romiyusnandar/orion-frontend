@@ -220,8 +220,7 @@ function formatDate(date: Date): string {
      ============================================ */
     .article-page {
         background: var(--color-bg-primary);
-        padding: calc(var(--spacing-section-y) + 72px) 0
-            var(--spacing-section-y);
+        padding: calc(var(--spacing-section-y)) 0 var(--spacing-section-y);
         min-height: 100vh;
     }
 
@@ -451,7 +450,7 @@ function formatDate(date: Date): string {
     .article-content :global(li) {
         font-size: var(--font-size-lg);
         line-height: 1.8;
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.75rem;
     }
 
     .article-content :global(ul li)::marker {
@@ -461,6 +460,44 @@ function formatDate(date: Date): string {
     .article-content :global(ol li)::marker {
         color: var(--color-orion);
         font-weight: 700;
+    }
+
+    /* Checkbox list styling */
+    .article-content :global(ul li:has(input[type="checkbox"])) {
+        list-style-type: none;
+        padding-left: 0;
+        display: flex;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+
+    .article-content :global(input[type="checkbox"]) {
+        appearance: none;
+        width: 1.25rem;
+        height: 1.25rem;
+        border: 2px solid var(--color-orion);
+        border-radius: 4px;
+        background: transparent;
+        cursor: default;
+        position: relative;
+        top: 0.25rem;
+        flex-shrink: 0;
+    }
+
+    .article-content :global(input[type="checkbox"]:checked) {
+        background: var(--color-orion);
+    }
+
+    .article-content :global(input[type="checkbox"]:checked::after) {
+        content: "";
+        position: absolute;
+        left: 6px;
+        top: 2px;
+        width: 5px;
+        height: 10px;
+        border: solid white;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
     }
 
     /* Code */
@@ -522,26 +559,42 @@ function formatDate(date: Date): string {
     /* Tables */
     .article-content :global(table) {
         width: 100%;
-        border-collapse: collapse;
-        margin: 2rem 0;
+        border-collapse: separate;
+        border-spacing: 0;
+        margin: 3rem 0;
         font-size: var(--font-size-base);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-lg);
+        overflow: hidden;
     }
 
     .article-content :global(th),
     .article-content :global(td) {
-        padding: 0.75rem 1rem;
-        border: 1px solid var(--color-border);
+        padding: 1rem 1.25rem;
+        border-bottom: 1px solid var(--color-border);
         text-align: left;
+    }
+
+    .article-content :global(tr:last-child td) {
+        border-bottom: none;
     }
 
     .article-content :global(th) {
         background: var(--color-bg-secondary);
         font-weight: 700;
         color: var(--color-text-primary);
+        font-size: var(--font-size-sm);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
     }
 
     .article-content :global(td) {
         color: var(--color-text-secondary);
+        background: var(--color-bg-primary);
+    }
+
+    .article-content :global(tbody tr:hover td) {
+        background: var(--color-bg-secondary);
     }
 
     /* ============================================

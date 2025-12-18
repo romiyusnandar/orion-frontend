@@ -34,7 +34,6 @@ function formatDate(date: Date): string {
                 <p class="hero-subheadline">
                     Discover the latest updates, in-depth tutorials, and news about the Orion OS ecosystem
                 </p>
-                <div class="hero-separator"></div>
             </div>
         </div>
     </section>
@@ -160,6 +159,13 @@ function formatDate(date: Date): string {
             )}
         </div>
     </section>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"></path>
+        </svg>
+    </button>
 </Layout>
 
 <script>
@@ -240,6 +246,28 @@ function formatDate(date: Date): string {
                 searchInput.focus();
             });
         }
+
+        // Back to Top Button
+        const backToTopButton = document.getElementById("back-to-top") as HTMLButtonElement;
+        
+        if (backToTopButton) {
+            // Show/hide button based on scroll position
+            window.addEventListener("scroll", () => {
+                if (window.scrollY > 300) {
+                    backToTopButton.classList.add("visible");
+                } else {
+                    backToTopButton.classList.remove("visible");
+                }
+            });
+
+            // Scroll to top when clicked
+            backToTopButton.addEventListener("click", () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
+            });
+        }
     });
 </script>
 
@@ -249,8 +277,8 @@ function formatDate(date: Date): string {
      ============================================ */
     .blog-hero {
         background: var(--color-bg-primary);
-        padding: calc(var(--spacing-section-y) + 72px) 0 var(--spacing-section-y);
-        min-height: 60vh;
+        padding: calc(var(--spacing-section-y) + 40px) 0 2rem;
+        min-height: auto;
         display: flex;
         align-items: center;
     }
@@ -284,14 +312,6 @@ function formatDate(date: Date): string {
         font-weight: 400;
     }
 
-    .hero-separator {
-        width: 4px;
-        height: 80px;
-        background: var(--color-orion);
-        margin: 0 auto;
-        border-radius: 2px;
-    }
-
     @keyframes fadeIn {
         from {
             opacity: 0;
@@ -308,7 +328,7 @@ function formatDate(date: Date): string {
      ============================================ */
     .search-section {
         background: var(--color-bg-primary);
-        padding: 3rem 0;
+        padding: 2rem 0;
         border-bottom: 1px solid var(--color-border);
     }
 
@@ -397,7 +417,7 @@ function formatDate(date: Date): string {
      ============================================ */
     .blog-section {
         background: var(--color-bg-primary);
-        padding: 6rem 0;
+        padding: 3rem 0 6rem;
     }
 
     /* ============================================
@@ -675,17 +695,87 @@ function formatDate(date: Date): string {
      ============================================ */
     @media (max-width: 768px) {
         .blog-hero {
-            min-height: 50vh;
+            padding: calc(var(--spacing-section-y-mobile) + 40px) 0 1.5rem;
         }
 
-        .hero-separator {
-            height: 60px;
+        .search-section {
+            padding: 1.5rem 0;
         }
 
         .blog-section {
-            padding: 3rem 0;
+            padding: 2rem 0 4rem;
+        }
+
+        .back-to-top {
+            width: 48px;
+            height: 48px;
         }
     }
+
+    /* ============================================
+     BACK TO TOP BUTTON
+     ============================================ */
+    .back-to-top {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        width: 56px;
+        height: 56px;
+        background: var(--color-orion);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: var(--shadow-xl);
+        transition: all var(--transition-base);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(100px);
+        z-index: 999;
+    }
+
+    .back-to-top.visible {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    .back-to-top:hover {
+        background: #4a5fd9;
+        transform: translateY(-4px);
+        box-shadow: 0 12px 24px rgba(99, 102, 241, 0.3);
+    }
+
+    .back-to-top:active {
+        transform: translateY(-2px);
+    }
+
+    .back-to-top svg {
+        transition: transform var(--transition-base);
+    }
+
+    .back-to-top:hover svg {
+        transform: translateY(-2px);
+    }
+
+    /* ============================================
+     RESPONSIVE
+     ============================================ */
+    @media (max-width: 768px) {
+        .blog-hero {
+            padding: calc(var(--spacing-section-y-mobile) + 40px) 0 1.5rem;
+        }
+
+        .search-section {
+            padding: 1.5rem 0;
+        }
+
+        .blog-section {
+            padding: 2rem 0 4rem;
+        }
 
     /* ============================================
      REDUCED MOTION
@@ -707,6 +797,13 @@ function formatDate(date: Date): string {
             opacity: 1;
             transform: none;
             transition: none;
+        }
+
+        .back-to-top,
+        .back-to-top:hover,
+        .back-to-top svg {
+            transform: none;
+            transition: opacity var(--transition-base);
         }
     }
 </style>
