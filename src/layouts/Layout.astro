@@ -6,12 +6,22 @@ import Footer from "../components/Footer.astro";
 interface Props {
     title?: string;
     description?: string;
+    image?: string;
+    url?: string;
 }
 
 const {
     title = "Orion OS - Premium Custom ROM Experience",
     description = "Experience the next generation of Android with Orion OS. A premium, minimalist custom ROM designed for performance and elegance.",
+    image = "/orion-lg.png",
+    url = Astro.url.href,
 } = Astro.props;
+
+// Ensure absolute image URL
+const siteUrl = Astro.site
+    ? Astro.site.href.replace(/\/$/, "")
+    : "https://orionos.tech";
+const ogImage = image.startsWith("http") ? image : `${siteUrl}${image}`;
 ---
 
 <!doctype html>
@@ -31,13 +41,17 @@ const {
 
         <!-- Open Graph / Facebook -->
         <meta property="og:type" content="website" />
+        <meta property="og:url" content={url} />
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
+        <meta property="og:image" content={ogImage} />
 
         <!-- Twitter -->
         <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:url" content={url} />
         <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content={description} />
+        <meta name="twitter:image" content={ogImage} />
 
         <!-- Favicon -->
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />

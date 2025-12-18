@@ -18,11 +18,14 @@ function formatDate(date: Date): string {
         day: "numeric",
     }).format(date);
 }
+const siteUrl = Astro.site ? Astro.site.href.replace(/\/$/, '') : 'https://orionos.tech';
+const canonicalUrl = `${siteUrl}${Astro.url.pathname}`;
 ---
 
 <Layout
     title="Blog - Orion OS"
     description="Discover the latest articles, tutorials, and news about Orion OS"
+    url={canonicalUrl}
 >
     <!-- Hero Section -->
     <section class="blog-hero">

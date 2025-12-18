@@ -29,11 +29,21 @@ function formatDate(date: Date): string {
         day: "numeric",
     }).format(date);
 }
+// Tentukan URL untuk sharing
+const siteUrl = Astro.site
+    ? Astro.site.href.replace(/\/$/, "")
+    : "https://orionos.tech";
+const postUrl = `${siteUrl}${Astro.url.pathname}`;
+const postImage = entry.data.image
+    ? `${siteUrl}${entry.data.image}`
+    : `${siteUrl}/images/og-image.png`;
 ---
 
 <Layout
     title={`${entry.data.title} - Orion OS Blog`}
     description={entry.data.description}
+    image={entry.data.image}
+    url={postUrl}
 >
     <article class="article-page">
         <div class="container">
@@ -135,7 +145,7 @@ function formatDate(date: Date): string {
                         <p class="share-title">Share this article:</p>
                         <div class="share-buttons">
                             <a
-                                href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(entry.data.title)}&url=${encodeURIComponent(Astro.url.href)}`}
+                                href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(entry.data.title)}&url=${encodeURIComponent(postUrl)}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 class="share-button"
@@ -153,7 +163,7 @@ function formatDate(date: Date): string {
                                 </svg>
                             </a>
                             <a
-                                href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(Astro.url.href)}`}
+                                href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(postUrl)}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 class="share-button"
@@ -171,7 +181,7 @@ function formatDate(date: Date): string {
                                 </svg>
                             </a>
                             <a
-                                href={`https://t.me/share/url?url=${encodeURIComponent(Astro.url.href)}&text=${encodeURIComponent(entry.data.title)}`}
+                                href={`https://t.me/share/url?url=${encodeURIComponent(postUrl)}&text=${encodeURIComponent(entry.data.title)}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 class="share-button"
