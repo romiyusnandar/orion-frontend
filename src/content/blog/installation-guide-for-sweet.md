@@ -1,6 +1,6 @@
 ---
 title: "Installation Guide for Sweet"
-description: "Learn how to install Orion OS on your Poco F5 (Marble) with this easy-to-follow step-by-step guide."
+description: "Learn how to install Orion OS on your Redmi Note 10 Pro (Sweet) with this easy-to-follow step-by-step guide."
 pubDate: 2025-12-22
 author: "RyuDev"
 authorImage: "https://i.ibb.co.com/7ytJ7Mw/romiz.jpg"
