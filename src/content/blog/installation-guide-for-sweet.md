@@ -29,9 +29,8 @@ Clean your device partitions to avoid conflicts.
    - Turn off your device.
    - Press and hold `Volume Up + Power` buttons.
 3. **Execute Clean Wipe:**
-   - Go to `Wipe` → `Custom Wipe`
-   - Select: **System, Vendor, Dalvik, Cache, and Data**.
-   - Swipe to confirm.
+   - Format data your devices
+   - Type `yes` to confirm
 
 > **Warning:** This step completely erases your apps and settings. Ensure your backup is safe!
 
