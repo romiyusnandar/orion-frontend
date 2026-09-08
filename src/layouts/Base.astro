@@ -120,11 +120,12 @@ const ogImage = `${base}/og.png`;
       let open = false;
       const setOpen = (v: boolean) => {
         open = v;
-        menu?.classList.toggle('hidden', !v);
+        menu?.classList.toggle('is-open', v);
         toggle?.setAttribute('aria-expanded', String(v));
-        iconMenu?.classList.toggle('hidden', v);
-        iconX?.classList.toggle('hidden', !v);
-        document.body.style.overflow = v ? 'hidden' : '';
+        iconMenu?.classList.toggle('is-shown', !v);
+        iconMenu?.classList.toggle('is-hidden', v);
+        iconX?.classList.toggle('is-shown', v);
+        iconX?.classList.toggle('is-hidden', !v);
       };
       toggle?.addEventListener('click', () => setOpen(!open));
       menu?.addEventListener('click', (e) => {
