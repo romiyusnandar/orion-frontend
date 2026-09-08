@@ -46,6 +46,18 @@
   mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
 }
 
+/* Decorative square grid (kotak-kotak) */
+.bg-grid {
+  background-image:
+    linear-gradient(to right, rgb(79 70 229 / 0.09) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(79 70 229 / 0.09) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+.bg-grid-fade {
+  -webkit-mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, #000 30%, transparent 100%);
+  mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, #000 30%, transparent 100%);
+}
+
 /* Soft animated gradient blobs */
 @keyframes blob-float {
   0%, 100% { transform: translate(0, 0) scale(1); }

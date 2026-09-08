@@ -9,6 +9,7 @@ import { latestChangelog } from '@/data/changelogs';
   <!-- decorative background -->
   <div class="pointer-events-none absolute inset-0 -z-10">
     <div class="absolute inset-0 bg-dots bg-dots-fade"></div>
+    <div class="absolute inset-0 bg-grid bg-grid-fade"></div>
     <div class="absolute -top-24 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-brand-200/40 blur-3xl animate-blob"></div>
     <div class="absolute right-0 top-40 h-64 w-64 rounded-full bg-violet-200/30 blur-3xl animate-blob" style="animation-delay:-7s;"></div>
   </div>
@@ -18,11 +19,11 @@ import { latestChangelog } from '@/data/changelogs';
       <div class="text-center lg:text-left">
         <a
           href="/changelogs"
-          class="inline-flex items-center gap-2 rounded-full border border-brand-200 bg-brand-50 py-1 pl-1.5 pr-3 text-sm font-medium text-brand-700 transition-colors hover:bg-brand-100"
+          class="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full border border-brand-200 bg-brand-50 py-1 pl-1.5 pr-2.5 text-xs font-medium text-brand-700 transition-colors hover:bg-brand-100"
         >
-          <span class="rounded-full bg-brand-600 px-2 py-0.5 text-xs font-semibold text-white">New</span>
-          {latestChangelog.version} {latestChangelog.codename} · Android 16
-          <Icon name="arrow-right" size={15} />
+          <span class="rounded-full bg-brand-600 px-2 py-0.5 text-[11px] font-semibold text-white">New</span>
+          <span>{latestChangelog.version} {latestChangelog.codename} · {latestChangelog.android}</span>
+          <Icon name="arrow-right" size={14} />
         </a>
 
         <h1 class="mt-6 text-4xl font-extrabold leading-[1.05] tracking-tight text-zinc-900 sm:text-5xl lg:text-6xl">
@@ -53,11 +54,11 @@ import { latestChangelog } from '@/data/changelogs';
           </a>
         </div>
 
-        <dl class="mx-auto mt-12 grid max-w-md grid-cols-3 gap-4 lg:mx-0">
+        <dl class="mx-auto mt-12 grid max-w-lg grid-cols-3 gap-4 lg:mx-0">
           {
             stats.map((s) => (
               <div class="text-center lg:text-left">
-                <dt class="text-2xl font-bold tracking-tight text-zinc-900 sm:text-3xl">{s.value}</dt>
+                <dt class="whitespace-nowrap text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">{s.value}</dt>
                 <dd class="mt-1 text-xs font-medium text-zinc-500 sm:text-sm">{s.label}</dd>
               </div>
             ))
