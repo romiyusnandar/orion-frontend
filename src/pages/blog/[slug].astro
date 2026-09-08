@@ -3,6 +3,7 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 import Base from '@/layouts/Base.astro';
 import Avatar from '@/components/Avatar.astro';
 import Icon from '@/components/Icon.astro';
+import { getDeveloper } from '@/data/developers';
 import { site } from '@/data/site';
 
 export async function getStaticPaths() {
@@ -14,6 +15,7 @@ const posts = await getCollection('blog');
 const found = posts.find((p) => p.id === slug);
 if (!found) Astro.redirect('/blog', 301);
 const post = found as CollectionEntry<'blog'>;
+const maintainer = getDeveloper(post.data.author);
 const html = post.rendered?.html ?? '';
 
 const words = post.body?.trim().split(/\s+/).length ?? 0;
@@ -54,7 +56,7 @@ const shareUrl = encodeURIComponent(`${site.url}/blog/${post.id}`);
       </h1>
 
       <div class="mt-6 flex items-center gap-3 border-b border-zinc-100 pb-6">
-        <Avatar name={post.data.author} size={44} />
+        <Avatar name={post.data.author} size={44} src={maintainer?.avatar} />
         <div class="text-sm">
           <p class="font-semibold text-zinc-800">{post.data.author}</p>
           <p class="text-zinc-400">

@@ -64,22 +64,15 @@ const isGapps = build.type === 'GAPPS';
     )
   }
 
-  <div class="mt-5 flex flex-col gap-2.5 border-t border-zinc-100 pt-4 sm:flex-row">
+  <div class="mt-5 flex flex-col gap-2.5 border-t border-zinc-100 pt-4 sm:flex-row sm:justify-end">
     <a
       href={build.url}
       target="_blank"
       rel="noopener noreferrer"
-      class="inline-flex items-center justify-center gap-2 rounded-xl bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-700 active:scale-[0.98]"
+      class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-700 active:scale-[0.98] sm:w-auto"
     >
       <Icon name="download" size={16} />
       Download
-    </a>
-    <a
-      href="/changelogs"
-      class="inline-flex items-center justify-center gap-2 rounded-xl border border-zinc-200 bg-white px-5 py-2.5 text-sm font-semibold text-zinc-700 shadow-sm transition hover:bg-zinc-50"
-    >
-      Changelog
-      <Icon name="arrow-right" size={16} />
     </a>
   </div>
 </article>

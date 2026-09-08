@@ -6,17 +6,26 @@ export interface Developer {
   tier: RoleTier;
   github?: string;
   telegram?: string;
+  avatar?: string;
   devices?: string[];
 }
 
 export const developers: Developer[] = [
-  { name: 'OrionOS Admin', role: 'Admin', tier: 'admin', github: 'https://github.com/orionos', telegram: 'https://t.me/orionos' },
+  {
+    name: 'OrionOS Admin',
+    role: 'Admin',
+    tier: 'admin',
+    github: 'https://github.com/orionos',
+    telegram: 'https://t.me/orionos',
+    avatar: 'https://i.postimg.cc/QN2Bj9Sp/orion-lg.png',
+  },
   {
     name: 'Hirokixd',
     role: 'Founder',
     tier: 'founder',
     github: 'https://github.com/Wrdn28',
     telegram: 'https://t.me/Hirokixd28',
+    avatar: 'https://i.ibb.co.com/X3wQXyb/hiro.jpg',
     devices: ['Redmi Note 8/8T · ginkgo'],
   },
   {
@@ -25,17 +34,33 @@ export const developers: Developer[] = [
     tier: 'founder',
     github: 'https://github.com/romiyusnandar',
     telegram: 'https://t.me/RyuDev21',
+    avatar: 'https://i.ibb.co.com/7ytJ7Mw/romiz.jpg',
     devices: ['Mi A1 · tissot', 'Redmi Note 10 Pro · sweet'],
   },
-  { name: 'Onle', role: 'Core Developer', tier: 'core', github: 'https://github.com/michionle', telegram: 'https://t.me/michionlee' },
+  {
+    name: 'Onle',
+    role: 'Core Developer',
+    tier: 'core',
+    github: 'https://github.com/michionle',
+    telegram: 'https://t.me/michionlee',
+    avatar: 'https://i.ibb.co.com/vYnMZrw/onlee.jpg',
+  },
   { name: 'Michael Pasep', role: 'Group Support', tier: 'support', telegram: 'https://t.me/rynothingspecial' },
-  { name: 'Iverz', role: 'UI/UX Designer', tier: 'design', github: 'https://github.com/asterixiverz', telegram: 'https://t.me/iverzasterix' },
+  {
+    name: 'Iverz',
+    role: 'UI/UX Designer',
+    tier: 'design',
+    github: 'https://github.com/asterixiverz',
+    telegram: 'https://t.me/iverzasterix',
+    avatar: 'https://i.ibb.co.com/GHrSRGW/ivzz-square.jpg',
+  },
   {
     name: 'rohmanurip',
     role: 'Maintainer',
     tier: 'maintainer',
     github: 'https://github.com/rohmanurip',
     telegram: 'https://t.me/haru_sama',
+    avatar: 'https://i.ibb.co.com/RpWYFjTw/photo-4150782744658552786-c.jpg',
     devices: ['Poco F4 · munch'],
   },
   {
@@ -44,6 +69,7 @@ export const developers: Developer[] = [
     tier: 'maintainer',
     github: 'https://github.com/HinohArata',
     telegram: 'https://t.me/xSkyyHinohara',
+    avatar: 'https://i.ibb.co.com/twJHJ2QW/IMG-20251215-090013-529.jpg',
     devices: ['Poco X3 NFC · surya'],
   },
   {
@@ -52,6 +78,7 @@ export const developers: Developer[] = [
     tier: 'maintainer',
     github: 'https://github.com/Jayedkhan800',
     telegram: 'https://t.me/Jayedkhan70',
+    avatar: 'https://i.ibb.co.com/fdpWBs1M/jayedkhan.jpg',
     devices: ['Redmi 9A · blossom'],
   },
   {
@@ -60,6 +87,7 @@ export const developers: Developer[] = [
     tier: 'maintainer',
     github: 'https://github.com/Maulanariaddy',
     telegram: 'https://t.me/Maulanariaddy',
+    avatar: 'https://i.ibb.co.com/HpgbK1Gn/IMG-20251216-103719-947.jpg',
     devices: ['Poco F5 · marble'],
   },
   {
@@ -68,6 +96,7 @@ export const developers: Developer[] = [
     tier: 'maintainer',
     github: 'https://github.com/skenakun',
     telegram: 'https://t.me/Yaseakun',
+    avatar: 'https://i.ibb.co.com/4wnkckYX/IMG-20251216-112848-460.jpg',
     devices: ['Poco F3 · alioth'],
   },
   {
@@ -75,6 +104,7 @@ export const developers: Developer[] = [
     role: 'Maintainer',
     tier: 'maintainer',
     telegram: 'https://t.me/ramshell688',
+    avatar: 'https://i.ibb.co.com/hR4LmDrP/IMG-20251216-205303-577.jpg',
     devices: ['Poco F6 / Redmi Turbo 3 · peridot', 'Poco F7 · onyx'],
   },
   {
@@ -83,6 +113,7 @@ export const developers: Developer[] = [
     tier: 'maintainer',
     github: 'https://github.com/zylhdrXP',
     telegram: 'https://t.me/ZylhdrXP',
+    avatar: 'https://i.ibb.co.com/Y4FtBK11/heydr.jpg',
     devices: ['Redmi Note 13 Pro 5G · garnet'],
   },
   {
@@ -91,6 +122,7 @@ export const developers: Developer[] = [
     tier: 'maintainer',
     github: 'https://github.com/AloozChips',
     telegram: 'https://t.me/AloozChips',
+    avatar: 'https://i.ibb.co.com/S4LjSQ3k/aranya.jpg',
     devices: ['Redmi 10C / 10 Power · fog'],
   },
   {
@@ -99,6 +131,7 @@ export const developers: Developer[] = [
     tier: 'maintainer',
     github: 'https://github.com/kidzz1965',
     telegram: 'https://t.me/kidzz_25',
+    avatar: 'https://i.ibb.co.com/B5bq1yN8/kidzz.jpg',
     devices: ['Poco M3 / Redmi 9T · chime'],
   },
   {
@@ -106,9 +139,14 @@ export const developers: Developer[] = [
     role: 'Maintainer',
     tier: 'maintainer',
     telegram: 'https://t.me/icaninpasar',
+    avatar: 'https://i.ibb.co.com/CsVgKy5x/IMG-20251223-184327-872.jpg',
     devices: ['Asus Zenfone Max Pro M1 · x00td'],
   },
 ];
+
+export function getDeveloper(name: string): Developer | undefined {
+  return developers.find((d) => d.name === name);
+}
 
 const AVATAR_PALETTE = [
   '#4f46e5',

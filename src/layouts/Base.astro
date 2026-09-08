@@ -50,6 +50,8 @@ const ogImage = `${base}/og.png`;
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://sourceforge.net" crossorigin />
+    <link rel="preconnect" href="https://i.ibb.co.com" crossorigin />
+    <link rel="preconnect" href="https://i.postimg.cc" crossorigin />
 
     <script type="application/ld+json" set:html={JSON.stringify({
       '@context': 'https://schema.org',
@@ -99,6 +101,15 @@ const ogImage = `${base}/og.png`;
         const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
       });
+
+      document.addEventListener(
+        'error',
+        (e) => {
+          const t = e.target as HTMLElement | null;
+          if (t?.classList?.contains('avatar-img')) t.remove();
+        },
+        true
+      );
 
       const toggle = document.getElementById('menu-toggle');
       const menu = document.getElementById('mobile-menu');

@@ -5,73 +5,82 @@ import Avatar from '@/components/Avatar.astro';
 import Icon from '@/components/Icon.astro';
 import StatusBadge from '@/components/StatusBadge.astro';
 import { devices, type Device } from '@/data/devices';
+import { getDeveloper } from '@/data/developers';
 import { site } from '@/data/site';
 
 export function getStaticPaths() {
   return devices.map((d) => ({ params: { code: d.code }, props: { device: d } }));
 }
 const { device } = Astro.props as { device: Device };
+const maintainer = getDeveloper(device.maintainer.name);
 
 const description = `Download the latest official Orion OS build for ${device.name} (${device.code}). ${device.builds.length} available build${device.builds.length === 1 ? '' : 's'}.`;
 ---
 
 <Base title={`${device.name} (${device.code}) — Orion OS`} description={description}>
+  <section class="relative overflow-hidden border-b border-zinc-100 bg-zinc-50/60">
+    <div class="pointer-events-none absolute inset-0">
+      <div class="absolute inset-0 bg-grid bg-grid-fade"></div>
+    </div>
+    <div class="relative mx-auto max-w-4xl px-4 pt-14 pb-10 sm:px-6 lg:px-8">
+      <nav class="flex items-center gap-2 text-sm text-zinc-500" aria-label="Breadcrumb">
+        <a href="/devices" class="inline-flex items-center gap-1.5 font-medium text-zinc-500 transition-colors hover:text-brand-700">
+          <Icon name="arrow-right" size={15} class="rotate-180" />
+          All devices
+        </a>
+        <span class="text-zinc-300">/</span>
+        <span class="font-semibold text-zinc-800">{device.name}</span>
+      </nav>
+
+      <header class="mt-8">
+        <div class="flex flex-wrap items-start justify-between gap-5">
+          <div class="flex items-center gap-4">
+            <span class="grid h-16 w-16 place-items-center rounded-2xl text-brand-600 ring-1 ring-brand-100 sm:h-20 sm:w-20" style="background-image:linear-gradient(135deg,#eef2ff,#f5f3ff);">
+              <Icon name="smartphone" size={34} />
+            </span>
+            <div>
+              <div class="flex flex-wrap items-center gap-3">
+                <h1 class="text-3xl font-bold tracking-tight text-zinc-900 sm:text-4xl">{device.name}</h1>
+                <span class="rounded-lg bg-zinc-100 px-2.5 py-1 font-mono text-sm text-zinc-500">{device.code}</span>
+              </div>
+              <div class="mt-3 flex items-center gap-3">
+                <StatusBadge status={device.status} />
+                <span class="text-sm text-zinc-400">
+                  {device.builds.length} build{device.builds.length === 1 ? '' : 's'} available
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-8 flex flex-col gap-4 rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm sm:flex-row sm:items-center">
+          <div class="flex items-center gap-3.5">
+            <Avatar name={device.maintainer.name} size={48} ring src={maintainer?.avatar} />
+            <div>
+              <p class="text-[11px] font-semibold uppercase tracking-wider text-zinc-400">Maintained by</p>
+              <p class="text-base font-semibold text-zinc-900">{device.maintainer.name}</p>
+              <p class="text-sm text-zinc-500">{device.maintainer.role}</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-2 sm:ml-auto">
+            {
+              device.maintainer.github && (
+                <a href={device.maintainer.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="grid h-10 w-10 place-items-center rounded-lg border border-zinc-200 text-zinc-500 transition-colors hover:bg-zinc-50 hover:text-zinc-900"><Icon name="github" size={19} /></a>
+              )
+            }
+            {
+              device.maintainer.telegram && (
+                <a href={device.maintainer.telegram} target="_blank" rel="noopener noreferrer" aria-label="Telegram" class="grid h-10 w-10 place-items-center rounded-lg border border-zinc-200 text-zinc-500 transition-colors hover:bg-zinc-50 hover:text-brand-600"><Icon name="telegram" size={19} /></a>
+              )
+            }
+          </div>
+        </div>
+      </header>
+    </div>
+  </section>
+
   <div class="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
-    <nav class="flex items-center gap-2 text-sm text-zinc-500" aria-label="Breadcrumb">
-      <a href="/devices" class="inline-flex items-center gap-1.5 font-medium text-zinc-500 transition-colors hover:text-brand-700">
-        <Icon name="arrow-right" size={15} class="rotate-180" />
-        All devices
-      </a>
-      <span class="text-zinc-300">/</span>
-      <span class="font-semibold text-zinc-800">{device.name}</span>
-    </nav>
-
-    <header class="mt-8">
-      <div class="flex flex-wrap items-start justify-between gap-5">
-        <div class="flex items-center gap-4">
-          <span class="grid h-16 w-16 place-items-center rounded-2xl text-brand-600 ring-1 ring-brand-100 sm:h-20 sm:w-20" style="background-image:linear-gradient(135deg,#eef2ff,#f5f3ff);">
-            <Icon name="smartphone" size={34} />
-          </span>
-          <div>
-            <div class="flex flex-wrap items-center gap-3">
-              <h1 class="text-3xl font-bold tracking-tight text-zinc-900 sm:text-4xl">{device.name}</h1>
-              <span class="rounded-lg bg-zinc-100 px-2.5 py-1 font-mono text-sm text-zinc-500">{device.code}</span>
-            </div>
-            <div class="mt-3 flex items-center gap-3">
-              <StatusBadge status={device.status} />
-              <span class="text-sm text-zinc-400">
-                {device.builds.length} build{device.builds.length === 1 ? '' : 's'} available
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="mt-8 flex flex-col gap-4 rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm sm:flex-row sm:items-center">
-        <div class="flex items-center gap-3.5">
-          <Avatar name={device.maintainer.name} size={48} />
-          <div>
-            <p class="text-[11px] font-semibold uppercase tracking-wider text-zinc-400">Maintained by</p>
-            <p class="text-base font-semibold text-zinc-900">{device.maintainer.name}</p>
-            <p class="text-sm text-zinc-500">{device.maintainer.role}</p>
-          </div>
-        </div>
-        <div class="flex items-center gap-2 sm:ml-auto">
-          {
-            device.maintainer.github && (
-              <a href={device.maintainer.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="grid h-10 w-10 place-items-center rounded-lg border border-zinc-200 text-zinc-500 transition-colors hover:bg-zinc-50 hover:text-zinc-900"><Icon name="github" size={19} /></a>
-            )
-          }
-          {
-            device.maintainer.telegram && (
-              <a href={device.maintainer.telegram} target="_blank" rel="noopener noreferrer" aria-label="Telegram" class="grid h-10 w-10 place-items-center rounded-lg border border-zinc-200 text-zinc-500 transition-colors hover:bg-zinc-50 hover:text-brand-600"><Icon name="telegram" size={19} /></a>
-            )
-          }
-        </div>
-      </div>
-    </header>
-
-    <section class="mt-12">
+    <section>
       <h2 class="flex items-center gap-2 text-xl font-bold tracking-tight text-zinc-900">
         <Icon name="package" size={20} class="text-brand-600" />
         Available Builds
@@ -99,7 +108,7 @@ const description = `Download the latest official Orion OS build for ${device.na
     </section>
 
     <section
-      class="mt-12 flex flex-col items-start justify-between gap-5 rounded-2xl border border-brand-100 p-6 sm:flex-row sm:items-center"
+      class="mt-10 flex flex-col items-start justify-between gap-5 rounded-2xl border border-brand-100 p-6 sm:flex-row sm:items-center"
       style="background-image:linear-gradient(135deg,#eef2ff,#f5f3ff);"
     >
       <div>

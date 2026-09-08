@@ -1,6 +1,7 @@
 ---
 import Avatar from './Avatar.astro';
 import Icon from './Icon.astro';
+import { getDeveloper } from '@/data/developers';
 import type { CollectionEntry } from 'astro:content';
 
 interface Props {
@@ -9,6 +10,7 @@ interface Props {
 }
 const { post, index } = Astro.props;
 const data = post.data;
+const author = getDeveloper(data.author);
 
 const tag = (data.tags[0] ?? 'post').toLowerCase();
 const banner: Record<string, string> = {
@@ -52,7 +54,7 @@ const date = data.pubDate.toLocaleDateString('en-US', { month: 'short', day: 'nu
     <p class="mt-2 line-clamp-2 text-sm leading-relaxed text-zinc-500">{data.description}</p>
 
     <div class="mt-auto flex items-center gap-2.5 border-t border-zinc-100 pt-4">
-      <Avatar name={data.author} size={30} />
+      <Avatar name={data.author} size={30} src={author?.avatar} />
       <div class="min-w-0 text-xs">
         <p class="truncate font-semibold text-zinc-700">{data.author}</p>
         <p class="text-zinc-400">{date}</p>
