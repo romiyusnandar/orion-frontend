@@ -3,6 +3,7 @@ import '@fontsource-variable/inter';
 import '../styles/global.css';
 import Navbar from '@/components/Navbar.astro';
 import Footer from '@/components/Footer.astro';
+import Icon from '@/components/Icon.astro';
 import { site } from '@/data/site';
 
 interface Props {
@@ -67,17 +68,37 @@ const ogImage = `${base}/og.png`;
     </main>
     <Footer />
 
+    <div class="pointer-events-none fixed inset-x-0 bottom-4 z-40 sm:bottom-6 lg:bottom-8">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <button
+          id="back-to-top"
+          type="button"
+          aria-label="Back to top"
+          class="back-to-top ml-auto grid h-11 w-11 place-items-center rounded-full border border-zinc-200 bg-white/90 text-zinc-600 shadow-lg backdrop-blur hover:border-brand-200 hover:text-brand-600 hover:shadow-xl"
+        >
+          <Icon name="chevron-up" size={20} />
+        </button>
+      </div>
+    </div>
+
     <script>
       const header = document.getElementById('site-header');
+      const toTop = document.getElementById('back-to-top');
       const onScroll = () => {
-        if (!header) return;
         const y = window.scrollY > 8;
-        header.classList.toggle('shadow-sm', y);
-        header.classList.toggle('border-zinc-200', y);
-        header.classList.toggle('bg-white/85', y);
+        if (header) {
+          header.classList.toggle('shadow-sm', y);
+          header.classList.toggle('border-zinc-200', y);
+          header.classList.toggle('bg-white/85', y);
+        }
+        toTop?.classList.toggle('is-visible', window.scrollY > 480);
       };
       onScroll();
       window.addEventListener('scroll', onScroll, { passive: true });
+      toTop?.addEventListener('click', () => {
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+      });
 
       const toggle = document.getElementById('menu-toggle');
       const menu = document.getElementById('mobile-menu');
