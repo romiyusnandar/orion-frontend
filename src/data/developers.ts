@@ -12,14 +12,6 @@ export interface Developer {
 
 export const developers: Developer[] = [
   {
-    name: 'OrionOS Admin',
-    role: 'Admin',
-    tier: 'admin',
-    github: 'https://github.com/orionos',
-    telegram: 'https://t.me/orionos',
-    avatar: 'https://i.postimg.cc/QN2Bj9Sp/orion-lg.png',
-  },
-  {
     name: 'Hirokixd',
     role: 'Founder',
     tier: 'founder',

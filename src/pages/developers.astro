@@ -9,8 +9,11 @@ const count = developers.length;
 ---
 
 <Base title="Developers — Orion OS" description="Meet the talented team of developers and maintainers building the future of Android with Orion OS.">
-  <section class="border-b border-zinc-100 bg-zinc-50/60">
-    <div class="mx-auto max-w-6xl px-4 pt-16 pb-12 sm:px-6 lg:px-8">
+  <section class="relative overflow-hidden border-b border-zinc-100 bg-zinc-50/60">
+    <div class="pointer-events-none absolute inset-0">
+      <div class="absolute inset-0 bg-grid bg-grid-fade"></div>
+    </div>
+    <div class="relative mx-auto max-w-6xl px-4 pt-16 pb-12 sm:px-6 lg:px-8">
       <span class="text-sm font-semibold uppercase tracking-wider text-brand-600">The Team</span>
       <h1 class="mt-2 text-4xl font-bold tracking-tight text-zinc-900 sm:text-5xl">Our developers</h1>
       <p class="mt-4 max-w-2xl text-lg text-zinc-500">
@@ -21,8 +24,12 @@ const count = developers.length;
   </section>
 
   <section class="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
-    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-      {developers.map((dev) => <DeveloperCard dev={dev} />)}
+    <div class="columns-1 gap-5 sm:columns-2 lg:columns-3">
+      {developers.map((dev, i) => (
+        <div class="reveal mb-5 break-inside-avoid" style={`transition-delay:${(i % 3) * 70}ms`}>
+          <DeveloperCard dev={dev} />
+        </div>
+      ))}
     </div>
 
     <div
