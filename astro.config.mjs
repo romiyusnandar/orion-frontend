@@ -5,7 +5,10 @@ import { fileURLToPath } from 'node:url';
 
 export default defineConfig({
   site: 'https://www.orionos-project.com',
-  trailingSlash: 'never',
+  trailingSlash: 'ignore',
+  build: {
+    format: 'file',
+  },
   integrations: [sitemap()],
   vite: {
     plugins: [tailwindcss()],
