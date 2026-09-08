@@ -141,12 +141,12 @@ export function getDeveloper(name: string): Developer | undefined {
 }
 
 const AVATAR_PALETTE = [
-  '#4f46e5',
+  'oklch(60.9% 0.126 221.723)',
   '#0ea5e9',
   '#0d9488',
   '#ca8a04',
   '#db2777',
-  '#7c3aed',
+  '#0284c7',
   '#dc2626',
   '#2563eb',
 ];

@@ -5,19 +5,19 @@ interface Props {
 const { class: className = '' } = Astro.props;
 
 const apps = [
-  'linear-gradient(135deg,#6366f1,#4338ca)',
+  'linear-gradient(135deg,var(--color-brand-500),var(--color-brand-700))',
   'linear-gradient(135deg,#0ea5e9,#2563eb)',
   'linear-gradient(135deg,#10b981,#0d9488)',
   'linear-gradient(135deg,#f59e0b,#d97706)',
   'linear-gradient(135deg,#ec4899,#db2777)',
-  'linear-gradient(135deg,#8b5cf6,#7c3aed)',
+  'linear-gradient(135deg,var(--color-brand-400),var(--color-brand-600))',
   'linear-gradient(135deg,#64748b,#334155)',
   'linear-gradient(135deg,#ef4444,#dc2626)',
 ];
 const dock = [
   'linear-gradient(135deg,#22c55e,#16a34a)',
   'linear-gradient(135deg,#3b82f6,#1d4ed8)',
-  'linear-gradient(135deg,#a855f7,#9333ea)',
+  'linear-gradient(135deg,#38bdf8,#0284c7)',
   'linear-gradient(135deg,#f97316,#ea580c)',
 ];
 ---
@@ -32,7 +32,7 @@ const dock = [
 
     <div
       class="relative aspect-[9/19] w-full overflow-hidden rounded-[2.1rem]"
-      style="background-image:linear-gradient(165deg,#eef2ff 0%,#e0e7ff 35%,#ede9fe 70%,#f5f3ff 100%);"
+      style="background-image:linear-gradient(165deg,var(--color-brand-50) 0%,var(--color-brand-100) 35%,var(--color-brand-50) 70%,#ffffff 100%);"
     >
       <!-- status bar -->
       <div class="flex items-center justify-between px-6 pt-4 text-[10px] font-semibold text-zinc-700">
@@ -46,7 +46,7 @@ const dock = [
 
       <!-- clock -->
       <div class="px-7 pt-8">
-        <p class="text-[10px] font-medium uppercase tracking-widest text-indigo-500/80">Orion OS</p>
+        <p class="text-[10px] font-medium uppercase tracking-widest text-brand-500/80">Orion OS</p>
         <p class="mt-1 text-4xl font-bold tracking-tight text-zinc-800">12:45</p>
         <p class="mt-0.5 text-xs font-medium text-zinc-500">Tuesday, January 6</p>
       </div>
@@ -54,7 +54,7 @@ const dock = [
       <!-- notification card -->
       <div class="mx-5 mt-6 rounded-2xl bg-white/70 p-3 backdrop-blur-sm ring-1 ring-white/60">
         <div class="flex items-center gap-2.5">
-          <span class="grid h-8 w-8 place-items-center rounded-lg text-white" style="background-image:linear-gradient(135deg,#6366f1,#4338ca);">
+          <span class="grid h-8 w-8 place-items-center rounded-lg text-white" style="background-image:linear-gradient(135deg,var(--color-brand-500),var(--color-brand-700));">
             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
           </span>
           <div class="min-w-0">

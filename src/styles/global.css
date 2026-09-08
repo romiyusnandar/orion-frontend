@@ -2,15 +2,18 @@
 
 @theme {
   --font-sans: "Inter Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  --color-brand-50: #eef2ff;
-  --color-brand-100: #e0e7ff;
-  --color-brand-200: #c7d2fe;
-  --color-brand-400: #818cf8;
-  --color-brand-500: #6366f1;
-  --color-brand-600: #4f46e5;
-  --color-brand-700: #4338ca;
-  --color-brand-900: #312e81;
-  --color-brand-950: #1e1b4b;
+  --color-orion: oklch(60.9% 0.126 221.723);
+  --color-brand-50: oklch(0.977 0.013 236.62);
+  --color-brand-100: oklch(0.951 0.026 236.62);
+  --color-brand-200: oklch(0.901 0.058 230.902);
+  --color-brand-300: oklch(0.828 0.111 230.318);
+  --color-brand-400: oklch(0.746 0.16 232.661);
+  --color-brand-500: oklch(0.685 0.169 237.323);
+  --color-brand-600: oklch(0.609 0.126 221.723);
+  --color-brand-700: oklch(0.5 0.134 242.749);
+  --color-brand-800: oklch(0.443 0.11 240.79);
+  --color-brand-900: oklch(0.391 0.09 240.876);
+  --color-brand-950: oklch(0.293 0.066 243.157);
 }
 
 @layer base {
@@ -49,8 +52,8 @@
 /* Decorative square grid (kotak-kotak) */
 .bg-grid {
   background-image:
-    linear-gradient(to right, rgb(79 70 229 / 0.09) 1px, transparent 1px),
-    linear-gradient(to bottom, rgb(79 70 229 / 0.09) 1px, transparent 1px);
+    linear-gradient(to right, color-mix(in srgb, var(--color-brand-600) 12%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--color-brand-600) 12%, transparent) 1px, transparent 1px);
   background-size: 44px 44px;
 }
 .bg-grid-fade {
@@ -171,7 +174,7 @@
   background: var(--color-brand-50);
   border-radius: 0 0.75rem 0.75rem 0;
   padding: 1rem 1.25rem;
-  color: #3730a3;
+  color: var(--color-brand-800);
   font-weight: 450;
 }
 .prose-orion blockquote p { margin-top: 0.35rem; }
@@ -182,7 +185,7 @@
   padding: 0.1rem 0.4rem;
   font-size: 0.9em;
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  color: #312e81;
+  color: var(--color-brand-900);
 }
 .prose-orion hr {
   border: none;
