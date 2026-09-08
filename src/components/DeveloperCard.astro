@@ -1,0 +1,71 @@
+---
+import Avatar from './Avatar.astro';
+import Icon from './Icon.astro';
+import type { Developer, RoleTier } from '@/data/developers';
+
+interface Props {
+  dev: Developer;
+}
+const { dev } = Astro.props;
+
+const roleStyles: Record<RoleTier, string> = {
+  admin: 'bg-brand-50 text-brand-700 ring-brand-100',
+  founder: 'bg-amber-50 text-amber-700 ring-amber-100',
+  core: 'bg-violet-50 text-violet-700 ring-violet-100',
+  support: 'bg-sky-50 text-sky-700 ring-sky-100',
+  design: 'bg-pink-50 text-pink-700 ring-pink-100',
+  maintainer: 'bg-zinc-100 text-zinc-600 ring-zinc-200',
+};
+---
+
+<article
+  class="group flex flex-col items-center rounded-2xl border border-zinc-200 bg-white p-6 text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand-200 hover:shadow-lg hover:shadow-brand-600/5"
+>
+  <Avatar name={dev.name} size={64} ring />
+  <h3 class="mt-4 text-base font-semibold text-zinc-900">{dev.name}</h3>
+  <span class:list={['mt-2 rounded-full px-2.5 py-1 text-xs font-semibold ring-1', roleStyles[dev.tier]]}>
+    {dev.role}
+  </span>
+
+  {
+    dev.devices && dev.devices.length > 0 && (
+      <div class="mt-4 w-full">
+        <p class="text-[11px] font-semibold uppercase tracking-wider text-zinc-400">Maintaining</p>
+        <ul class="mt-2 flex flex-wrap justify-center gap-1.5">
+          {dev.devices.map((d) => (
+            <li class="rounded-md bg-zinc-50 px-2 py-1 text-xs font-medium text-zinc-600 ring-1 ring-zinc-100">{d}</li>
+          ))}
+        </ul>
+      </div>
+    )
+  }
+
+  <div class="mt-5 flex items-center gap-2 border-t border-zinc-100 pt-4">
+    {
+      dev.github && (
+        <a
+          href={dev.github}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`${dev.name} on GitHub`}
+          class="grid h-9 w-9 place-items-center rounded-lg text-zinc-500 transition-colors hover:bg-zinc-100 hover:text-zinc-900"
+        >
+          <Icon name="github" size={18} />
+        </a>
+      )
+    }
+    {
+      dev.telegram && (
+        <a
+          href={dev.telegram}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`${dev.name} on Telegram`}
+          class="grid h-9 w-9 place-items-center rounded-lg text-zinc-500 transition-colors hover:bg-zinc-100 hover:text-brand-600"
+        >
+          <Icon name="telegram" size={18} />
+        </a>
+      )
+    }
+  </div>
+</article>

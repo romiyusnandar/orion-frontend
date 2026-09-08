@@ -1,0 +1,73 @@
+---
+import PhoneMockup from './PhoneMockup.astro';
+import Icon from './Icon.astro';
+import { stats } from '@/data/site';
+import { latestChangelog } from '@/data/changelogs';
+---
+
+<section class="relative overflow-hidden">
+  <!-- decorative background -->
+  <div class="pointer-events-none absolute inset-0 -z-10">
+    <div class="absolute inset-0 bg-dots bg-dots-fade"></div>
+    <div class="absolute -top-24 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-brand-200/40 blur-3xl animate-blob"></div>
+    <div class="absolute right-0 top-40 h-64 w-64 rounded-full bg-violet-200/30 blur-3xl animate-blob" style="animation-delay:-7s;"></div>
+  </div>
+
+  <div class="mx-auto max-w-6xl px-4 pt-16 pb-20 sm:px-6 sm:pt-24 lg:px-8 lg:pt-28">
+    <div class="grid items-center gap-14 lg:grid-cols-[1.05fr_0.95fr]">
+      <div class="text-center lg:text-left">
+        <a
+          href="/changelogs"
+          class="inline-flex items-center gap-2 rounded-full border border-brand-200 bg-brand-50 py-1 pl-1.5 pr-3 text-sm font-medium text-brand-700 transition-colors hover:bg-brand-100"
+        >
+          <span class="rounded-full bg-brand-600 px-2 py-0.5 text-xs font-semibold text-white">New</span>
+          {latestChangelog.version} {latestChangelog.codename} · Android 16
+          <Icon name="arrow-right" size={15} />
+        </a>
+
+        <h1 class="mt-6 text-4xl font-extrabold leading-[1.05] tracking-tight text-zinc-900 sm:text-5xl lg:text-6xl">
+          Orion OS.
+          <span class="block bg-[image:linear-gradient(90deg,#4f46e5,#8b5cf6,#4f46e5)] bg-[length:200%_100%] bg-clip-text text-transparent">
+            Pure Performance.
+          </span>
+        </h1>
+
+        <p class="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-zinc-600 lg:mx-0">
+          Experience Android the way it was meant to be. A lightweight, secure, and beautifully minimal custom ROM — built to stay fast on day 100.
+        </p>
+
+        <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row lg:justify-start">
+          <a
+            href="/devices"
+            class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand-600 px-6 py-3.5 text-base font-semibold text-white shadow-lg shadow-brand-600/20 transition hover:bg-brand-700 active:scale-[0.98] sm:w-auto"
+          >
+            <Icon name="download" size={18} />
+            Download Now
+          </a>
+          <a
+            href="/about"
+            class="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-zinc-200 bg-white px-6 py-3.5 text-base font-semibold text-zinc-800 shadow-sm transition hover:border-zinc-300 hover:bg-zinc-50 active:scale-[0.98] sm:w-auto"
+          >
+            Learn more
+            <Icon name="arrow-right" size={18} />
+          </a>
+        </div>
+
+        <dl class="mx-auto mt-12 grid max-w-md grid-cols-3 gap-4 lg:mx-0">
+          {
+            stats.map((s) => (
+              <div class="text-center lg:text-left">
+                <dt class="text-2xl font-bold tracking-tight text-zinc-900 sm:text-3xl">{s.value}</dt>
+                <dd class="mt-1 text-xs font-medium text-zinc-500 sm:text-sm">{s.label}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+
+      <div class="reveal mx-auto w-full max-w-sm lg:mx-0">
+        <PhoneMockup />
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,112 @@
+---
+interface Props {
+  class?: string;
+}
+const { class: className = '' } = Astro.props;
+
+const apps = [
+  'linear-gradient(135deg,#6366f1,#4338ca)',
+  'linear-gradient(135deg,#0ea5e9,#2563eb)',
+  'linear-gradient(135deg,#10b981,#0d9488)',
+  'linear-gradient(135deg,#f59e0b,#d97706)',
+  'linear-gradient(135deg,#ec4899,#db2777)',
+  'linear-gradient(135deg,#8b5cf6,#7c3aed)',
+  'linear-gradient(135deg,#64748b,#334155)',
+  'linear-gradient(135deg,#ef4444,#dc2626)',
+];
+const dock = [
+  'linear-gradient(135deg,#22c55e,#16a34a)',
+  'linear-gradient(135deg,#3b82f6,#1d4ed8)',
+  'linear-gradient(135deg,#a855f7,#9333ea)',
+  'linear-gradient(135deg,#f97316,#ea580c)',
+];
+---
+
+<div class={`relative ${className}`}>
+  <div
+    class="relative mx-auto w-[250px] rounded-[2.6rem] bg-zinc-900 p-2.5 shadow-2xl ring-1 ring-black/10 sm:w-[280px]"
+    style="box-shadow:0 40px 80px -20px rgba(49,46,129,0.35);"
+  >
+    <!-- punch hole -->
+    <span class="absolute left-1/2 top-4 z-20 h-4 w-4 -translate-x-1/2 rounded-full bg-zinc-950 ring-1 ring-black/40"></span>
+
+    <div
+      class="relative aspect-[9/19] w-full overflow-hidden rounded-[2.1rem]"
+      style="background-image:linear-gradient(165deg,#eef2ff 0%,#e0e7ff 35%,#ede9fe 70%,#f5f3ff 100%);"
+    >
+      <!-- status bar -->
+      <div class="flex items-center justify-between px-6 pt-4 text-[10px] font-semibold text-zinc-700">
+        <span>12:45</span>
+        <span class="flex items-center gap-1">
+          <span class="h-2 w-3 rounded-[2px] bg-zinc-700/80"></span>
+          <span class="h-2 w-1.5 rounded-[1px] bg-zinc-700/80"></span>
+          <span class="h-2.5 w-4 rounded-[3px] border border-zinc-700/70"></span>
+        </span>
+      </div>
+
+      <!-- clock -->
+      <div class="px-7 pt-8">
+        <p class="text-[10px] font-medium uppercase tracking-widest text-indigo-500/80">Orion OS</p>
+        <p class="mt-1 text-4xl font-bold tracking-tight text-zinc-800">12:45</p>
+        <p class="mt-0.5 text-xs font-medium text-zinc-500">Tuesday, January 6</p>
+      </div>
+
+      <!-- notification card -->
+      <div class="mx-5 mt-6 rounded-2xl bg-white/70 p-3 backdrop-blur-sm ring-1 ring-white/60">
+        <div class="flex items-center gap-2.5">
+          <span class="grid h-8 w-8 place-items-center rounded-lg text-white" style="background-image:linear-gradient(135deg,#6366f1,#4338ca);">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </span>
+          <div class="min-w-0">
+            <p class="truncate text-[11px] font-semibold text-zinc-800">Performance Mode</p>
+            <p class="truncate text-[10px] text-zinc-500">Zero bloat · 120Hz ready</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- app grid -->
+      <div class="grid grid-cols-4 gap-x-5 gap-y-4 px-6 pt-7">
+        {
+          apps.map((bg) => (
+            <span class="h-11 w-11 rounded-[1.05rem] shadow-sm" style={`background-image:${bg};`}></span>
+          ))
+        }
+      </div>
+
+      <!-- spacer + page dot -->
+      <div class="mt-7 flex justify-center"><span class="h-1 w-1 rounded-full bg-zinc-400/70"></span></div>
+
+      <!-- dock -->
+      <div class="absolute inset-x-4 bottom-4 flex items-center justify-around rounded-3xl bg-white/55 px-3 py-2.5 backdrop-blur-md ring-1 ring-white/60">
+        {dock.map((bg) => (
+          <span class="h-10 w-10 rounded-[1rem] shadow-sm" style={`background-image:${bg};`}></span>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- floating chips -->
+  <div class="absolute -left-4 top-24 hidden animate-blob rounded-2xl bg-white px-3.5 py-2.5 shadow-xl ring-1 ring-zinc-100 sm:block">
+    <div class="flex items-center gap-2.5">
+      <span class="grid h-9 w-9 place-items-center rounded-xl bg-emerald-50 text-emerald-600">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      </span>
+      <div>
+        <p class="text-sm font-bold leading-none text-zinc-900">120Hz</p>
+        <p class="text-[11px] text-zinc-500">Silky smooth</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="absolute -right-2 bottom-16 hidden animate-blob rounded-2xl bg-white px-3.5 py-2.5 shadow-xl ring-1 ring-zinc-100 sm:block" style="animation-delay:-6s;">
+    <div class="flex items-center gap-2.5">
+      <span class="grid h-9 w-9 place-items-center rounded-xl bg-brand-50 text-brand-600">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+      </span>
+      <div>
+        <p class="text-sm font-bold leading-none text-zinc-900">Secure</p>
+        <p class="text-[11px] text-zinc-500">Privacy first</p>
+      </div>
+    </div>
+  </div>
+</div>

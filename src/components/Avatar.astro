@@ -1,0 +1,20 @@
+---
+import { avatarColor, initials } from '@/data/developers';
+interface Props {
+  name: string;
+  size?: number;
+  ring?: boolean;
+}
+const { name, size = 44, ring = false } = Astro.props;
+const color = avatarColor(name);
+const fs = Math.max(11, Math.round(size * 0.36));
+---
+
+<span
+  class={`inline-grid shrink-0 place-items-center rounded-full font-semibold text-white ${ring ? 'ring-2 ring-white' : ''}`}
+  style={`background-color:${color};width:${size}px;height:${size}px;font-size:${fs}px;letter-spacing:0.02em;`}
+  role="img"
+  aria-label={name}
+>
+  {initials(name)}
+</span>

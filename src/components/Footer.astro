@@ -1,0 +1,55 @@
+---
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+import { site } from '@/data/site';
+
+const columns: { title: string; links: { href: string; label: string; external?: boolean }[] }[] = [
+  { title: 'Navigate', links: [{ href: '/devices', label: 'Download' }, { href: '/changelogs', label: 'Changelogs' }, { href: '/developers', label: 'Developers' }] },
+  { title: 'Community', links: [{ href: site.telegram, label: 'Telegram', external: true }, { href: site.github, label: 'GitHub', external: true }, { href: site.kofi, label: 'Support us', external: true }] },
+  { title: 'Project', links: [{ href: '/about', label: 'About Us' }, { href: '/blog', label: 'Blog' }] },
+];
+---
+
+<footer class="mt-24 border-t border-zinc-200 bg-zinc-50">
+  <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
+    <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
+      <div class="max-w-xs">
+        <a href="/" class="inline-block"><Logo size={34} /></a>
+        <p class="mt-4 text-sm leading-relaxed text-zinc-500">
+          Next level Android experience. Built for performance, designed for you.
+        </p>
+        <div class="mt-5 flex items-center gap-2">
+          <a href={site.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="grid h-9 w-9 place-items-center rounded-lg border border-zinc-200 bg-white text-zinc-500 transition-colors hover:border-zinc-300 hover:text-zinc-900"><Icon name="github" size={18} /></a>
+          <a href={site.telegram} target="_blank" rel="noopener noreferrer" aria-label="Telegram" class="grid h-9 w-9 place-items-center rounded-lg border border-zinc-200 bg-white text-zinc-500 transition-colors hover:border-zinc-300 hover:text-zinc-900"><Icon name="telegram" size={18} /></a>
+        </div>
+      </div>
+
+      {
+        columns.map((col) => (
+          <div>
+            <h3 class="text-xs font-semibold uppercase tracking-wider text-zinc-400">{col.title}</h3>
+            <ul class="mt-4 space-y-3">
+              {col.links.map((l) => (
+                <li>
+                  <a
+                    href={l.href}
+                    target={l.external ? '_blank' : undefined}
+                    rel={l.external ? 'noopener noreferrer' : undefined}
+                    class="text-sm text-zinc-600 transition-colors hover:text-brand-700"
+                  >
+                    {l.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="mt-12 flex flex-col items-center justify-between gap-3 border-t border-zinc-200 pt-6 sm:flex-row">
+      <p class="text-sm text-zinc-500">© {new Date().getFullYear()} Orion OS. All rights reserved.</p>
+      <p class="text-sm text-zinc-400">Made with <span class="text-brand-500">♥</span> by the Orion OS team</p>
+    </div>
+  </div>
+</footer>
